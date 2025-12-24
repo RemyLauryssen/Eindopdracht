@@ -1,0 +1,49 @@
+.company-logo {
+    margin: 25px;
+    border: none;
+    max-width: 200px;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 0 100px;
+}
+
+.logo-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.nav-items li {
+    list-style: none;
+}
+
+.nav-items {
+    display: flex;
+    gap: 20px;
+    margin-right: 15px;
+}
+
+.login-icon {
+    width: 30px;
+}
+.active-link {
+    text-decoration: underline;
+    color: gold;
+}
+
+.active-link:hover{
+    color: gold;
+}
+
+.default-link {
+    text-decoration: none;
+    color: white;
+}
+
+.default-link:hover{
+    color: gold;
+}
