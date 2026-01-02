@@ -1,6 +1,6 @@
 import "./Navigation.css";
 import {NavLink, useNavigate} from "react-router-dom";
-import companyLogo from "../../assets/logo_placeholder.svg";
+import companyLogo from "../../assets/company-logo.jpg";
 import loginIcon from "../../assets/Login-Icon.svg";
 
 function Navigation() {

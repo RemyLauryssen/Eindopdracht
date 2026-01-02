@@ -1,26 +1,30 @@
 import React from "react";
 import "./Homepage.css";
-import placeholder1 from "../../assets/600x400_1.svg";
-import placeholder2 from "../../assets/600x400_2.svg";
-import placeholder3 from "../../assets/600x400_3.svg";
+import EmblaCarousel from "../../components/image_carousel/EmblaCarousel.jsx";
+import "../../components/image_carousel/Base.css";
+import "../../components/image_carousel/Embla.css"
+
+
+
+const OPTIONS = { loop: true, autoplay: true }
+const SLIDE_COUNT = 5
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
 
 function Homepage() {
+
     return (
         <main>
-            <section>
-            <h1>Homepage</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut debitis doloribus
-                facilis iste placeat praesentium sint voluptatem. Architecto at, maiores?
-            </p>
-            </section>
-            <section className="image-container">
-                <img src={placeholder1} alt="Afbeelding restaurant"/>
-                <img src={placeholder2} alt="Afbeelding restaurant"/>
-                <img src={placeholder3} alt="Afbeelding restaurant"/>
+            <section className="homepage-container">
+                <h1>Celia's Kitchen</h1>
+                <p>
+                    Bij Celia's Kitchen kunt u volop genieten van de lekkerste, glutenvrije maaltijden, speciaal voor u bereid!
+                </p>
+                <EmblaCarousel slides={SLIDES} options={OPTIONS} />
             </section>
 
-            <p>Lorum ipsum</p>
+
+
         </main>
     );
 }
