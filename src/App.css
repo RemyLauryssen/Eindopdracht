@@ -1,6 +1,8 @@
 * {
     background: rgb(44,47,57);
     color: white;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 

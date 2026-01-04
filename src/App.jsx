@@ -4,7 +4,7 @@ import {Routes, Route} from "react-router-dom";
 import Navigation from "./components/navigation/Navigation.jsx";
 import Homepage from "./pages/homepage/Homepage.jsx";
 import Contact from "./pages/contact/Contact";
-import Menu from "./pages/menu/Menu";
+import Menu from "./pages/menu/Menu.jsx";
 import Webshop from "./pages/webshop/Webshop";
 import Login from "./pages/login/Login";
 
@@ -19,7 +19,7 @@ function App() {
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/menu" element={<Menu/>}/>
                 <Route path="/webshop" element={<Webshop/>}/>
-                <Route path="login" element={<Login/>}/>
+                <Route path="/login" element={<Login/>}/>
             </Routes>
 
         </>

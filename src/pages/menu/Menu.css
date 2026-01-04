@@ -1,0 +1,75 @@
+:root {
+    --primary: gold;
+    --light: #fafafd;
+}
+
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 50vw;
+    align-items: center;
+    margin-left: 25%;
+}
+
+.full-menu {
+    max-height: 84vh;
+    overflow-y: scroll;
+}
+
+.menu-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.menu-logo {
+    max-height: 16vh;
+    margin-top: 6px;
+}
+
+.mains {
+    grid-column: 1 / 2;
+}
+
+.mains-name {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.mains-description {
+    flex: 1 1 100%;
+    margin: 0.75rem 0 0;
+    color: var(--primary);
+}
+
+.extras {
+    color: var(--primary);
+}
+
+.extras + .extras {
+    margin-top: 1.5rem;
+}
+
+
+.extras .menu-item {
+    margin-bottom: 0.75rem;
+}
+
+.extras-heading {
+    margin: 0 0 1.5rem;
+    border-bottom: 1px solid var(--primary);
+}
+
+.extras-drinks-container {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin-left: 25vw;
+}
+
+.extras-name {
+    flex-grow: 1;
+}

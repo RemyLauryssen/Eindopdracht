@@ -14,15 +14,17 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 function Homepage() {
 
     return (
-        <main>
-            <section className="homepage-container">
+        <main className="homepage-container">
+            <section >
                 <h1>Celia's Kitchen</h1>
                 <p>
                     Bij Celia's Kitchen kunt u volop genieten van de lekkerste, glutenvrije maaltijden, speciaal voor u bereid!
                 </p>
                 <EmblaCarousel slides={SLIDES} options={OPTIONS} />
             </section>
-
+            <section>
+                <p>Celia's Kitchen staat bekend om zijn glutenvrije maaltijden en speciale dieetwensen voor iedereen!</p>
+            </section>
 
 
         </main>

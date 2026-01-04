@@ -1,7 +1,7 @@
 .company-logo {
     margin: 25px;
     border: none;
-    max-width: 80px;
+    max-width: 60px;
 }
 
 .nav-container {
@@ -10,6 +10,8 @@
     justify-content: space-between;
     width: 100vw;
     padding: 0 100px;
+    height: 16vh;
+    border-bottom: 2px gold solid;
 }
 
 .logo-button {
