@@ -3,23 +3,47 @@
     flex-direction: column;
     align-items: center;
     max-height: 84vh;
-    border: 2px dotted green;
+    overflow-y: scroll;
 }
 
 
 .main-container {
     display: flex;
     justify-content: center;
-    border: 2px dotted blue;
 }
 
 .contact-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px dotted red;
 }
 
-.reservation-input-field {
+h2 {
+    color: gold;
+}
 
+.reservation-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+}
+.allergies-checkboxes {
+    margin-left: 10px;
+}
+.reservation-input-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservation-input-field > input {
+    background: white;
+    color: black;
+    padding: 0 0 0 5px;
+}
+
+.reservation-input-field > button {
+    margin-top: 5px;
+    background-color: gold;
+    color: black;
+    padding: 5px 0;
 }

@@ -1,0 +1,43 @@
+.webshop-introduction {
+    height: 14vh;
+}
+
+
+.webshop-main-container {
+    display: flex;
+    border: 2px dotted green;
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.product-catalog {
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px dotted blue;
+    padding: 0 10px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    border: 2px solid gold;
+    height: 50vh;
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card > img {
+    max-height: 145px;
+    padding: 5px;
+}
+
+.product-card > h4 {
+    margin-top: 15px;
+}
+
+.product-card > p {
+    text-align: center;
+    padding: 0;
+}

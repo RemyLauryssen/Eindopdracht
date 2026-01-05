@@ -1,16 +1,34 @@
 import React from "react";
 import "./Webshop.css";
+import LogoPlaceholder from "../../assets/logo_placeholder.svg";
 
 function Webshop() {
     return (
         <main>
-            <h1>Contact</h1>
+            <div className="webshop-introduction">
+            <h1>Webshop</h1>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut debitis doloribus
-                facilis iste placeat praesentium sint voluptatem. Architecto at, maiores?
+                Welkom bij de webshop van Celia's Kitchen. Hier kunt u uw favoriete producten bestellen en ophalen wanneer het u uitkomt!
             </p>
+            </div>
+            <div className="webshop-main-container">
+            <div className="product-catalog">
+                <div className="product-card">
+                    <img src={LogoPlaceholder} alt="Placeholder image"/>
+                    <h4>Placeholder artikel</h4>
+                    <p>Blablabla de lekkerste gerechten</p>
+                </div>
+                <div className="product-card">
+                    <img src={LogoPlaceholder} alt="Placeholder image"/>
+                </div>
+                <div className="product-card">
+                    <img src={LogoPlaceholder} alt="Placeholder image"/>
+                </div>
 
-            <p>Lorum ipsum</p>
+
+            </div>
+
+            </div>
         </main>
     );
 }
