@@ -1,15 +1,18 @@
 .company-logo {
-    margin: 25px;
+    margin: 2vw;
     border: none;
     max-width: 60px;
+    flex-shrink: 2;
+    flex-grow: 0;
 }
 
 .nav-container {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100vw;
-    padding: 0 100px;
+    padding: 0 0 1vw 1vw;
     height: 16vh;
     border-bottom: 2px gold solid;
 }
@@ -18,15 +21,18 @@
     background: transparent;
     border: none;
     cursor: pointer;
+    flex-shrink: 2;
+    flex-grow: 1;
 }
+
 .nav-items li {
     list-style: none;
 }
 
 .nav-items {
     display: flex;
-    gap: 20px;
-    margin-right: 15px;
+    gap: 3vw;
+    margin: 1vw;
 }
 
 .login-icon {
