@@ -11,8 +11,8 @@ export default function Menu() {
     return (
 <div className="full-menu">
         <Provider>
-
-            <section className="menu-container">
+<div className="menu-container">
+            <section>
                 <img className="menu-logo" src={CompanyLogo} alt="Logo van het restaurant"/>
                 <Mains meals={mains}/>
             </section>
@@ -20,6 +20,7 @@ export default function Menu() {
                     <Extras type="Bijgerechten" items={sides}/>
                     <Extras type="Drankjes" items={drinks}/>
                     </section>
+</div>
 
         </Provider>
 </div>
