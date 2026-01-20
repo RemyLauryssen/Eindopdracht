@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import "./Webshop.css";
-import LogoPlaceholder from "../../assets/logo_placeholder.svg";
-import {webshopProduct} from "./WebshopProduct.js";
+import Product from "../product/Product.jsx"
 
 function Webshop() {
 
@@ -16,30 +15,8 @@ function Webshop() {
             </div>
             <div className="webshop-main-container">
                 <div className="product-catalog">
+        <Product/>
 
-                    {webshopProduct.map((webshopProduct) => {
-                        return (<div key={webshopProduct.id}>
-                            <div className="product-card">
-                                <img src={webshopProduct.image}
-                                     alt="placeholder image"
-                                     className="product-image"/>
-                                <h4 className={webshopProduct.name}>{webshopProduct.name}</h4>
-                                <p>{webshopProduct.description}</p>
-                            </div>
-
-                        </div>)
-                    })}
-
-
-                    {/*    <img src={webshopProduct[0].image} alt="Placeholder image"/>*/}
-                    {/*    <h4>{webshopProduct[0].name}</h4>*/}
-                    {/*    <p>{webshopProduct[0].description}</p>*/}
-                    {/*</div>*/}
-                    {/*<div className="product-card">*/}
-                    {/*    <img src={LogoPlaceholder} alt="Placeholder image"/>*/}
-                    {/*</div>*/}
-                    {/*<div className="product-card">*/}
-                    {/*    <img src={LogoPlaceholder} alt="Placeholder image"/>*/}
                 </div>
 
 
