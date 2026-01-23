@@ -2,9 +2,12 @@ import "./Navigation.css";
 import {NavLink, useNavigate} from "react-router-dom";
 import companyLogo from "../../assets/company-logo.jpg";
 import loginIcon from "../../assets/Login-Icon.svg";
+import {useContext} from "react";
+import {AuthenticationContext} from "../../context/AuthenticationContext.jsx";
 
 function Navigation() {
     const navigate = useNavigate();
+    const {isUser} = useContext(AuthenticationContext);
 
     return (
         <nav>
@@ -29,10 +32,13 @@ function Navigation() {
                     <li><NavLink to="/webshop"
                         className={({isActive}) => isActive ? 'active-link' : 'default-link'}>Webshop</NavLink>
                     </li>
-                    <li><NavLink to="/login"
+                    <li>
+                        {isUser ?
+                            <NavLink to="/profile"><img className="login-icon" src={loginIcon} alt="Profiel"/></NavLink> :
+                        <NavLink to="/login"
                                  className={({isActive}) => isActive ? 'active-link' : 'default-link'}>
                         <img className="login-icon" src={loginIcon} alt="Inloggen" />
-                    </NavLink>
+                    </NavLink>}
                     </li>
                 </div>
                 </ul>

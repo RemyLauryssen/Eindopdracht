@@ -8,17 +8,23 @@
 .login-form {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 5px;
-    width: 20vw;
 }
 
 .email-input-box, .password-input-box {
     background: white;
     color: black;
+    width: 20vw;
 }
 
 .submit-button {
     background: white;
     color: black;
     margin-top: 30px;
+    width: 20vw;
+}
+
+.form-label > p {
+    padding: 0;
 }

@@ -1,12 +1,15 @@
-import './Product.css';
-import {useEffect, useState} from 'react';
+import "./ProductMap.css";
+
 import {webshopProduct} from "./WebshopProduct.js";
 
 
-function Product() {
-    return (
+
+function ProductMap() {
+
+return (
         webshopProduct.map((webshopProduct) => {
-            return (<div key={webshopProduct.id}>
+            return (
+            (<div key={webshopProduct.id}>
                 <div className="product-card">
                     <img src={webshopProduct.image}
                          alt="placeholder image"
@@ -15,10 +18,11 @@ function Product() {
                     <p>{webshopProduct.shortDescription}</p>
                 </div>
 
-            </div>)
+            </div>
+            ))
         })
 
     )
 }
 
-export default Product;
+export default ProductMap;

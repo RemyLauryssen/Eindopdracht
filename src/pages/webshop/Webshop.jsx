@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./Webshop.css";
-import Product from "../product/Product.jsx"
+import ProductMap from "../../components/productmap/ProductMap.jsx";
+
 
 function Webshop() {
 
@@ -15,8 +16,7 @@ function Webshop() {
             </div>
             <div className="webshop-main-container">
                 <div className="product-catalog">
-        <Product/>
-
+                    <ProductMap/>
                 </div>
 
 
