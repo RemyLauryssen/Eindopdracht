@@ -43,6 +43,7 @@ public class ProductService {
 
         existingProductEntity.setName(requestDTO.getName());
         existingProductEntity.setShortDescription(requestDTO.getShortDescription());
+        existingProductEntity.setPrice(requestDTO.getPrice());
 
         existingProductEntity = productRepository.save(existingProductEntity);
         return productDTOMapper.mapToDTO(existingProductEntity);

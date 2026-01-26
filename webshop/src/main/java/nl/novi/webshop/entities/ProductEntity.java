@@ -5,9 +5,11 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {
-    @Column(nullable = false)
     private String name;
+
     private String shortDescription;
+
+    private double price;
 
     public String getName() {
         return name;
@@ -23,5 +25,13 @@ public class ProductEntity extends BaseEntity {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
