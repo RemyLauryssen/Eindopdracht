@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-
 @MappedSuperclass
 public abstract class BaseEntity {
 
@@ -12,7 +11,7 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "date_created", updatable = false)
+    @Column(name = "date_created", updatable = false)
     private LocalDateTime dateCreated;
 
     @Column(name = "date_edited")
@@ -53,3 +52,6 @@ public abstract class BaseEntity {
         this.dateEdited = dateEdited;
     }
 }
+
+
+

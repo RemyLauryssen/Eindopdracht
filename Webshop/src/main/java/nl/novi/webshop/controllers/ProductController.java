@@ -2,8 +2,8 @@ package nl.novi.webshop.controllers;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import nl.novi.webshop.dtos.product.ProductRequestDTO;
 import nl.novi.webshop.dtos.product.ProductResponseDTO;
+import nl.novi.webshop.dtos.product.ProductRequestDTO;
 import nl.novi.webshop.entities.ProductEntity;
 import nl.novi.webshop.helpers.UrlHelper;
 import nl.novi.webshop.services.ProductService;

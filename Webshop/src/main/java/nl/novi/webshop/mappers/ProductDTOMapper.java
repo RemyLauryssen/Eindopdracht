@@ -13,13 +13,14 @@ public class ProductDTOMapper implements DTOMapper<ProductResponseDTO, ProductRe
 
     @Override
     public ProductResponseDTO mapToDTO(ProductEntity model) {
+
         var result = new ProductResponseDTO();
         result.setId(model.getId());
+        result.setDescription(model.getDescription());
         result.setName(model.getName());
-        result.setShortDescription(model.getShortDescription());
-        result.setPrice(model.getPrice());
         return result;
     }
+
 
     @Override
     public List<ProductResponseDTO> mapToDTO(List<ProductEntity> models) {
@@ -30,12 +31,12 @@ public class ProductDTOMapper implements DTOMapper<ProductResponseDTO, ProductRe
         return result;
     }
 
+
     @Override
     public ProductEntity mapToEntity(ProductRequestDTO productModel) {
         var result = new ProductEntity();
         result.setName(productModel.getName());
-        result.setShortDescription(productModel.getShortDescription());
-        result.setPrice(productModel.getPrice());
+        result.setDescription(productModel.getDescription());
         return result;
     }
 }
