@@ -16,8 +16,10 @@ public class ProductDTOMapper implements DTOMapper<ProductResponseDTO, ProductRe
 
         var result = new ProductResponseDTO();
         result.setId(model.getId());
-        result.setDescription(model.getDescription());
+        result.setShortDescription(model.getShortDescription());
+        result.setPrice(model.getPrice());
         result.setName(model.getName());
+
         return result;
     }
 
@@ -36,7 +38,8 @@ public class ProductDTOMapper implements DTOMapper<ProductResponseDTO, ProductRe
     public ProductEntity mapToEntity(ProductRequestDTO productModel) {
         var result = new ProductEntity();
         result.setName(productModel.getName());
-        result.setDescription(productModel.getDescription());
+        result.setShortDescription(productModel.getShortDescription());
+        result.setPrice(productModel.getPrice());
         return result;
     }
 }

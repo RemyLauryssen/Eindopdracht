@@ -41,11 +41,12 @@ public class ProductService {
         return productDTOMapper.mapToDTO(productEntity);
     }
 
-    public ProductResponseDTO updateProduct(Long id, ProductRequestDTO requestDto)  {
+    public ProductResponseDTO updateProduct(Long id, ProductRequestDTO requestDTO)  {
         ProductEntity existingProductEntity = getProductEntity(id);
 
-        existingProductEntity.setName(requestDto.getName());
-        existingProductEntity.setDescription(requestDto.getDescription());
+        existingProductEntity.setName(requestDTO.getName());
+        existingProductEntity.setShortDescription(requestDTO.getShortDescription());
+        existingProductEntity.setPrice(requestDTO.getPrice());
 
         existingProductEntity = productRepository.save(existingProductEntity);
         return productDTOMapper.mapToDTO(existingProductEntity);

@@ -11,7 +11,8 @@ import java.util.Objects;
 public class ProductEntity extends BaseEntity {
     @Column(nullable = false)
     private String name;
-    private String description;
+    private String shortDescription;
+    private double price;
 
     public String getName() {
         return name;
@@ -21,23 +22,31 @@ public class ProductEntity extends BaseEntity {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity that = (ProductEntity) o;
-        return Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription());
+        return Objects.equals(getName(), that.getName()) && Objects.equals(getShortDescription(), that.getShortDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription());
+        return Objects.hash(getName(), getShortDescription());
     }
 }
