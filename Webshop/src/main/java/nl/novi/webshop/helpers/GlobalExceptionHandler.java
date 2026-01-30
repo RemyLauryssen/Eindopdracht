@@ -1,6 +1,6 @@
 package nl.novi.webshop.helpers;
 
-import nl.novi.webshop.exceptions.ProductNotFoundException;
+import nl.novi.webshop.exceptions.RecordNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,8 +12,8 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<String> handleException(ProductNotFoundException ex){
+    @ExceptionHandler(RecordNotFoundException.class)
+    public ResponseEntity<String> handleException(RecordNotFoundException ex){
         return ResponseEntity.notFound().build();
     }
 

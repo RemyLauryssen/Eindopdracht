@@ -4,7 +4,7 @@ package nl.novi.webshop.services;
 import nl.novi.webshop.dtos.product.ProductRequestDTO;
 import nl.novi.webshop.dtos.product.ProductResponseDTO;
 import nl.novi.webshop.entities.ProductEntity;
-import nl.novi.webshop.exceptions.ProductNotFoundException;
+import nl.novi.webshop.exceptions.RecordNotFoundException;
 import nl.novi.webshop.mappers.ProductDTOMapper;
 import nl.novi.webshop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -54,7 +54,7 @@ public class ProductService {
 
     private ProductEntity getProductEntity(Long id) {
         ProductEntity existingProductEntity = productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException("Product " + id +" not found"));
+                .orElseThrow(() -> new RecordNotFoundException("Product " + id +" not found"));
         return existingProductEntity;
     }
 

@@ -1,0 +1,38 @@
+.admin-nav-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid white;
+}
+
+.admin-item {
+    display: flex;
+    padding: 5px;
+    font-size: large;
+}
+
+.horizontal-separator {
+    font-size: x-large;
+    list-style: none;
+}
+
+.admin-header {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.active-admin-shortcut, .admin-shortcuts-default {
+    padding: 0 10px;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
+.admin-shortcuts-default {
+    border: 1px solid gold;
+}
+
+.active-admin-shortcut {
+    border: 1px solid grey;
+    color: lightgray;
+}

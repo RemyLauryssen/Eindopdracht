@@ -5,6 +5,7 @@ export const AuthenticationContext = createContext({});
 
 function AuthenticationContextProvider({children}) {
     const [isUser, toggleIsUser] = useState(true);
+    const [isAdmin, toggleIsAdmin] = useState(true);
     const navigate = useNavigate();
 
     function login() {
@@ -19,6 +20,7 @@ function AuthenticationContextProvider({children}) {
 
     const contextData = {
         isUser: isUser,
+        isAdmin: isAdmin,
         login: login,
         logout: logout
     };

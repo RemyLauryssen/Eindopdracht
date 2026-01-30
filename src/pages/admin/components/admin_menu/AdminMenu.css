@@ -1,0 +1,43 @@
+.menu-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 84vh;
+}
+
+
+.radio-button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.input-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.input-field > input {
+    background: white;
+    color: black;
+    padding: 0 0 0 5px;
+}
+
+.submit-button {
+    align-self: flex-end;
+}
+
+
+

@@ -2,8 +2,7 @@ import "./Profile.css";
 import {useContext, useState} from "react";
 import {AuthenticationContext} from "../../context/AuthenticationContext.jsx";
 import {Mockuser} from "./Mockuser.js";
-import Product from "../../components/productmap/ProductMap.jsx";
-import ProductMap from "../../components/productmap/ProductMap.jsx";
+
 
 function Profile() {
 
