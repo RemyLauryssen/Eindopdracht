@@ -1,15 +1,20 @@
 import "./AdminMenu.css";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
+import UseMenuItems from "../../../../hooks/UseMenuItems.jsx";
 
 
 function AdminMenu() {
+    const [products, setProducts] = useState([]);
     const [productName, setProductName] = useState("");
+    const [menuItem, setMenuItem] = useState([]);
     const [productDescription, setProductDescription] = useState("");
     const [productPrice, setProductPrice] = useState("");
-    const [productType, setProductType] = useState("mains")
+    const [productType, setProductType] = useState("")
     const [addSuccess, toggleAddSuccess] = useState(false);
     const [error, setError] = useState(null);
+    const [loading, toggleLoading] = useState(false);
+
 
     async function addMenuItem(e) {
         e.preventDefault();
@@ -17,7 +22,7 @@ function AdminMenu() {
         setError(null);
 
         try {
-            const response = await axios.post('http://localhost:8080/menu', {
+            const response = await axios.post("http://localhost:8080/menu", {
                 name: productName, description: productDescription, price: productPrice, type: productType
             });
             console.log(response.data);
@@ -28,93 +33,119 @@ function AdminMenu() {
             setError(e);
         }
     }
+    const {menuItems} = UseMenuItems("http://localhost:8080/menu");
 
     return (
-
-        <div className="menu-page-container">
-            <h2>Een product toevoegen</h2>
-            {addSuccess === true && <p className="success-message">Product is toegevoegd!</p>}
-            <form onSubmit={addMenuItem} className="menu-form-container">
-                <div className="radio-button-container">
-                    <label htmlFor="mains">
-                        <input
-                            type="radio"
-                            id="mains"
-                            name="menu-product"
-                            value="mains"
-                            checked={productType === "mains"}
-                            onChange={(e) => setProductType(e.target.value)}
-                        />
-                        Hoofdgerecht
-                    </label>
-                    <label htmlFor="extras">
-                        <input
-                            type="radio"
-                            id="extras"
-                            name="menu-product"
-                            value="extras"
-                            checked={productType === "extras"}
-                            onChange={(e) => setProductType(e.target.value)}
-                        />
-                        Bijgerecht
-                    </label>
-                    <label htmlFor="drinks">
-                        <input
-                            type="radio"
-                            id="drinks"
-                            name="menu-product"
-                            value="drinks"
-                            checked={productType === "drinks"}
-                            onChange={(e) => setProductType(e.target.value)}
-                        />
-                        Drankje
-                    </label>
+        <>
+            <div className="menu-page-container">
+                <div className="menu-left-side">
+                    <h2>Huidig menu</h2>
+                    {menuItems.map((menuItem) => {
+                        return (
+                            <div key={menuItem.id}>
+                                <div className={`product-card ${menuItem.name}`}>
+                                    <img src={menuItem.image}
+                                         alt="placeholder image"
+                                         className="product-image"/>
+                                    <h4 className={menuItem.name}>{menuItem.name}</h4>
+                                    <p>{menuItem.description})</p>
+                                </div>
+                            </div>
+                        )
+                    })}
                 </div>
-                <label htmlFor="product-name">
-                    <div className="input-title">
-                        Naam:
+                <span className="vertical-line">
+            </span>
+                <div className="menu-right-side">
+                    <div>
+                        <h2>Een product toevoegen</h2>
+                        {addSuccess === true && <p className="success-message">Product is toegevoegd!</p>}
+
+                        <form onSubmit={addMenuItem} className="menu-form-container">
+                            <div className="radio-button-container">
+                                <label htmlFor="mains">
+                                    <input
+                                        type="radio"
+                                        id="mains"
+                                        name="menu-product"
+                                        value="mains"
+                                        checked={productType === "mains"}
+                                        onChange={(e) => setProductType(e.target.value)}
+                                    />
+                                    Hoofdgerecht
+                                </label>
+                                <label htmlFor="extras">
+                                    <input
+                                        type="radio"
+                                        id="extras"
+                                        name="menu-product"
+                                        value="extras"
+                                        checked={productType === "extras"}
+                                        onChange={(e) => setProductType(e.target.value)}
+                                    />
+                                    Bijgerecht
+                                </label>
+                                <label htmlFor="drinks">
+                                    <input
+                                        type="radio"
+                                        id="drinks"
+                                        name="menu-product"
+                                        value="drinks"
+                                        checked={productType === "drinks"}
+                                        onChange={(e) => setProductType(e.target.value)}
+                                    />
+                                    Drankje
+                                </label>
+                            </div>
+                            <label htmlFor="product-name">
+                                <div className="input-title">
+                                    Naam:
+                                </div>
+                                <div className="input-field">
+                                    <input
+                                        type="text"
+                                        name="product-name-field"
+                                        id="product-name"
+                                        value={productName}
+                                        onChange={(e) => setProductName(e.target.value)}/>
+                                </div>
+                            </label>
+                            <label htmlFor="product-description">
+                                <div className="input-title">
+                                    Beschrijving:
+                                </div>
+                                <div className="input-field">
+                                    <input
+                                        type="text"
+                                        name="product-description-field"
+                                        id="product-description"
+                                        value={productDescription}
+                                        onChange={(e) => setProductDescription(e.target.value)}/>
+                                </div>
+                            </label>
+                            <label htmlFor="product-price">
+                                <div className="input-title">
+                                    Prijs:
+                                </div>
+                                <div className="input-field">
+                                    <input
+                                        type="text"
+                                        name="product-price-field"
+                                        id="product-price"
+                                        value={productPrice}
+                                        onChange={(e) => setProductPrice(e.target.value)}/>
+                                </div>
+                            </label>
+                            <button className="submit-button" type="submit">
+                                Product toevoegen
+                            </button>
+                        </form>
                     </div>
-                    <div className="input-field">
-                    <input
-                        type="text"
-                        name="product-name-field"
-                        id="product-name"
-                        value={productName}
-                        onChange={(e) => setProductName(e.target.value)}/>
-                    </div>
-                </label>
-                <label htmlFor="product-description">
-                        <div className="input-title">
-                    Beschrijving:
-                        </div>
-                    <div className="input-field">
-                    <input
-                        type="text"
-                        name="product-description-field"
-                        id="product-description"
-                        value={productDescription}
-                        onChange={(e) => setProductDescription(e.target.value)}/>
-                    </div>
-                </label>
-                <label htmlFor="product-price">
-                    <div className="input-title">
-                    Prijs:
-                    </div>
-                    <div className="input-field">
-                    <input
-                        type="text"
-                        name="product-price-field"
-                        id="product-price"
-                        value={productPrice}
-                        onChange={(e) => setProductPrice(e.target.value)}/>
-                    </div>
-                </label>
-                <button className="submit-button" type="submit">
-                    Product toevoegen
-                </button>
-            </form>
-            {error && <p className="error-message">Toevoegen is mislukt. Probeer het opnieuw</p>}
-        </div>);
+                </div>
+                {error && <p className="error-message">Toevoegen is mislukt. Probeer het opnieuw</p>}
+            </div>
+        </>)
 }
+
 
 export default AdminMenu;

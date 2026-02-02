@@ -18,7 +18,7 @@ public class MenuRequestDTO {
     @Positive
     private double price;
     @NotNull
-    private String type;
+    private String dish;
 
     public String getName() {
         return name;
@@ -44,12 +44,12 @@ public class MenuRequestDTO {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public String getDish() {
+        return dish;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDish(String dish) {
+        this.dish = dish;
     }
 
 

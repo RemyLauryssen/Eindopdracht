@@ -9,20 +9,20 @@ import "./Menu.css";
 
 export default function Menu() {
     return (
-<div className="full-menu">
-        <Provider>
-<div className="menu-container">
-            <section>
-                <img className="menu-logo" src={CompanyLogo} alt="Logo van het restaurant"/>
-                <Mains meals={mains}/>
-            </section>
-            <section className="extras-drinks-container">
-                    <Extras type="Bijgerechten" items={sides}/>
-                    <Extras type="Drankjes" items={drinks}/>
+        <div className="full-menu">
+            <Provider>
+                <div className="menu-container">
+                    <section>
+                        <img className="menu-logo" src={CompanyLogo} alt="Logo van het restaurant"/>
+                        <Mains meals={mains}/>
                     </section>
-</div>
+                    <section className="extras-drinks-container">
+                        <Extras type="Bijgerechten" items={sides}/>
+                        <Extras type="Drankjes" items={drinks}/>
+                    </section>
+                </div>
 
-        </Provider>
-</div>
+            </Provider>
+        </div>
     );
 }

@@ -33,6 +33,11 @@ public class MenuService {
         return menuDTOMapper.mapToDTO(menuEntity);
     }
 
+    public MenuResponseDTO findMenuItemByDish(String dish) {
+        MenuEntity menuEntity = getMenuEntityByDish(dish);
+        return menuDTOMapper.mapToDTO(menuEntity);
+    }
+
     public MenuResponseDTO createMenuItem(MenuRequestDTO menuDTO) {
         MenuEntity menuEntity = menuDTOMapper.mapToEntity(menuDTO);
         menuEntity = menuRepository.save(menuEntity);
@@ -45,17 +50,23 @@ public class MenuService {
         existingMenuEntity.setName(requestDTO.getName());
         existingMenuEntity.setDescription(requestDTO.getDescription());
         existingMenuEntity.setPrice(requestDTO.getPrice());
-        existingMenuEntity.setType(requestDTO.getType());
+        existingMenuEntity.setDish(requestDTO.getDish());
 
         existingMenuEntity = menuRepository.save(existingMenuEntity);
         return menuDTOMapper.mapToDTO(existingMenuEntity);
     }
 
     private MenuEntity getMenuEntity(Long id) {
-        MenuEntity existingMenuEntity = menuRepository.findById(id)
+        return menuRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Menu-item " + id +" not found"));
-        return existingMenuEntity;
     }
+
+    private MenuEntity getMenuEntityByDish(String dish) {
+        return (MenuEntity) menuRepository.findByDish(dish)
+                .orElseThrow(() -> new RecordNotFoundException("Menu-item " + dish +" not found"));
+    }
+
+
 
     public void deleteMenuItem(Long id) {
         menuRepository.deleteById(id);

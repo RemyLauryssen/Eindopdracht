@@ -19,7 +19,7 @@ public class MenuDTOMapper implements DTOMapper<MenuResponseDTO, MenuRequestDTO,
         result.setDescription(model.getDescription());
         result.setPrice(model.getPrice());
         result.setName(model.getName());
-        result.setType(model.getType());
+        result.setDish(model.getDish());
 
         return result;
     }
@@ -41,7 +41,7 @@ public class MenuDTOMapper implements DTOMapper<MenuResponseDTO, MenuRequestDTO,
         result.setName(productModel.getName());
         result.setDescription(productModel.getDescription());
         result.setPrice(productModel.getPrice());
-        result.setType(productModel.getType());
+        result.setDish(productModel.getDish());
         return result;
     }
 }

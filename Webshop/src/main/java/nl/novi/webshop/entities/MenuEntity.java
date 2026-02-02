@@ -13,7 +13,7 @@ public class MenuEntity extends BaseEntity {
     private String name;
     private String description;
     private double price;
-    private String type;
+    private String dish;
 
     public String getName() {
         return name;
@@ -39,12 +39,12 @@ public class MenuEntity extends BaseEntity {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public String getDish() {
+        return dish;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDish(String dish) {
+        this.dish = dish;
     }
 
     @Override

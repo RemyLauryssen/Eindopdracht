@@ -1,11 +1,21 @@
 .menu-page-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-height: 84vh;
+    justify-content: space-evenly;
+    border: 2px dotted red;
 }
 
+.menu-left-side {
+    display: flex;
+    border: 2px dotted green;
+}
 
+.vertical-line {
+    border-left: 1px solid white;
+}
+.menu-right-side {
+    display: flex;
+    border: 2px dotted white;
+}
 .radio-button-container {
     display: flex;
     justify-content: space-evenly;
