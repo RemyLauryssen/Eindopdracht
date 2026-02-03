@@ -36,12 +36,6 @@ public class MenuController {
         return ResponseEntity.ok(menuItem);
     }
 
-    @GetMapping("/{dish}")
-    public ResponseEntity<MenuResponseDTO> getMenuItemByDish(@PathVariable @RequestParam(name="mains") String dish) {
-        MenuResponseDTO menuItem = menuService.findMenuItemByDish(dish);
-        return ResponseEntity.ok(menuItem);
-    }
-
      @PostMapping
     public ResponseEntity<MenuResponseDTO> createMenuItem(@RequestBody @Valid MenuRequestDTO menuModel) {
         MenuResponseDTO newMenuItem = menuService.createMenuItem(menuModel);

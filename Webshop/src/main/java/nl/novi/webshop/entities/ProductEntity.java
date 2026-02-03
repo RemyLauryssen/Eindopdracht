@@ -2,6 +2,7 @@ package nl.novi.webshop.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.util.Objects;
@@ -13,6 +14,9 @@ public class ProductEntity extends BaseEntity {
     private String name;
     private String shortDescription;
     private double price;
+
+    @OneToOne
+    ProductImage productImage;
 
     public String getName() {
         return name;
@@ -36,6 +40,14 @@ public class ProductEntity extends BaseEntity {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public ProductImage getProductImage() {
+        return productImage;
+    }
+
+    public  void setProductImage(ProductImage productImage) {
+        this.productImage = productImage;
     }
 
     @Override

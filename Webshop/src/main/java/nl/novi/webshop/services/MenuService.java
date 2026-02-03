@@ -33,11 +33,6 @@ public class MenuService {
         return menuDTOMapper.mapToDTO(menuEntity);
     }
 
-    public MenuResponseDTO findMenuItemByDish(String dish) {
-        MenuEntity menuEntity = getMenuEntityByDish(dish);
-        return menuDTOMapper.mapToDTO(menuEntity);
-    }
-
     public MenuResponseDTO createMenuItem(MenuRequestDTO menuDTO) {
         MenuEntity menuEntity = menuDTOMapper.mapToEntity(menuDTO);
         menuEntity = menuRepository.save(menuEntity);
@@ -59,11 +54,6 @@ public class MenuService {
     private MenuEntity getMenuEntity(Long id) {
         return menuRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Menu-item " + id +" not found"));
-    }
-
-    private MenuEntity getMenuEntityByDish(String dish) {
-        return (MenuEntity) menuRepository.findByDish(dish)
-                .orElseThrow(() -> new RecordNotFoundException("Menu-item " + dish +" not found"));
     }
 
 

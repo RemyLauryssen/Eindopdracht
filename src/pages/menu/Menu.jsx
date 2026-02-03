@@ -1,28 +1,56 @@
 import React from "react";
 import CompanyLogo from "../../assets/company-logo.jpg";
-import Mains from "./components/Mains.jsx";
-import Extras from "./components/Extras.jsx";
-import {Provider} from "./Context.jsx";
-import {mains, sides, drinks} from "./data";
+
 
 import "./Menu.css";
+import UseMenuItems from "../../hooks/UseMenuItems.jsx";
 
 export default function Menu() {
+    const {menuItems} = UseMenuItems("http://localhost:8080/menu");
     return (
         <div className="full-menu">
-            <Provider>
-                <div className="menu-container">
-                    <section>
-                        <img className="menu-logo" src={CompanyLogo} alt="Logo van het restaurant"/>
-                        <Mains meals={mains}/>
-                    </section>
-                    <section className="extras-drinks-container">
-                        <Extras type="Bijgerechten" items={sides}/>
-                        <Extras type="Drankjes" items={drinks}/>
-                    </section>
-                </div>
 
-            </Provider>
+            <div className="menu-container">
+                <section>
+                    <img className="menu-logo" src={CompanyLogo} alt="Logo van het restaurant"/>
+                    <h3>Hoofdgerechten</h3>
+                    {menuItems.map((menuItem) => {
+                        if (menuItem.dish === "mains") {
+                            return (
+                                <article className="menu-item" key={menuItem.id}>
+                                    <h3 className="mains-name">{menuItem.name}</h3>
+                                    <div className="price-container">
+                                        <strong>€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                    </div>
+                                    <p className="mains-description">{menuItem.description}</p>
+                                </article>
+                            )
+                        }
+                    })}
+                    <h3>Bijgerechten</h3>
+                    {menuItems.map((menuItem) => {
+                        if (menuItem.dish === "extras") {
+                            return (
+                                <article className="menu-item" key={menuItem.id}>
+                                    <div className="extras-name">{menuItem.name}</div>
+                                    <strong className="extras-price">€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                </article>
+                            )
+                        }
+                    })}
+                    <h3>Drankjes</h3>
+                    {menuItems.map((menuItem) => {
+                        if (menuItem.dish === "drinks") {
+                            return (
+                                <article className="menu-item" key={menuItem.id}>
+                                    <div className="extras-name">{menuItem.name}</div>
+                                    <strong className="extras-price">€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                </article>
+                            )
+                        }
+                    })}
+                </section>
+            </div>
         </div>
     );
 }

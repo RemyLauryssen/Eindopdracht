@@ -1,22 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-const UseMenuItems = (url) => {
 
+function UseMenuItems(url) {
     const [menuItems, setMenuItems] = useState([]);
 
+    const fetchMenu = async () => {
+        const response = await axios.get(url);
+        setMenuItems(response.data);
+    };
+
     useEffect(() => {
-        async function fetchMenuItems() {
-            try {
-                const response = await axios.get(url);
-                setMenuItems(response.data);
-                console.log(response.data);
-            } catch(e) {
-                console.error(e);
-            }
-        }
-        void fetchMenuItems()
-    }, []);
-    return { menuItems }
-};
+        fetchMenu();
+    }, [url]);
+
+    return { menuItems, refetch: fetchMenu };
+}
 
 export default UseMenuItems;

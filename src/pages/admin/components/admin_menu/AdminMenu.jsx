@@ -5,53 +5,104 @@ import UseMenuItems from "../../../../hooks/UseMenuItems.jsx";
 
 
 function AdminMenu() {
-    const [products, setProducts] = useState([]);
+
     const [productName, setProductName] = useState("");
-    const [menuItem, setMenuItem] = useState([]);
     const [productDescription, setProductDescription] = useState("");
     const [productPrice, setProductPrice] = useState("");
-    const [productType, setProductType] = useState("")
+    const [dishType, setDishType] = useState("mains");
     const [addSuccess, toggleAddSuccess] = useState(false);
     const [error, setError] = useState(null);
     const [loading, toggleLoading] = useState(false);
 
 
-    async function addMenuItem(e) {
-        e.preventDefault();
-        console.log(productName, productDescription, productPrice, productType);
+    async function addMenuItem() {
+        console.log(productName, productDescription, productPrice, dishType);
         setError(null);
 
         try {
             const response = await axios.post("http://localhost:8080/menu", {
-                name: productName, description: productDescription, price: productPrice, type: productType
+                name: productName, description: productDescription, price: productPrice, dish: dishType
             });
             console.log(response.data);
             toggleAddSuccess(true);
-
         } catch (e) {
             console.error(e);
             setError(e);
         }
     }
-    const {menuItems} = UseMenuItems("http://localhost:8080/menu");
+
+    const {menuItems, refetch} = UseMenuItems("http://localhost:8080/menu");
+
+    async function deleteMenuItem(id) {
+
+        try {
+            await axios.delete(`http://localhost:8080/menu/${id}`);
+            await refetch();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
 
     return (
         <>
             <div className="menu-page-container">
                 <div className="menu-left-side">
-                    <h2>Huidig menu</h2>
+                    <div className="menu-title">
+                        <h2>Huidig menu</h2>
+                    </div>
+                    <h3>Hoofdgerechten</h3>
                     {menuItems.map((menuItem) => {
-                        return (
-                            <div key={menuItem.id}>
-                                <div className={`product-card ${menuItem.name}`}>
-                                    <img src={menuItem.image}
-                                         alt="placeholder image"
-                                         className="product-image"/>
-                                    <h4 className={menuItem.name}>{menuItem.name}</h4>
-                                    <p>{menuItem.description})</p>
-                                </div>
-                            </div>
-                        )
+                        if (menuItem.dish === "mains") {
+                            return (
+                                <article className="menu-item" key={menuItem.id}>
+                                    <h4 className="mains-name">{menuItem.name}</h4>
+                                    <div className="price-container">
+                                        <strong>€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                    </div>
+                                    <p className="mains-description">{menuItem.description}</p>
+                                    <button className="delete-button" type="button"
+                                            onClick={() => deleteMenuItem(menuItem.id)}>X
+                                    </button>
+                                </article>
+                            )
+                        }
+                    })}
+                    <h3>Bijgerechten</h3>
+                    {menuItems.map((menuItem) => {
+                        if (menuItem.dish === "extras") {
+                            return (
+                                <>
+                                    <article className="menu-item" key={menuItem.id}>
+                                        <div className="extras-name">{menuItem.name}</div>
+                                        <strong className="extras-price">€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                    </article>
+                                    <div>
+                                        <button className="delete-button" type="button"
+                                                onClick={() => deleteMenuItem(menuItem.id)}>X
+                                        </button>
+                                    </div>
+                                </>
+                            )
+                        }
+                    })}
+                    <h3>Drankjes</h3>
+                    {menuItems.map((menuItem) => {
+                        if (menuItem.dish === "drinks") {
+                            return (
+                                <>
+                                    <article className="menu-item" key={menuItem.id}>
+                                        <div className="extras-name">{menuItem.name}</div>
+                                        <strong className="extras-price">€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                    </article>
+                                    <div>
+                                        <button className="delete-button" type="button"
+                                                onClick={() => deleteMenuItem(menuItem.id)}>X
+                                        </button>
+                                    </div>
+                                </>
+                            )
+                        }
                     })}
                 </div>
                 <span className="vertical-line">
@@ -69,8 +120,8 @@ function AdminMenu() {
                                         id="mains"
                                         name="menu-product"
                                         value="mains"
-                                        checked={productType === "mains"}
-                                        onChange={(e) => setProductType(e.target.value)}
+                                        checked={dishType === "mains"}
+                                        onChange={(e) => setDishType(e.target.value)}
                                     />
                                     Hoofdgerecht
                                 </label>
@@ -80,8 +131,8 @@ function AdminMenu() {
                                         id="extras"
                                         name="menu-product"
                                         value="extras"
-                                        checked={productType === "extras"}
-                                        onChange={(e) => setProductType(e.target.value)}
+                                        checked={dishType === "extras"}
+                                        onChange={(e) => setDishType(e.target.value)}
                                     />
                                     Bijgerecht
                                 </label>
@@ -91,8 +142,8 @@ function AdminMenu() {
                                         id="drinks"
                                         name="menu-product"
                                         value="drinks"
-                                        checked={productType === "drinks"}
-                                        onChange={(e) => setProductType(e.target.value)}
+                                        checked={dishType === "drinks"}
+                                        onChange={(e) => setDishType(e.target.value)}
                                     />
                                     Drankje
                                 </label>

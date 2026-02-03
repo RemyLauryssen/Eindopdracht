@@ -1,12 +1,11 @@
 .menu-page-container {
     display: flex;
     justify-content: space-evenly;
-    border: 2px dotted red;
 }
 
 .menu-left-side {
     display: flex;
-    border: 2px dotted green;
+    flex-direction: column;
 }
 
 .vertical-line {
@@ -14,8 +13,8 @@
 }
 .menu-right-side {
     display: flex;
-    border: 2px dotted white;
 }
+
 .radio-button-container {
     display: flex;
     justify-content: space-evenly;
@@ -49,5 +48,56 @@
     align-self: flex-end;
 }
 
+.menu-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
 
+.menu-logo {
+    max-height: 16vh;
+    margin-top: 6px;
+}
+
+.mains-name {
+    display: flex;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.mains-description {
+    flex: 1 1 100%;
+    margin: 0.75rem 0 0;
+    color: gold;
+}
+
+.extras {
+    color: gold;
+}
+
+.extras + .extras {
+    margin-top: 1.5rem;
+}
+
+
+.extras .menu-item {
+    margin-bottom: 0.75rem;
+}
+
+.extras-heading {
+    margin: 0 0 1.5rem;
+    border-bottom: 1px solid gold;
+}
+
+.extras-drinks-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1vw;
+}
+
+.extras-name {
+    flex-grow: 1;
+}
 
