@@ -36,12 +36,12 @@ public class MenuDTOMapper implements DTOMapper<MenuResponseDTO, MenuRequestDTO,
 
 
     @Override
-    public MenuEntity mapToEntity(MenuRequestDTO productModel) {
+    public MenuEntity mapToEntity(MenuRequestDTO menuModel) {
         var result = new MenuEntity();
-        result.setName(productModel.getName());
-        result.setDescription(productModel.getDescription());
-        result.setPrice(productModel.getPrice());
-        result.setDish(productModel.getDish());
+        result.setName(menuModel.getName());
+        result.setDescription(menuModel.getDescription());
+        result.setPrice(menuModel.getPrice());
+        result.setDish(menuModel.getDish());
         return result;
     }
 }

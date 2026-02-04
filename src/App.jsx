@@ -16,6 +16,7 @@ import AdminReservations from "./pages/admin/components/admin_reservations/Admin
 import AdminMenu from "./pages/admin/components/admin_menu/AdminMenu.jsx";
 import AdminProducts from "./pages/admin/components/admin_products/AdminProducts.jsx";
 import AdminOrders from "./pages/admin/components/admin_orders/AdminOrders.jsx";
+import ShoppingBasket from "./pages/shopping_basket/ShoppingBasket.jsx";
 
 
 function App() {
@@ -32,12 +33,12 @@ function App() {
                 <Route path="/webshop" element={<Webshop/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/profile" element={isUser ? <Profile/> : <Navigate to="/signup"/>}/>
+                <Route path="/shopping-basket" element={isUser ? <ShoppingBasket/> : <Navigate to="/signup"/>}/>
                 <Route path="/admin" element={isAdmin ? <Admin/> : <Navigate to="/"/>}/>
                 <Route path="/adminReservations" element={isAdmin ? <AdminReservations/> : <Navigate to="/"/>}/>
                 <Route path="/adminMenu" element={isAdmin ? <AdminMenu/> : <Navigate to="/"/>}/>
                 <Route path="/adminOrders" element={isAdmin ? <AdminOrders/> : <Navigate to="/"/>}/>
                 <Route path="/adminProducts" element={isAdmin ? <AdminProducts/> : <Navigate to="/"/>}/>
-
             </Routes>
 
         </>

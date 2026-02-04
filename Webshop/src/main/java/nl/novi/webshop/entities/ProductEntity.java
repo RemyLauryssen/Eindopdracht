@@ -1,9 +1,6 @@
 package nl.novi.webshop.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -15,8 +12,10 @@ public class ProductEntity extends BaseEntity {
     private String shortDescription;
     private double price;
 
-    @OneToOne
-    ProductImage productImage;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
+    private ProductImage productImage;
+
 
     public String getName() {
         return name;

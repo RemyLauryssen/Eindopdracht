@@ -20,7 +20,11 @@ export default function Menu() {
                                 <article className="menu-item" key={menuItem.id}>
                                     <h3 className="mains-name">{menuItem.name}</h3>
                                     <div className="price-container">
-                                        <strong>€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                        <strong>
+                                            € {menuItem.price.toLocaleString("nl-NL", {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2,
+                                        })}</strong>
                                     </div>
                                     <p className="mains-description">{menuItem.description}</p>
                                 </article>
@@ -33,7 +37,12 @@ export default function Menu() {
                             return (
                                 <article className="menu-item" key={menuItem.id}>
                                     <div className="extras-name">{menuItem.name}</div>
-                                    <strong className="extras-price">€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                    <strong className="extras-price">
+                                        € {menuItem.price.toLocaleString("nl-NL", {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                    })}
+                                    </strong>
                                 </article>
                             )
                         }
@@ -44,7 +53,10 @@ export default function Menu() {
                             return (
                                 <article className="menu-item" key={menuItem.id}>
                                     <div className="extras-name">{menuItem.name}</div>
-                                    <strong className="extras-price">€ {menuItem.price.toFixed(2).toLocaleString("nl")}</strong>
+                                    <strong className="extras-price"> € {menuItem.price.toLocaleString("nl-NL", {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                    })}</strong>
                                 </article>
                             )
                         }

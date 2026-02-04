@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import nl.novi.webshop.entities.ProductImage;
 
+import java.awt.*;
 import java.util.Objects;
 
 public class ProductRequestDTO {
@@ -17,6 +19,7 @@ public class ProductRequestDTO {
     @NotNull
     @Positive
     private double price;
+    private ProductImage productImage;
 
     public String getName() {
         return name;
@@ -30,7 +33,7 @@ public class ProductRequestDTO {
         return shortDescription;
     }
 
-    public void setDescription(String description) {
+    public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
     }
 
@@ -42,6 +45,13 @@ public class ProductRequestDTO {
         this.price = price;
     }
 
+    public ProductImage getProductImage() {
+        return productImage;
+    }
+
+    public void setImage(ProductImage productImage) {
+        this.productImage = productImage;
+    }
 
     @Override
     public boolean equals(Object o) {

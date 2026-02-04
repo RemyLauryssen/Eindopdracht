@@ -1,22 +1,31 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-const UseProducts = (url) => {
+import { useState } from "react";
+import axios from "axios";
 
-    const [products, setProducts] = useState([]);
+export function useProducts() {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [addSuccess, setAddSuccess] = useState(false);
 
-    useEffect(() => {
-        async function fetchProducts() {
-            try {
-                const response = await axios.get(url);
-                setProducts(response.data);
-                console.log(response.data);
-            } catch(e) {
-                console.error(e);
-            }
+    async function addProduct(formData) {
+        setLoading(true);
+        setError(null);
+        setAddSuccess(false);
+
+        try {
+            const response = await axios.post("/products", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            setAddSuccess(true);
+            return response.data;
+        } catch (err) {
+            console.error(err);
+            setError(true);
+        } finally {
+            setLoading(false);
         }
-        void fetchProducts()
-    }, []);
-    return { products }
-};
+    }
 
-export default UseProducts;
+    return { addProduct, loading, error, addSuccess };
+}

@@ -3,6 +3,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import companyLogo from "../../assets/company-logo.jpg";
 import loginIcon from "../../assets/Login-Icon.svg";
 import loginIconAdmin from "../../assets/Login-Icon-Admin.svg"
+import shoppingIcon from "../../assets/Shopping-cart.svg";
 import {useContext} from "react";
 import {AuthenticationContext} from "../../context/AuthenticationContext.jsx";
 
@@ -41,13 +42,24 @@ function Navigation() {
                                          className={({isActive}) => isActive ? 'active-link' : 'default-link'}>
                                     <img className="login-icon" src={loginIcon} alt="Inloggen"/>
                                 </NavLink>}
-                            {isAdmin ?
-                                <NavLink to="/admin"><img className="login-icon" src={loginIconAdmin}
-                                                            alt="Admin"/></NavLink> :
+                            {isUser ?
+                                <NavLink to="/shopping-basket"><img className="login-icon" src={shoppingIcon}
+                                                                    alt="Winkelwagen"/></NavLink> :
                                 <NavLink to="/login"
                                          className={({isActive}) => isActive ? 'active-link' : 'default-link'}>
                                     <img className="login-icon" src={loginIcon} alt="Inloggen"/>
                                 </NavLink>}
+
+                            {isAdmin ?
+                                <NavLink to="/admin"><img className="login-icon" src={loginIconAdmin}
+                                                          alt="Admin"/></NavLink> :
+                                <NavLink to="/login"
+                                         className={({isActive}) => isActive ? 'active-link' : 'default-link'}>
+                                    <img className="login-icon" src={loginIcon} alt="Inloggen"/>
+                                </NavLink>
+                            }
+
+
                         </li>
                     </div>
                 </ul>

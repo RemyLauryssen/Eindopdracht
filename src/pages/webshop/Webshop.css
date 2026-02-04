@@ -1,13 +1,18 @@
 .webshop-introduction {
-    height: 14vh;
+    height: 16vh;
+    margin-bottom: 2vh;
 }
+
 
 
 .webshop-main-container {
     display: flex;
-    border: 2px dotted green;
+    flex-direction: row;
+    border: 1px solid white;
     max-height: 70vh;
     overflow-y: scroll;
+    padding: 3px;
+    flex-wrap: wrap;
 }
 
 .product-catalog {
@@ -45,3 +50,4 @@
 .product-image {
     padding: 10px 10px 0 10px;
 }
+
