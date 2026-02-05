@@ -1,9 +1,12 @@
 package nl.novi.webshop.services;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import nl.novi.webshop.dtos.reservationDetails.ReservationDetailsRequestDTO;
 import nl.novi.webshop.dtos.reservationDetails.ReservationDetailsResponseDTO;
+import nl.novi.webshop.dtos.reservationDetails.ReservationStatusUpdateDTO;
 import nl.novi.webshop.entities.ReservationDetailsEntity;
+import nl.novi.webshop.entities.ReservationStatus;
 import nl.novi.webshop.exceptions.RecordNotFoundException;
 import nl.novi.webshop.mappers.ReservationDetailsDTOMapper;
 import nl.novi.webshop.repositories.ReservationDetailsRepository;
@@ -39,13 +42,34 @@ public class ReservationDetailsService {
         return reservationDetailsDTOMapper.mapToDTO(reservationDetailsEntity);
     }
 
+    public ReservationDetailsResponseDTO updateReservationStatus(Long id, ReservationStatusUpdateDTO reservationStatusUpdateDTO) {
+
+        ReservationDetailsEntity reservationDetailsEntity = getReservationDetailsEntity(id);
+
+        ReservationStatus status;
+        try {
+            status = ReservationStatus.valueOf(reservationStatusUpdateDTO.getStatus().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid reservation status: " + reservationStatusUpdateDTO.getStatus());
+        }
+
+        reservationDetailsEntity.setStatus(status);
+
+
+        reservationDetailsEntity = reservationDetailsRepository.save(reservationDetailsEntity);
+        return reservationDetailsDTOMapper.mapToDTO(reservationDetailsEntity);
+    }
+
     public ReservationDetailsResponseDTO updateReservationDetails(Long id, ReservationDetailsRequestDTO requestDTO)  {
         ReservationDetailsEntity existingReservationDetailsEntity = getReservationDetailsEntity(id);
+
 
         existingReservationDetailsEntity.setFirstName(requestDTO.getFirstName());
         existingReservationDetailsEntity.setLastName(requestDTO.getLastName());
         existingReservationDetailsEntity.setEmailAddress(requestDTO.getEmailAddress());
-        existingReservationDetailsEntity.setLocalDateTime(requestDTO.getLocalDateTime());
+        existingReservationDetailsEntity.setReservationDateTime(requestDTO.getReservationDateTime());
+        existingReservationDetailsEntity.setNumberOfGuests(requestDTO.getNumberOfGuests());
+
 
         existingReservationDetailsEntity = reservationDetailsRepository.save(existingReservationDetailsEntity);
         return reservationDetailsDTOMapper.mapToDTO(existingReservationDetailsEntity);

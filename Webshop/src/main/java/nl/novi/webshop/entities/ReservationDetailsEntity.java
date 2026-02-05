@@ -1,20 +1,24 @@
 package nl.novi.webshop.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
+@Table(name = "reservation-details")
 public class ReservationDetailsEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String firstName;
     private String lastName;
     private String emailAddress;
-    private LocalDateTime localDateTime;
+    private LocalDateTime reservationDateTime;
+    private int numberOfGuests;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ReservationStatus status = ReservationStatus.PENDING;
 
     public String getFirstName() {
         return firstName;
@@ -40,13 +44,32 @@ public class ReservationDetailsEntity extends BaseEntity {
         this.emailAddress = emailAddress;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDateTime getReservationDateTime() {
+        return reservationDateTime;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setReservationDateTime(LocalDateTime reservationDateTime) {
+        this.reservationDateTime = reservationDateTime;
     }
+
+    public int getNumberOfGuests() {
+        return numberOfGuests;
+    }
+
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
+
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        if (status != null) {
+            this.status = status;
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -59,5 +82,7 @@ public class ReservationDetailsEntity extends BaseEntity {
     public int hashCode() {
         return Objects.hash(getFirstName(), getLastName());
     }
+
+
 }
 

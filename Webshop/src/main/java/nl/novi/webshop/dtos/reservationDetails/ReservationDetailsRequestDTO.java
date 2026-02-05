@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import nl.novi.webshop.entities.ReservationStatus;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -19,7 +20,12 @@ public class ReservationDetailsRequestDTO {
     @NotNull
     private String emailAddress;
     @NotNull
-    private LocalDateTime localDateTime;
+    private LocalDateTime reservationDateTime;
+    @NotNull
+    @Positive
+    private int numberOfGuests;
+
+    private ReservationStatus status;
 
     public String getFirstName() {
         return firstName;
@@ -45,12 +51,28 @@ public class ReservationDetailsRequestDTO {
         this.emailAddress = emailAddress;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDateTime getReservationDateTime() {
+        return reservationDateTime;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setReservationDateTime(LocalDateTime reservationDateTime) {
+        this.reservationDateTime = reservationDateTime;
+    }
+
+    public int getNumberOfGuests() {
+        return numberOfGuests;
+    }
+
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
+
+    public ReservationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservationStatus status) {
+        this.status = status;
     }
 
     @Override

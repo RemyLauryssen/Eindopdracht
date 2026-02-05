@@ -11,13 +11,13 @@ function AdminMenu() {
     const [productPrice, setProductPrice] = useState("");
     const [dishType, setDishType] = useState("mains");
     const [addSuccess, toggleAddSuccess] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
 
     async function addMenuItem() {
         console.log(productName, productDescription, productPrice, dishType);
-        setError(null);
+        toggleError(false);
 
         try {
             const response = await axios.post("http://localhost:8080/menu", {
@@ -27,7 +27,7 @@ function AdminMenu() {
             toggleAddSuccess(true);
         } catch (e) {
             console.error(e);
-            setError(e);
+            toggleError(e);
         }
     }
 

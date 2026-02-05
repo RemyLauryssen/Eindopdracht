@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import nl.novi.webshop.dtos.reservationDetails.ReservationDetailsResponseDTO;
 import nl.novi.webshop.dtos.reservationDetails.ReservationDetailsRequestDTO;
+import nl.novi.webshop.dtos.reservationDetails.ReservationStatusUpdateDTO;
 import nl.novi.webshop.entities.ReservationDetailsEntity;
 import nl.novi.webshop.helpers.UrlHelper;
 import nl.novi.webshop.services.ReservationDetailsService;
@@ -46,6 +47,12 @@ public class ReservationDetailsController {
     public ResponseEntity<ReservationDetailsResponseDTO> updateReservationDetails(@PathVariable Long id, @RequestBody ReservationDetailsRequestDTO reservationDetailsModel) {
         ReservationDetailsResponseDTO updatedReservationDetails = reservationDetailsService.updateReservationDetails(id, reservationDetailsModel);
         return ResponseEntity.ok(updatedReservationDetails);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<ReservationDetailsResponseDTO> updateReservationStatus(@PathVariable Long id, @RequestBody @Valid ReservationStatusUpdateDTO statusUpdateDTO) {
+        ReservationDetailsResponseDTO updatedReservation = reservationDetailsService.updateReservationStatus(id, statusUpdateDTO);
+        return ResponseEntity.ok(updatedReservation);
     }
 
     @DeleteMapping("/{id}")

@@ -19,7 +19,10 @@ public class ReservationDetailsDTOMapper implements DTOMapper<ReservationDetails
         result.setFirstName(model.getFirstName());
         result.setLastName(model.getLastName());
         result.setEmailAddress(model.getEmailAddress());
-        result.setLocalDateTime(model.getLocalDateTime());
+        result.setReservationDateTime(model.getReservationDateTime());
+        result.setNumberOfGuests(model.getNumberOfGuests());
+        result.setStatus(model.getStatus());
+
 
         return result;
     }
@@ -41,7 +44,12 @@ public class ReservationDetailsDTOMapper implements DTOMapper<ReservationDetails
         result.setFirstName(reservationModel.getFirstName());
         result.setLastName(reservationModel.getLastName());
         result.setEmailAddress(reservationModel.getEmailAddress());
-        result.setLocalDateTime(reservationModel.getLocalDateTime());
+        result.setReservationDateTime(reservationModel.getReservationDateTime());
+        result.setNumberOfGuests(reservationModel.getNumberOfGuests());
+        if (reservationModel.getStatus() != null) {
+            result.setStatus(reservationModel.getStatus());
+        }
+
         return result;
     }
 }
