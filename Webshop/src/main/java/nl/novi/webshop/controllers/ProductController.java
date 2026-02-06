@@ -47,9 +47,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.findProductById(id));
     }
 
-    // -------------------- CREATE WITH IMAGE --------------------
+
     @PostMapping(
-            value = "/create-with-image",
+            value = "/create",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
     public ResponseEntity<ProductResponseDTO> createProductWithImage(
@@ -58,18 +58,22 @@ public class ProductController {
             @RequestParam("price") Double price,
             @RequestParam(value = "file", required = false) MultipartFile file
     ) {
-        // Create product
+
         ProductRequestDTO requestDTO = new ProductRequestDTO();
         requestDTO.setName(name);
         requestDTO.setShortDescription(shortDescription);
         requestDTO.setPrice(price);
 
+
         ProductResponseDTO created = productService.createProduct(requestDTO);
 
-        // Attach image if provided
+
         if (file != null && !file.isEmpty()) {
-            String storedFileName = imageService.storeProductImage(file);
+            String storedFileName = imageService.storeProductImage(created.getId(), file);
             productService.attachImageToProduct(created.getId(), storedFileName);
+
+
+            created = productService.findProductById(created.getId());
         }
 
         URI location = ServletUriComponentsBuilder
@@ -81,17 +85,14 @@ public class ProductController {
         return ResponseEntity.created(location).body(created);
     }
 
-    // -------------------- GET IMAGE --------------------
+
     @GetMapping("/{id}/image")
     public ResponseEntity<Resource> getProductImage(@PathVariable Long id) {
-        String fileName = productService.getImageNameByProductId(id);
-        Resource image = imageService.loadProductImage(fileName);
 
-        MediaType mediaType = MediaType.IMAGE_JPEG;
-
+        Resource image = imageService.loadProductImage(id);
 
         return ResponseEntity.ok()
-                .contentType(mediaType)
+                .contentType(MediaType.IMAGE_JPEG)
                 .body(image);
     }
 }

@@ -1,0 +1,64 @@
+package nl.novi.webshop.dtos.order;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class OrderResponseDTO {
+
+    private Long orderId;
+    private LocalDateTime createdAt;
+    private String customerName;
+    private String customerEmail;
+    private List<OrderItemResponse> items;
+
+    public OrderResponseDTO() {}
+
+    public OrderResponseDTO(Long orderId, LocalDateTime createdAt,
+                            String customerName, String customerEmail,
+                            List<OrderItemResponse> items) {
+        this.orderId = orderId;
+        this.createdAt = createdAt;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.items = items;
+    }
+
+    public static class OrderItemResponse {
+        private Long productId;
+        private String productName;
+        private int quantity;
+        private double price;
+
+        public OrderItemResponse() {}
+
+        public OrderItemResponse(Long productId, String productName,
+                                 int quantity, double price) {
+            this.productId = productId;
+            this.productName = productName;
+            this.quantity = quantity;
+            this.price = price;
+        }
+
+        // getters & setters
+        public Long getProductId() { return productId; }
+        public void setProductId(Long productId) { this.productId = productId; }
+        public String getProductName() { return productName; }
+        public void setProductName(String productName) { this.productName = productName; }
+        public int getQuantity() { return quantity; }
+        public void setQuantity(int quantity) { this.quantity = quantity; }
+        public double getPrice() { return price; }
+        public void setPrice(double price) { this.price = price; }
+    }
+
+    // getters & setters
+    public Long getOrderId() { return orderId; }
+    public void setOrderId(Long orderId) { this.orderId = orderId; }
+    public LocalDateTime getOrderDate() { return createdAt; }
+    public void setOrderDate(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public String getCustomerName() { return customerName; }
+    public void setCustomerName(String customerName) { this.customerName = customerName; }
+    public String getCustomerEmail() { return customerEmail; }
+    public void setCustomerEmail(String customerEmail) { this.customerEmail = customerEmail; }
+    public List<OrderItemResponse> getItems() { return items; }
+    public void setItems(List<OrderItemResponse> items) { this.items = items; }
+}

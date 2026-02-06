@@ -16,7 +16,7 @@ public class MenuRequestDTO {
     private String description;
     @NotNull
     @Positive
-    private double price;
+    private Double price;
     @NotNull
     private String dish;
 
@@ -36,11 +36,11 @@ public class MenuRequestDTO {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

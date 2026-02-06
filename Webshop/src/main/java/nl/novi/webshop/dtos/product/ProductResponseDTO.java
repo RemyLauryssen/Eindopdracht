@@ -1,16 +1,13 @@
 package nl.novi.webshop.dtos.product;
 
-import nl.novi.webshop.entities.ProductImage;
-
-import java.awt.*;
 import java.util.Objects;
 
 public class ProductResponseDTO {
     private Long id;
     private String name;
     private String shortDescription;
-    private double price;
-    private ProductImage productImage;
+    private Double price;
+    private String imageUrl;
 
     public Long getId() {
         return id;
@@ -36,20 +33,20 @@ public class ProductResponseDTO {
         this.shortDescription = shortDescription;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public ProductImage getImage(){
-        return productImage;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(ProductImage productImage) {
-        this.productImage = productImage;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override

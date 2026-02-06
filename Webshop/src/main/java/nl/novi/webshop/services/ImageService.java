@@ -1,5 +1,7 @@
 package nl.novi.webshop.services;
 
+import nl.novi.webshop.entities.ProductEntity;
+import nl.novi.webshop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -21,16 +23,24 @@ import java.util.UUID;
 public class ImageService {
 
     private final Path fileStoragePath;
+    private final ProductRepository productRepository;
 
-    public ImageService(@Value("${my.upload_location}") String fileStorageLocation) throws IOException {
+
+    public ImageService(@Value("${my.upload_location}") String fileStorageLocation, ProductRepository productRepository) throws IOException {
         this.fileStoragePath = Paths.get(fileStorageLocation)
                 .toAbsolutePath()
                 .normalize();
 
         Files.createDirectories(fileStoragePath);
+        this.productRepository = productRepository;
     }
 
-    public String storeProductImage(MultipartFile file) {
+
+    public String storeProductImage(Long productId, MultipartFile file) {
+
+        ProductEntity product = productRepository.findById(productId).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Product not found"
+        ));
 
         if (file.isEmpty()) {
             throw new ResponseStatusException(
@@ -72,8 +82,26 @@ public class ImageService {
                     HttpStatus.INTERNAL_SERVER_ERROR, "Failed to store file"
             );
         }
+        product.setImageFileName(storedFileName);
+        productRepository.save(product);
 
         return storedFileName;
+    }
+
+    public Resource loadProductImage(Long productId) {
+
+        ProductEntity product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Product not found"
+                ));
+
+        if (product.getImageFileName() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Product has no image"
+            );
+        }
+
+        return loadProductImage(product.getImageFileName());
     }
 
     public Resource loadProductImage(String fileName) {

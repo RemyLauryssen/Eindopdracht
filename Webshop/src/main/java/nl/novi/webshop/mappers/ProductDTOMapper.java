@@ -19,7 +19,9 @@ public class ProductDTOMapper implements DTOMapper<ProductResponseDTO, ProductRe
         result.setShortDescription(model.getShortDescription());
         result.setPrice(model.getPrice());
         result.setName(model.getName());
-
+        if (model.getImageFileName() != null) {
+            result.setImageUrl("/products/" + model.getId() + "/image");
+        }
         return result;
     }
 

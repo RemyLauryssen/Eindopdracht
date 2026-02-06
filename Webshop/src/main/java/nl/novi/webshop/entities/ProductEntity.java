@@ -10,11 +10,9 @@ public class ProductEntity extends BaseEntity {
     @Column(nullable = false)
     private String name;
     private String shortDescription;
-    private double price;
+    private Double price;
+    private String imageFileName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id")
-    private ProductImage productImage;
 
 
     public String getName() {
@@ -33,20 +31,20 @@ public class ProductEntity extends BaseEntity {
         this.shortDescription = shortDescription;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public ProductImage getProductImage() {
-        return productImage;
+    public String getImageFileName() {
+        return imageFileName;
     }
 
-    public  void setProductImage(ProductImage productImage) {
-        this.productImage = productImage;
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 
     @Override

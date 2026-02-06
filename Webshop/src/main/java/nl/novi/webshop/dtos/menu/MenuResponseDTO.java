@@ -6,7 +6,7 @@ public class MenuResponseDTO {
     private Long id;
     private String name;
     private String description;
-    private double price;
+    private Double price;
     private String dish;
 
     public Long getId() {
@@ -33,11 +33,11 @@ public class MenuResponseDTO {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

@@ -1,11 +1,9 @@
 package nl.novi.webshop.services;
 
-
 import jakarta.transaction.Transactional;
 import nl.novi.webshop.dtos.product.ProductRequestDTO;
 import nl.novi.webshop.dtos.product.ProductResponseDTO;
 import nl.novi.webshop.entities.ProductEntity;
-import nl.novi.webshop.entities.ProductImage;
 import nl.novi.webshop.exceptions.RecordNotFoundException;
 import nl.novi.webshop.mappers.ProductDTOMapper;
 import nl.novi.webshop.repositories.ProductRepository;
@@ -40,34 +38,34 @@ public class ProductService {
 
     public ProductResponseDTO updateProduct(Long id, ProductRequestDTO requestDTO) {
         ProductEntity product = getProductEntity(id);
-
         product.setName(requestDTO.getName());
         product.setShortDescription(requestDTO.getShortDescription());
         product.setPrice(requestDTO.getPrice());
-
         return productDTOMapper.mapToDTO(productRepository.save(product));
     }
 
     public void deleteProduct(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new RecordNotFoundException("Product " + id + " not found");
+        }
         productRepository.deleteById(id);
     }
 
-    @Transactional
+        @Transactional
     public void attachImageToProduct(Long productId, String fileName) {
         ProductEntity product = getProductEntity(productId);
-        product.setProductImage(new ProductImage(fileName));
+        product.setImageFileName(fileName);
+        productRepository.save(product);
     }
 
-    @Transactional
     public String getImageNameByProductId(Long productId) {
         ProductEntity product = getProductEntity(productId);
-
-        if (product.getProductImage() == null) {
+        if (product.getImageFileName() == null) {
             throw new RecordNotFoundException("Image for product " + productId + " not found.");
         }
-
-        return product.getProductImage().getFileName();
+        return product.getImageFileName();
     }
+
 
     private ProductEntity getProductEntity(Long id) {
         return productRepository.findById(id)
