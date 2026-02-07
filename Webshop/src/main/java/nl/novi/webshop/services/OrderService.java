@@ -25,6 +25,14 @@ public class OrderService {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
     }
+
+    public List<OrderResponseDTO> getAllOrders() {
+        return orderRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
     public OrderResponseDTO mapToResponse(OrderEntity order) {
         List<OrderResponseDTO.OrderItemResponse> itemResponses =
                 order.getItems().stream()
