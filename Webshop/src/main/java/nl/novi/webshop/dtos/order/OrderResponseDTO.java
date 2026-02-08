@@ -10,6 +10,7 @@ public class OrderResponseDTO {
     private String customerName;
     private String customerEmail;
     private List<OrderItemResponse> items;
+    private Double totalPrice;
 
     public OrderResponseDTO() {}
 
@@ -22,6 +23,11 @@ public class OrderResponseDTO {
         this.customerEmail = customerEmail;
         this.items = items;
     }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
 
     public static class OrderItemResponse {
         private Long productId;

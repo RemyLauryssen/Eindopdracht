@@ -1,35 +1,56 @@
-import React, {createContext, useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
+import keycloak from "../components/security/Keycloak.jsx";
 
-export const AuthenticationContext = createContext({});
+export const AuthenticationContext = createContext(null);
 
-function AuthenticationContextProvider({children}) {
-    const [isUser, toggleIsUser] = useState(true);
-    const [isAdmin, toggleIsAdmin] = useState(true);
-    const navigate = useNavigate();
+export default function AuthenticationContextProvider({ children }) {
+    const [initialized, setInitialized] = useState(false);
+    const [authenticated, setAuthenticated] = useState(false);
 
-    function login() {
-        toggleIsUser(true);
-        navigate('/profile');
+    useEffect(() => {
+        keycloak
+            .init({
+                onLoad: "login-required",
+                pkceMethod: "S256",
+                checkLoginIframe: false,
+            })
+            .then((auth) => {
+                setAuthenticated(auth);
+                setInitialized(true);
+            })
+            .catch(() => {
+                console.error("Keycloak init failed");
+            });
+    }, []);
+
+    useEffect(() => {
+        if (!initialized) return;
+
+        const interval = setInterval(() => {
+            keycloak
+                .updateToken(60)
+                .catch(() => {
+                    keycloak.login();
+                });
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, [initialized]);
+
+   if (!initialized) {
+        return <div>Loading authentication…</div>;
     }
-
-    function logout() {
-        toggleIsUser(false);
-        navigate('/register');
-    }
-
-    const contextData = {
-        isUser: isUser,
-        isAdmin: isAdmin,
-        login: login,
-        logout: logout
-    };
 
     return (
-        <AuthenticationContext.Provider value={contextData}>
+        <AuthenticationContext.Provider
+            value={{
+                keycloak,
+                authenticated,
+                token: keycloak.token,
+                logout: () => keycloak.logout(),
+            }}
+        >
             {children}
         </AuthenticationContext.Provider>
-    )
+    );
 }
-
-export default AuthenticationContextProvider;

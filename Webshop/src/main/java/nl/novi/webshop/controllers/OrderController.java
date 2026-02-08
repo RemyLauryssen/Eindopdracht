@@ -1,5 +1,6 @@
 package nl.novi.webshop.controllers;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import nl.novi.webshop.dtos.order.OrderRequestDTO;
 import nl.novi.webshop.dtos.order.OrderResponseDTO;
@@ -26,6 +27,12 @@ public class OrderController {
         List<OrderResponseDTO> orders = orderService.getAllOrders();
 
         return ResponseEntity.ok(orders);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderResponseDTO> getOrderById(@PathVariable Long id) throws EntityNotFoundException {
+        OrderResponseDTO order = orderService.findOrderById(id);
+        return ResponseEntity.ok(order);
     }
 
 

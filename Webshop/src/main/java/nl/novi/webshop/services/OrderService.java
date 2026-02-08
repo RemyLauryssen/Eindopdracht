@@ -1,11 +1,13 @@
 package nl.novi.webshop.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import nl.novi.webshop.dtos.order.OrderRequestDTO;
 import nl.novi.webshop.dtos.order.OrderResponseDTO;
 import nl.novi.webshop.entities.OrderEntity;
 import nl.novi.webshop.entities.OrderItem;
 import nl.novi.webshop.entities.ProductEntity;
+import nl.novi.webshop.mappers.OrderDTOMapper;
 import nl.novi.webshop.repositories.OrderRepository;
 import nl.novi.webshop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -19,11 +21,13 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
+    private final OrderDTOMapper orderDTOMapper;
 
     public OrderService(OrderRepository orderRepository,
-                        ProductRepository productRepository) {
+                        ProductRepository productRepository, OrderDTOMapper orderDTOMapper) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
+        this.orderDTOMapper = orderDTOMapper;
     }
 
     public List<OrderResponseDTO> getAllOrders() {
@@ -31,6 +35,12 @@ public class OrderService {
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
+    }
+
+
+    public OrderResponseDTO findOrderById(Long id) {
+    OrderEntity order = getOrderEntity(id);
+    return orderDTOMapper.mapToDTO(order);
     }
 
     public OrderResponseDTO mapToResponse(OrderEntity order) {
@@ -54,42 +64,35 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderEntity createOrder(OrderRequestDTO request) {
+    public OrderEntity createOrder(OrderRequestDTO dto) {
 
         OrderEntity order = new OrderEntity();
-        order.setCustomerName(request.getCustomerName());
-        order.setCustomerEmail(request.getCustomerEmail());
+        order.setCustomerName(dto.getCustomerName());
+        order.setCustomerEmail(dto.getCustomerEmail());
 
-        double total = 0.0;
+        double total = 0;
 
-        for (OrderRequestDTO.OrderItemRequestDTO itemDTO : request.getItems()) {
+        for (OrderRequestDTO.OrderItemRequestDTO itemDto : dto.getItems()) {
+            ProductEntity product = productRepository.findById(itemDto.getProductId())
+                    .orElseThrow(() -> new EntityNotFoundException("Product not found"));
 
-            if (itemDTO.getQuantity() <= 0) {
-                throw new ResponseStatusException(
-                        HttpStatus.BAD_REQUEST,
-                        "Quantity must be at least 1"
-                );
-            }
+            OrderItem item = new OrderItem();
+            item.setProduct(product);
+            item.setQuantity(itemDto.getQuantity());
+            item.setPrice(product.getPrice() * itemDto.getQuantity());
 
-            ProductEntity product = productRepository
-                    .findById(itemDTO.getProductId())
-                    .orElseThrow(() -> new ResponseStatusException(
-                            HttpStatus.NOT_FOUND,
-                            "Product " + itemDTO.getProductId() + " not found"
-                    ));
-
-            OrderItem orderItem = new OrderItem();
-            orderItem.setProduct(product);
-            orderItem.setQuantity(itemDTO.getQuantity());
-
-            double itemTotal = product.getPrice() * itemDTO.getQuantity();
-            orderItem.setPrice(itemTotal);
-
-            order.addItem(orderItem);
-            total += itemTotal;
+            total += item.getPrice();
+            order.addItem(item);
         }
 
         order.setTotalPrice(total);
         return orderRepository.save(order);
+    }
+
+    private OrderEntity getOrderEntity(Long id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Order not found with id " + id)
+                );
     }
 }

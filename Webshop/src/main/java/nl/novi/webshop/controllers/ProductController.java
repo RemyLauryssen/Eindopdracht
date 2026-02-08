@@ -35,7 +35,6 @@ public class ProductController {
         this.imageService = imageService;
     }
 
-    // -------------------- PRODUCTS --------------------
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDTO>> getAllProducts() {
