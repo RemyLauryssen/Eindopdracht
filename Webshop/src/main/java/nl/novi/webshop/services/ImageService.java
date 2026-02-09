@@ -128,4 +128,37 @@ public class ImageService {
             );
         }
     }
+
+    public void deleteProductImage(Long productId) {
+
+        ProductEntity product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Product not found"
+                ));
+
+        String imageFileName = product.getImageFileName();
+        if (imageFileName == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Product has no image to delete"
+            );
+        }
+
+        Path targetLocation = fileStoragePath.resolve(imageFileName).normalize();
+
+        if (!Files.exists(targetLocation)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Image file not found"
+            );
+        }
+
+        try {
+            Files.delete(targetLocation);
+            product.setImageFileName(null);
+            productRepository.save(product);
+        } catch (IOException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR, "Failed to delete image"
+            );
+        }
+    }
 }

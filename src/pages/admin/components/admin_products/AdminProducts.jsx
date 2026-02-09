@@ -1,13 +1,9 @@
 import "./AdminProducts.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
+import adminApi from "../../../../constants/admin_api/adminApi";
 
 function AdminProducts() {
-    const [form, setForm] = useState({
-        name: "",
-        shortDescription: "",
-        price: "",
-    });
-
+    const [form, setForm] = useState({ name: "", shortDescription: "", price: "" });
     const [productImage, setProductImage] = useState(null);
     const [previewUrlImage, setPreviewUrlImage] = useState("");
     const [loading, setLoading] = useState(false);
@@ -15,32 +11,22 @@ function AdminProducts() {
     const [addSuccess, setAddSuccess] = useState(false);
     const [createdProduct, setCreatedProduct] = useState(null);
 
-    // Handle text input changes
     function handleChange(e) {
-        const {name, value} = e.target;
-        setForm(prev => ({...prev, [name]: value}));
+        const { name, value } = e.target;
+        setForm(prev => ({ ...prev, [name]: value }));
     }
 
-    // Handle image selection & preview
     function handleImageChange(e) {
         const file = e.target.files[0];
         if (!file) return;
 
-        if (!file.type.startsWith("image/")) {
-            alert("Alleen afbeeldingen zijn toegestaan.");
-            return;
-        }
-
-        if (file.size > 15 * 1024 * 1024) {
-            alert("Maximale bestandsgrootte is 15MB.");
-            return;
-        }
+        if (!file.type.startsWith("image/")) return alert("Alleen afbeeldingen toegestaan.");
+        if (file.size > 15 * 1024 * 1024) return alert("Maximale bestandsgrootte is 15MB.");
 
         setProductImage(file);
         setPreviewUrlImage(URL.createObjectURL(file));
     }
 
-    // Handle form submission
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
@@ -48,45 +34,21 @@ function AdminProducts() {
         setAddSuccess(false);
 
         try {
-            if (isNaN(parseFloat(form.price))) {
-                setError("Prijs is ongeldig");
-                setLoading(false);
-                return;
-            }
-
             const formData = new FormData();
             formData.append("name", form.name);
             formData.append("shortDescription", form.shortDescription);
             formData.append("price", parseFloat(form.price));
+            if (productImage) formData.append("file", productImage);
 
-            if (productImage) {
-                formData.append("file", productImage);
-            }
+            const res = await adminApi.post("/products/create", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
 
-            const response = await fetch(
-                "http://localhost:8080/products/create",
-                {
-                    method: "POST",
-                    body: formData,
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Product aanmaken mislukt");
-            }
-
-            const data = await response.json();
-            console.log("Created product:", data);
-
-
-            setCreatedProduct(data);
+            setCreatedProduct(res.data);
             setAddSuccess(true);
-
-            setProductImage(null);
-            setPreviewUrlImage("");
         } catch (err) {
             console.error(err);
-            setError(err.message);
+            setError(err.response?.data?.message || "Product aanmaken mislukt");
         } finally {
             setLoading(false);
         }

@@ -1,19 +1,30 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import adminApi from "../constants/admin_api/AdminApi.jsx";
 
-function UseReservationDetails(url) {
+function UseReservationDetails(endpoint) {
     const [reservationDetails, setReservationDetails] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const fetchReservationDetails = async () => {
-        const response = await axios.get(url);
-        setReservationDetails(response.data);
+    const refetch = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await adminApi.get(endpoint);
+            setReservationDetails(response.data);
+        } catch (err) {
+            console.error("Failed to fetch reservation details", err);
+            setError(err.response?.data?.message || "Fout bij laden reserveringen");
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
-        fetchReservationDetails();
-    }, [url]);
+        refetch();
+    }, [endpoint]);
 
-    return { reservationDetails, refetch: fetchReservationDetails };
+    return { reservationDetails, refetch, loading, error };
 }
 
 export default UseReservationDetails;

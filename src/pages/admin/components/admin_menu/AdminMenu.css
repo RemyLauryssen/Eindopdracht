@@ -91,11 +91,6 @@
     border-bottom: 1px solid gold;
 }
 
-.extras-drinks-container {
-    display: flex;
-    flex-direction: column;
-    margin-left: 1vw;
-}
 
 .extras-name {
     flex-grow: 1;

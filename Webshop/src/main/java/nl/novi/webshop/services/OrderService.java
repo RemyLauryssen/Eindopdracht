@@ -95,4 +95,14 @@ public class OrderService {
                         new EntityNotFoundException("Order not found with id " + id)
                 );
     }
+
+    public List<OrderResponseDTO> findOrdersByCustomerEmail(String email) {
+
+        List<OrderEntity> orders = orderRepository.findByCustomerEmail(email);
+
+
+        return orders.stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
 }

@@ -106,41 +106,6 @@ function Contact() {
                             />
                         </div>
                         <div className="reservation-input-field">
-                            {/*<fieldset>*/}
-                            {/*    <legend>Dieetwensen/allergieën:</legend>*/}
-
-                            {/*    <div>*/}
-                            {/*        <input className="allergies-checkboxes" type="checkbox" id="gluten" name="gluten"*/}
-                            {/*               checked/>*/}
-                            {/*        <label htmlFor="gluten">Glutenvrij (standaard)</label>*/}
-                            {/*    </div>*/}
-
-                            {/*    <div>*/}
-                            {/*        <input className="allergies-checkboxes" type="checkbox" id="vegetarian"*/}
-                            {/*               name="vegetarian"/>*/}
-                            {/*        <label htmlFor="vegetarian">Vegetarisch</label>*/}
-                            {/*    </div>*/}
-                            {/*    <div>*/}
-                            {/*        <input className="allergies-checkboxes" type="checkbox" id="vegan" name="vegan"/>*/}
-                            {/*        <label htmlFor="vegan">Veganistisch</label>*/}
-                            {/*    </div>*/}
-                            {/*    <div>*/}
-                            {/*        <input className="allergies-checkboxes" type="checkbox" id="nuts" name="nuts"/>*/}
-                            {/*        <label htmlFor="nuts">Noten/zaden</label>*/}
-                            {/*    </div>*/}
-                            {/*    <div>*/}
-                            {/*        <input className="allergies-checkboxes" type="checkbox" id="lactose"*/}
-                            {/*               name="lactose"/>*/}
-                            {/*        <label htmlFor="lactose">Lactose</label>*/}
-                            {/*    </div>*/}
-                            {/*    <div>*/}
-                            {/*        <input className="allergies-checkboxes" type="checkbox" id="crustaceans"*/}
-                            {/*               name="crustaceans"/>*/}
-                            {/*        <label htmlFor="crustaceans">Schaaldieren</label>*/}
-                            {/*    </div>*/}
-                            {/*</fieldset>*/}
-                        </div>
-                        <div className="reservation-input-field">
                             <label htmlFor="reservation-date-time">Datum en tijd:</label>
                             <input
                                 type="datetime-local"

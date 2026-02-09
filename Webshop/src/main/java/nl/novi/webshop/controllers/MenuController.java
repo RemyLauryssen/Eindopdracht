@@ -9,6 +9,7 @@ import nl.novi.webshop.helpers.UrlHelper;
 import nl.novi.webshop.services.MenuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,30 +26,35 @@ public class MenuController {
     }
 
     @GetMapping
+    @PreAuthorize("permitAll()")
     public ResponseEntity<List<MenuResponseDTO>> getMenuItems() {
         List<MenuResponseDTO> menuItems = menuService.findAllMenuItems();
         return ResponseEntity.ok(menuItems);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<MenuResponseDTO> getMenuItemById(@PathVariable Long id) throws EntityNotFoundException {
         MenuResponseDTO menuItem = menuService.findMenuItemById(id);
         return ResponseEntity.ok(menuItem);
     }
 
      @PostMapping
+     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<MenuResponseDTO> createMenuItem(@RequestBody @Valid MenuRequestDTO menuModel) {
         MenuResponseDTO newMenuItem = menuService.createMenuItem(menuModel);
         return ResponseEntity.created(urlHelper.getCurrentUrlWithId(newMenuItem.getId())).body(newMenuItem);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<MenuResponseDTO> updateMenuItem(@PathVariable Long id, @RequestBody MenuRequestDTO menuModel) {
         MenuResponseDTO updatedMenuItem = menuService.updateMenuItem(id, menuModel);
         return ResponseEntity.ok(updatedMenuItem);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteMenuItem(@PathVariable Long id) {
         menuService.deleteMenuItem(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

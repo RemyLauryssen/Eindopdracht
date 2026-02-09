@@ -1,69 +1,85 @@
 import "./Navigation.css";
-import {NavLink, useNavigate} from "react-router-dom";
+import { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthenticationContext } from "../../context/AuthenticationContext.jsx";
 import companyLogo from "../../assets/company-logo.jpg";
 import loginIcon from "../../assets/Login-Icon.svg";
-import loginIconAdmin from "../../assets/Login-Icon-Admin.svg"
+import loginIconAdmin from "../../assets/Login-Icon-Admin.svg";
 import shoppingIcon from "../../assets/Shopping-cart.svg";
-import {useContext} from "react";
-import {AuthenticationContext} from "../../context/AuthenticationContext.jsx";
 
 function Navigation() {
     const navigate = useNavigate();
-    const {isUser, isAdmin} = useContext(AuthenticationContext);
+    const { authenticated, roles, login, logout } = useContext(AuthenticationContext);
+
+    const isAdmin = authenticated && roles.includes("ADMIN");
+    const isUser = authenticated && (roles.includes("USER") || isAdmin);
+
+    // Handles logout and redirects to homepage
+    const handleLogout = () => {
+        logout(); // ends Keycloak session
+        navigate("/"); // navigate to public homepage
+    };
 
     return (
         <nav>
             <div className="nav-container">
                 <span className="nav-image">
                     <button className="logo-button" onClick={() => navigate("/")}>
-                    <img className="company-logo" src={companyLogo} alt="Logo van het restaurant"/>
-                        </button>
+                        <img className="company-logo" src={companyLogo} alt="Logo" />
+                    </button>
                 </span>
 
                 <ul>
                     <div className="nav-items">
-                        <li><NavLink to="/"
-                                     className={({isActive}) => isActive ? 'active-link' : 'default-link'}>Restaurant</NavLink>
-                        </li>
-                        <li><NavLink to="/menu"
-                                     className={({isActive}) => isActive ? 'active-link' : 'default-link'}>Menu
-                        </NavLink></li>
-                        <li><NavLink to="/contact"
-                                     className={({isActive}) => isActive ? 'active-link' : 'default-link'}>Contact</NavLink>
-                        </li>
-                        <li><NavLink to="/webshop"
-                                     className={({isActive}) => isActive ? 'active-link' : 'default-link'}>Webshop</NavLink>
+                        <li>
+                            <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>
+                                Restaurant
+                            </NavLink>
                         </li>
                         <li>
-                            {isUser ?
-                                <NavLink to="/profile"><img className="login-icon" src={loginIcon}
-                                                            alt="Profiel"/></NavLink> :
-                                <NavLink to="/login"
-                                         className={({isActive}) => isActive ? 'active-link' : 'default-link'}>
-                                    <img className="login-icon" src={loginIcon} alt="Inloggen"/>
-                                </NavLink>}
-                            {isUser ?
-                                <NavLink to="/shopping-basket"><img className="login-icon" src={shoppingIcon}
-                                                                    alt="Winkelwagen"/></NavLink> :
-                                <NavLink to="/login"
-                                         className={({isActive}) => isActive ? 'active-link' : 'default-link'}>
-                                    <img className="login-icon" src={loginIcon} alt="Inloggen"/>
-                                </NavLink>}
+                            <NavLink to="/menu" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>
+                                Menu
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/contact" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>
+                                Contact
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/webshop" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>
+                                Webshop
+                            </NavLink>
+                        </li>
+                        <li>
+                            {!authenticated ? (
+                                // Login button for unauthenticated users
+                                <button className="login-button" onClick={login}>
+                                    <img className="login-icon" src={loginIcon} alt="Login" />
+                                </button>
+                            ) : (
+                                <>
+                                    {/* Profile + Basket for users */}
+                                    {isUser && (
+                                        <>
+                                            <NavLink to="/profile">
+                                                <img className="login-icon" src={loginIcon} alt="Profile" />
+                                            </NavLink>
+                                            <NavLink to="/shopping-basket">
+                                                <img className="login-icon" src={shoppingIcon} alt="Basket" />
+                                            </NavLink>
+                                        </>
+                                    )}
 
-                            {isAdmin ?
-                                <NavLink to="/admin"><img className="login-icon" src={loginIconAdmin}
-                                                          alt="Admin"/></NavLink> :
-                                <NavLink to="/login"
-                                         className={({isActive}) => isActive ? 'active-link' : 'default-link'}>
-                                    <img className="login-icon" src={loginIcon} alt="Inloggen"/>
-                                </NavLink>
-                            }
-
-
+                                    {/* Logout button */}
+                                    <button className="logout-button" onClick={handleLogout}>
+                                        Uitloggen
+                                    </button>
+                                </>
+                            )}
                         </li>
                     </div>
                 </ul>
-
             </div>
         </nav>
     );

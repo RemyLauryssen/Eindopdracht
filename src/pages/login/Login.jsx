@@ -1,47 +1,28 @@
-import React, {useContext} from "react";
-import {Link} from "react-router-dom";
-import {AuthenticationContext} from "../../context/AuthenticationContext.jsx";
-import "./Login.css";
+import { useContext } from "react";
+import { AuthenticationContext } from "../../context/AuthenticationContext.jsx";
 
-function Login() {
-    const {login} = useContext(AuthenticationContext);
+export default function LoginPage() {
+    const { login, authenticated, roles } = useContext(AuthenticationContext);
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        login();
+    if (authenticated) {
+        return (
+            <div>
+                <h2>Je bent al ingelogd</h2>
+                <p>Jouw rollen: {roles.join(", ")}</p>
+            </div>
+        );
     }
 
     return (
-        <main>
-            <section className="form-container">
-                <h1>Inloggen</h1>
-                <div>
-                    <form className="login-form">
-                        <label className="form-label" htmlFor="email-input-box">
-                            <p>E-mailadres:</p>
-                            <input
-                                type="email"
-                                id="email-input-box"
-                                name="email"
-                                className="email-input-box"
-                            />
-                        </label>
-                        <label className="form-label" htmlFor="password-input-box">
-                            <p>Wachtwoord:</p>
-                            <input
-                                type="password"
-                                id="password-input-box"
-                                name="password"
-                                className="password-input-box"
-                            />
-                        </label>
-                        <button id="login-form" type="submit" className="submit-button" onSubmit={handleSubmit}>Inloggen</button>
-                    </form>
-                </div>
-                <p>Wachtwoord vergeten?</p>
-            </section>
-        </main>
+        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+            <h2>Inloggen</h2>
+            <p>Klik op de knop om in te loggen met je account:</p>
+            <button
+                onClick={login}
+                style={{ padding: "0.5rem 1rem", fontSize: "1rem", cursor: "pointer" }}
+            >
+                Inloggen
+            </button>
+        </div>
     );
 }
-
-export default Login;

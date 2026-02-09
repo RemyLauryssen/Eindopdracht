@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
@@ -44,32 +45,49 @@ public class OauthSecurityConfiguration {
         return source;
     }
 
+
     @Bean
     public SecurityFilterChain config(HttpSecurity http) throws Exception {
         return http
-                .httpBasic(hp -> hp.disable())
+                .httpBasic(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt
-                                .jwtAuthenticationConverter(jwtAuthenticationConverter())
-                        )
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/menu").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products/create/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products/{id}/image/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/products/{id}/image/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/orders").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/orders").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/orders/**").permitAll()
-                        .requestMatchers("/").authenticated()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/", "/menu", "/menu/*", "/products", "/products/*", "/products/*/image/**")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/reservation-details")
+                        .permitAll()
 
-                        .requestMatchers(HttpMethod.POST, "/menu")
+                        // USER endpoints
+                        .requestMatchers(HttpMethod.GET, "/orders/*")
+                        .hasAuthority("USER")
+                        .requestMatchers(HttpMethod.POST, "/orders/**")
+                        .hasAuthority("USER")
+
+                        // ADMIN endpoints
+                        .requestMatchers("/admin/**")
                         .hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/menu")
+                        .requestMatchers(HttpMethod.POST, "/products/**")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/products/create/**")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/menu/**")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/reservation-details/*")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/reservation-details/*/status")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/menu/*")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/reservation-details/*")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/products/*")
+                        .hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/products/*/image")
                         .hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -86,7 +104,7 @@ public class OauthSecurityConfiguration {
             public Collection<GrantedAuthority> convert(Jwt jwt) {
                 Collection<GrantedAuthority> authorities = new ArrayList<>();
                 for (String role : extractRoles(jwt)) {
-                    authorities.add(new SimpleGrantedAuthority(role));
+                    authorities.add(new SimpleGrantedAuthority(role.toUpperCase()));
                 }
                 return authorities;
             }

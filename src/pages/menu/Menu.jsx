@@ -13,12 +13,12 @@ export default function Menu() {
             <div className="menu-container">
                 <section>
                     <img className="menu-logo" src={CompanyLogo} alt="Logo van het restaurant"/>
-                    <h3>Hoofdgerechten</h3>
+                    <h3>Lunchgerechten</h3>
                     {menuItems.map((menuItem) => {
-                        if (menuItem.dish === "mains") {
+                        if (menuItem.dish === "lunch") {
                             return (
                                 <article className="menu-item" key={menuItem.id}>
-                                    <h3 className="mains-name">{menuItem.name}</h3>
+                                    <h3 className="lunch-name">{menuItem.name}</h3>
                                     <div className="price-container">
                                         <strong>
                                             € {menuItem.price.toLocaleString("nl-NL", {
@@ -26,18 +26,19 @@ export default function Menu() {
                                             maximumFractionDigits: 2,
                                         })}</strong>
                                     </div>
-                                    <p className="mains-description">{menuItem.description}</p>
+                                    <p className="lunch-description">{menuItem.description}</p>
                                 </article>
                             )
                         }
                     })}
-                    <h3>Bijgerechten</h3>
+                    <h3>Gebakjes en deegwaren</h3>
                     {menuItems.map((menuItem) => {
-                        if (menuItem.dish === "extras") {
+                        if (menuItem.dish === "pastries") {
                             return (
                                 <article className="menu-item" key={menuItem.id}>
-                                    <div className="extras-name">{menuItem.name}</div>
-                                    <strong className="extras-price">
+                                    <div className="lunch-name">{menuItem.name}</div>
+                                    <strong>{menuItem.description}</strong>
+                                    <strong className="pastries-price">
                                         € {menuItem.price.toLocaleString("nl-NL", {
                                         minimumFractionDigits: 2,
                                         maximumFractionDigits: 2,
