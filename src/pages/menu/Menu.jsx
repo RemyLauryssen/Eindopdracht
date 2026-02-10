@@ -1,5 +1,5 @@
 import React from "react";
-import CompanyLogo from "../../assets/company-logo.jpg";
+import CompanyLogo from "../../assets/logo/Celia's.svg";
 
 
 import "./Menu.css";

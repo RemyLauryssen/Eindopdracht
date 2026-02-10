@@ -2,9 +2,8 @@ import "./Navigation.css";
 import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthenticationContext } from "../../context/AuthenticationContext.jsx";
-import companyLogo from "../../assets/company-logo.jpg";
+import companyLogo from "../../assets/logo/Celia's.svg";
 import loginIcon from "../../assets/Login-Icon.svg";
-import loginIconAdmin from "../../assets/Login-Icon-Admin.svg";
 import shoppingIcon from "../../assets/Shopping-cart.svg";
 
 function Navigation() {

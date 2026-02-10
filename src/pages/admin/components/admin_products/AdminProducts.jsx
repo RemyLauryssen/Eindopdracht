@@ -46,6 +46,9 @@ function AdminProducts() {
 
             setCreatedProduct(res.data);
             setAddSuccess(true);
+            setForm({ name: "", shortDescription: "", price: "" });
+            setProductImage(null);
+            setPreviewUrlImage("");
         } catch (err) {
             console.error(err);
             setError(err.response?.data?.message || "Product aanmaken mislukt");
@@ -93,7 +96,6 @@ function AdminProducts() {
                     </label>
                     <input
                         type="number"
-                        step="0.01"
                         name="price"
                         value={form.price}
                         onChange={handleChange}
