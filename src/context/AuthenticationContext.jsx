@@ -9,7 +9,6 @@ export default function AuthenticationContextProvider({ children }) {
     const [initialized, setInitialized] = useState(false);
     const [authenticated, setAuthenticated] = useState(false);
 
-    // Initialize Keycloak
     useEffect(() => {
         keycloak
             .init({
@@ -19,6 +18,9 @@ export default function AuthenticationContextProvider({ children }) {
             })
             .then((auth) => {
                 if (auth) {
+                    console.log("Authenticated:", auth);
+                    console.log("Token:", keycloak.token);
+                    console.log("Parsed:", keycloak.tokenParsed);
                     localStorage.setItem("accessToken", keycloak.token)
                 }
                 setAuthenticated(auth);
@@ -30,18 +32,22 @@ export default function AuthenticationContextProvider({ children }) {
             });
     }, []);
 
-    // Refresh token ONLY if authenticated
     useEffect(() => {
         if (!initialized || !authenticated) return;
 
         const interval = setInterval(() => {
-            keycloak.updateToken(60).catch(() => keycloak.login());
+            keycloak.updateToken(60)
+                .then((refreshed) => {
+                    if (refreshed) {
+                        localStorage.setItem("accessToken", keycloak.token);
+                    }
+                })
+                .catch(() => keycloak.login());
         }, 60000);
 
         return () => clearInterval(interval);
     }, [initialized, authenticated]);
 
-    // Extract roles
     const roles = [
         ...(keycloak.tokenParsed?.resource_access?.[clientId]?.roles ?? []),
         ...(keycloak.tokenParsed?.realm_access?.roles ?? []),

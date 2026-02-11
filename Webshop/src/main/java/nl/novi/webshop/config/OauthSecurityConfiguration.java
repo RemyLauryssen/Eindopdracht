@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -57,38 +58,40 @@ public class OauthSecurityConfiguration {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/", "/menu", "/menu/*", "/products", "/products/*", "/products/*/image/**")
+                        .requestMatchers(HttpMethod.GET, "/", "/menu", "/menu/**", "/products", "/products/*", "/products/*/image/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/reservation-details")
+                        .requestMatchers(HttpMethod.POST, "/reservation-details", "/reservation-details/*")
                         .permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+
 
                         // USER endpoints
                         .requestMatchers(HttpMethod.GET, "/orders/*")
-                        .hasAuthority("USER")
+                        .hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/orders/**")
-                        .hasAuthority("USER")
+                        .hasRole("USER")
 
                         // ADMIN endpoints
                         .requestMatchers("/admin/**")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/products/**")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/products/create/**")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/menu/**")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/reservation-details/*")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/reservation-details/*/status")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/menu/*")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/reservation-details/*")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/products/*")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/products/*/image")
-                        .hasAuthority("ADMIN")
+                        .hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .build();
@@ -96,51 +99,27 @@ public class OauthSecurityConfiguration {
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter scopeConverter = new JwtGrantedAuthoritiesConverter();
+        scopeConverter.setAuthorityPrefix("SCOPE_");
+
+        JwtGrantedAuthoritiesConverter realmRoleConverter = new JwtGrantedAuthoritiesConverter();
+        realmRoleConverter.setAuthorityPrefix("ROLE_");
+        realmRoleConverter.setAuthoritiesClaimName("realm_access.roles");
 
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-        converter.setJwtGrantedAuthoritiesConverter(new Converter<Jwt, Collection<GrantedAuthority>>() {
+        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            Collection<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.addAll(scopeConverter.convert(jwt));
 
-            @Override
-            public Collection<GrantedAuthority> convert(Jwt jwt) {
-                Collection<GrantedAuthority> authorities = new ArrayList<>();
-                for (String role : extractRoles(jwt)) {
-                    authorities.add(new SimpleGrantedAuthority(role.toUpperCase()));
-                }
-                return authorities;
+            Map<String, Object> realmAccess = jwt.getClaim("realm_access");
+            if (realmAccess != null && realmAccess.get("roles") != null) {
+                Collection<String> roles = (Collection<String>) realmAccess.get("roles");
+                roles.forEach(role -> authorities.add(
+                        new SimpleGrantedAuthority("ROLE_" + role)
+                ));
             }
 
-            @SuppressWarnings("unchecked")
-            private List<String> extractRoles(Jwt jwt) {
-
-                Map<String, Object> resourceAccess =
-                        jwt.getClaim("resource_access");
-
-                if (resourceAccess != null) {
-                    Object clientAccess = resourceAccess.get(clientId);
-                    if (clientAccess instanceof Map<?, ?> clientMap) {
-                        Object roles = clientMap.get("roles");
-                        if (roles instanceof List<?> roleList) {
-                            return roleList.stream()
-                                    .map(String.class::cast)
-                                    .toList();
-                        }
-                    }
-                }
-
-                Map<String, Object> realmAccess =
-                        jwt.getClaim("realm_access");
-
-                if (realmAccess != null) {
-                    Object roles = realmAccess.get("roles");
-                    if (roles instanceof List<?> roleList) {
-                        return roleList.stream()
-                                .map(String.class::cast)
-                                .toList();
-                    }
-                }
-
-                return List.of();
-            }
+            return authorities;
         });
 
         return converter;

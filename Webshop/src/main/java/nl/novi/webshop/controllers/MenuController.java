@@ -40,21 +40,21 @@ public class MenuController {
     }
 
      @PostMapping
-     @PreAuthorize("hasAuthority('ADMIN')")
+     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MenuResponseDTO> createMenuItem(@RequestBody @Valid MenuRequestDTO menuModel) {
         MenuResponseDTO newMenuItem = menuService.createMenuItem(menuModel);
         return ResponseEntity.created(urlHelper.getCurrentUrlWithId(newMenuItem.getId())).body(newMenuItem);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MenuResponseDTO> updateMenuItem(@PathVariable Long id, @RequestBody MenuRequestDTO menuModel) {
         MenuResponseDTO updatedMenuItem = menuService.updateMenuItem(id, menuModel);
         return ResponseEntity.ok(updatedMenuItem);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteMenuItem(@PathVariable Long id) {
         menuService.deleteMenuItem(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

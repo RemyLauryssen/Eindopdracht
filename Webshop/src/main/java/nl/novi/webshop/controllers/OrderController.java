@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<OrderResponseDTO>> getAllOrders() {
         List<OrderResponseDTO> orders = orderService.getAllOrders();
 
@@ -34,26 +34,23 @@ public class OrderController {
 
     @GetMapping("/{id}")
     @PreAuthorize("""
-    hasAuthority('ADMIN') || (hasAuthority('USER') and @orderSecurity.isOwner(#id, authentication))
-""")
+                hasRole('ADMIN') || (hasRole('USER') and @orderSecurity.isOwner(#id, authentication))
+            """)
     public ResponseEntity<OrderResponseDTO> getOrderById(@PathVariable Long id) throws EntityNotFoundException {
         OrderResponseDTO order = orderService.findOrderById(id);
         return ResponseEntity.ok(order);
     }
 
     @GetMapping("/user")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    @PreAuthorize("hasRole('ADMIN') || hasRole('USER')")
     public ResponseEntity<List<OrderResponseDTO>> getOrdersForUser(
             @RequestParam(required = false) String email,
             Authentication authentication) {
 
         String userEmail;
-
-        // If the caller is ADMIN, allow optional email param
         if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
             userEmail = (email != null) ? email : getEmailFromAuth(authentication);
         } else {
-            // USER can only see their own orders
             userEmail = getEmailFromAuth(authentication);
         }
 
@@ -61,13 +58,11 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
 
-    // Helper method to extract email from authentication
     private String getEmailFromAuth(Authentication authentication) {
-        // Assuming your JWT gives the email as the principal or in details
         if (authentication.getPrincipal() instanceof org.springframework.security.oauth2.jwt.Jwt jwt) {
             return jwt.getClaim("email");
         }
-        return authentication.getName(); // fallback
+        return authentication.getName();
     }
 
 

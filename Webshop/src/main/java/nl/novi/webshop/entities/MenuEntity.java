@@ -7,12 +7,14 @@ import jakarta.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "menuItems")
+@Table(name = "menu_items")
 public class MenuEntity extends BaseEntity {
     @Column(nullable = false)
     private String name;
     private String description;
+    @Column(nullable = false)
     private Double price;
+    @Column(nullable = false)
     private String dish;
 
     public String getName() {

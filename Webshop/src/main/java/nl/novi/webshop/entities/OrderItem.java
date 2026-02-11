@@ -24,7 +24,7 @@ public class OrderItem {
     @JsonIgnore
     private OrderEntity order;
 
-    // Getters and setters
+
     public Long getId() { return id; }
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }

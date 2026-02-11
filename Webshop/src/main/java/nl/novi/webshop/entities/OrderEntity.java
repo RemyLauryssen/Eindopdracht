@@ -27,13 +27,12 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 
-    // Add an item to the order
     public void addItem(OrderItem item) {
         items.add(item);
         item.setOrder(this);
     }
 
-    // Getters and setters
+
     public Long getId() { return id; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public Double getTotalPrice() { return totalPrice; }

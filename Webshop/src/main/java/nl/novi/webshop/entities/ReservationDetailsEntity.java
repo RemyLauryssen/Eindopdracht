@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "reservation-details")
+@Table(name = "reservation_details")
 public class ReservationDetailsEntity extends BaseEntity {
 
     @Column(nullable = false)

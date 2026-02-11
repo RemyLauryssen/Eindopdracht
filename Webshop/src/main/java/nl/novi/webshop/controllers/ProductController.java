@@ -54,7 +54,7 @@ public class ProductController {
             value = "/create",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductResponseDTO> createProductWithImage(
             @RequestParam("name") String name,
             @RequestParam("shortDescription") String shortDescription,
@@ -101,7 +101,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         try {
             imageService.deleteProductImage(id);
