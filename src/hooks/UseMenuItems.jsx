@@ -13,7 +13,6 @@ function UseMenuItems(endpoint) {
             const response = await adminApi.get(endpoint);
             setMenuItems(response.data);
         } catch (err) {
-            console.error("Failed to fetch menu items", err);
             setError(err.response?.data?.message || "Fout bij laden menu");
         } finally {
             setLoading(false);

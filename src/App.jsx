@@ -19,7 +19,6 @@ import AdminMenu from "./pages/admin/components/admin_menu/AdminMenu.jsx";
 import AdminOrders from "./pages/admin/components/admin_orders/AdminOrders.jsx";
 import AdminProducts from "./pages/admin/components/admin_products/AdminProducts.jsx";
 
-import ProtectedRoute from "./components/security/ProtectedRoute.jsx";
 import RoleProtectedRoute from "./components/security/RoleProtectedRoute.jsx";
 
 function App() {
@@ -28,39 +27,33 @@ function App() {
 
     return (
         <>
-            {/* Main navigation always visible */}
             <Navigation />
-
-            {/* Admin navbar visible only for admins */}
             {isAdmin && <AdminNavbar />}
 
             <Routes>
-                {/* Public routes */}
                 <Route path="/" element={<Homepage />} />
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/webshop" element={<Webshop />} />
                 <Route path="/login" element={<Login />} />
 
-                {/* User protected routes */}
                 <Route
                     path="/profile"
                     element={
-                        <ProtectedRoute>
+                        <RoleProtectedRoute allowedRoles={["USER", "ADMIN"]}>
                             <Profile />
-                        </ProtectedRoute>
+                        </RoleProtectedRoute>
                     }
                 />
                 <Route
                     path="/shopping-basket"
                     element={
-                        <ProtectedRoute>
+                        <RoleProtectedRoute allowedRoles={["USER", "ADMIN"]}>
                             <ShoppingBasket />
-                        </ProtectedRoute>
+                        </RoleProtectedRoute>
                     }
                 />
 
-                {/* Admin protected routes */}
                 <Route
                     path="/admin"
                     element={

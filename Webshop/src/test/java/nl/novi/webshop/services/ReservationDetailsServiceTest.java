@@ -54,23 +54,23 @@ class ReservationDetailsServiceTest {
         ReservationDetailsEntity entity = new ReservationDetailsEntity();
         ReservationDetailsResponseDTO dto = new ReservationDetailsResponseDTO();
 
-        when(reservationDetailsRepository.findById(1L)).thenReturn(Optional.of(entity));
+        when(reservationDetailsRepository.findById(Long.valueOf(1))).thenReturn(Optional.of(entity));
         when(reservationDetailsDTOMapper.mapToDTO(entity)).thenReturn(dto);
 
         ReservationDetailsResponseDTO result =
-                reservationDetailsService.findReservationDetailsById(1L);
+                reservationDetailsService.findReservationDetailsById(Long.valueOf(1));
 
         assertNotNull(result);
-        verify(reservationDetailsRepository).findById(1L);
+        verify(reservationDetailsRepository).findById(Long.valueOf(1));
         verify(reservationDetailsDTOMapper).mapToDTO(entity);
     }
 
     @Test
     void findReservationDetailsById_notFound() {
-        when(reservationDetailsRepository.findById(1L)).thenReturn(Optional.empty());
+        when(reservationDetailsRepository.findById(Long.valueOf(1))).thenReturn(Optional.empty());
 
         assertThrows(RecordNotFoundException.class, () ->
-                reservationDetailsService.findReservationDetailsById(1L));
+                reservationDetailsService.findReservationDetailsById(Long.valueOf(1)));
     }
 
     @Test
@@ -100,12 +100,12 @@ class ReservationDetailsServiceTest {
 
         ReservationDetailsResponseDTO responseDTO = new ReservationDetailsResponseDTO();
 
-        when(reservationDetailsRepository.findById(1L)).thenReturn(Optional.of(entity));
+        when(reservationDetailsRepository.findById(Long.valueOf(1))).thenReturn(Optional.of(entity));
         when(reservationDetailsRepository.save(entity)).thenReturn(entity);
         when(reservationDetailsDTOMapper.mapToDTO(entity)).thenReturn(responseDTO);
 
         ReservationDetailsResponseDTO result =
-                reservationDetailsService.updateReservationStatus(1L, statusUpdateDTO);
+                reservationDetailsService.updateReservationStatus(Long.valueOf(1), statusUpdateDTO);
 
         assertEquals(ReservationStatus.APPROVED, entity.getStatus());
         verify(reservationDetailsRepository).save(entity);
@@ -123,12 +123,12 @@ class ReservationDetailsServiceTest {
 
         ReservationDetailsResponseDTO responseDTO = new ReservationDetailsResponseDTO();
 
-        when(reservationDetailsRepository.findById(1L)).thenReturn(Optional.of(entity));
+        when(reservationDetailsRepository.findById(Long.valueOf(1))).thenReturn(Optional.of(entity));
         when(reservationDetailsRepository.save(entity)).thenReturn(entity);
         when(reservationDetailsDTOMapper.mapToDTO(entity)).thenReturn(responseDTO);
 
         ReservationDetailsResponseDTO result =
-                reservationDetailsService.updateReservationDetails(1L, requestDTO);
+                reservationDetailsService.updateReservationDetails(Long.valueOf(1), requestDTO);
 
         assertEquals("Jan", entity.getFirstName());
         assertEquals("Janssen", entity.getLastName());
@@ -140,9 +140,9 @@ class ReservationDetailsServiceTest {
 
     @Test
     void deleteReservationDetails() {
-        reservationDetailsService.deleteReservationDetails(1L);
+        reservationDetailsService.deleteReservationDetails(Long.valueOf(1));
 
-        verify(reservationDetailsRepository).deleteById(1L);
+        verify(reservationDetailsRepository).deleteById(Long.valueOf(1));
     }
 
     @Test
@@ -152,11 +152,11 @@ class ReservationDetailsServiceTest {
         ReservationStatusUpdateDTO statusUpdateDTO = new ReservationStatusUpdateDTO();
         statusUpdateDTO.setStatus("not-a-valid-status");
 
-        when(reservationDetailsRepository.findById(1L)).thenReturn(Optional.of(entity));
+        when(reservationDetailsRepository.findById(Long.valueOf(1))).thenReturn(Optional.of(entity));
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> reservationDetailsService.updateReservationStatus(1L, statusUpdateDTO)
+                () -> reservationDetailsService.updateReservationStatus(Long.valueOf(1), statusUpdateDTO)
         );
 
         assertEquals(

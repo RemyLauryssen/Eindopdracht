@@ -6,6 +6,7 @@ import nl.novi.webshop.dtos.product.ProductResponseDTO;
 import nl.novi.webshop.entities.ProductEntity;
 import nl.novi.webshop.exceptions.RecordNotFoundException;
 import nl.novi.webshop.mappers.ProductDTOMapper;
+import nl.novi.webshop.repositories.OrderItemRepository;
 import nl.novi.webshop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,13 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductDTOMapper productDTOMapper;
+    private final OrderItemRepository orderItemRepository;
 
     public ProductService(ProductRepository productRepository,
-                          ProductDTOMapper productDTOMapper) {
+                          ProductDTOMapper productDTOMapper, OrderItemRepository orderItemRepository) {
         this.productRepository = productRepository;
         this.productDTOMapper = productDTOMapper;
+        this.orderItemRepository = orderItemRepository;
     }
 
     public List<ProductResponseDTO> findAllProducts() {
@@ -45,10 +48,16 @@ public class ProductService {
     }
 
     public void deleteProduct(Long id) {
-        if (!productRepository.existsById(id)) {
-            throw new RecordNotFoundException("Product " + id + " not found");
+
+        ProductEntity product = getProductEntity(id);
+
+        if (orderItemRepository.existsByProductId(id)) {
+            throw new IllegalStateException(
+                    "Cannot delete product. It is used in existing orders."
+            );
         }
-        productRepository.deleteById(id);
+
+        productRepository.delete(product);
     }
 
         @Transactional

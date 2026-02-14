@@ -5,11 +5,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "order_items")
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(nullable = false)
     private int quantity;
     @Column(nullable = false)
@@ -25,7 +22,6 @@ public class OrderItem {
     private OrderEntity order;
 
 
-    public Long getId() { return id; }
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public double getPrice() { return price; }

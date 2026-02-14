@@ -12,19 +12,16 @@ function Webshop() {
         return storedBasket ? JSON.parse(storedBasket) : [];
     });
     const [isAuthorized, setIsAuthorized] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false); // Track if user is an admin
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    // Fetch products
     useEffect(() => {
         fetchProducts();
     }, []);
 
-    // Persist basket to localStorage
     useEffect(() => {
         localStorage.setItem("basketItems", JSON.stringify(basketItems));
     }, [basketItems]);
 
-    // Check token for USER or ADMIN role
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
         if (!token) return;
@@ -149,7 +146,6 @@ function Webshop() {
                             })}
                             </p>
 
-                            {/* Quantity controls and add button only visible for USER/ADMIN */}
                             {isAuthorized && (
                                 <div className="quantity-controls">
                                     <button onClick={() => decrement(product.id)}>-</button>
@@ -165,7 +161,6 @@ function Webshop() {
                                 </div>
                             )}
 
-                            {/* Remove button for ADMIN only */}
                             {isAdmin && (
                                 <button
                                     className="remove-button"

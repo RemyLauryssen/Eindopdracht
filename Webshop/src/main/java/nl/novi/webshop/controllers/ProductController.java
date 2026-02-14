@@ -108,7 +108,7 @@ public class ProductController {
             productService.deleteProduct(id);
             return ResponseEntity.noContent().build();
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404 if product not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

@@ -40,7 +40,7 @@ function AdminOrders() {
                             <p>
                                 <strong>Klant:</strong> {order.customerName}<br />
                                 <strong>Email:</strong> {order.customerEmail}<br />
-                                <strong>Datum:</strong> {new Date(order.orderDate).toLocaleString("nl-NL")}
+                                <strong>Datum:</strong> {new Date(order.dateCreated).toLocaleString("nl-NL")}
                             </p>
                             <table className="order-items">
                                 <thead>

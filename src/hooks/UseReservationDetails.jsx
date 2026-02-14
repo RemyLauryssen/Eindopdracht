@@ -13,7 +13,6 @@ function UseReservationDetails(endpoint) {
             const response = await adminApi.get(endpoint);
             setReservationDetails(response.data);
         } catch (err) {
-            console.error("Failed to fetch reservation details", err);
             setError(err.response?.data?.message || "Fout bij laden reserveringen");
         } finally {
             setLoading(false);

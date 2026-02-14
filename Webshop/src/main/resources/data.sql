@@ -39,11 +39,11 @@ VALUES
     ('Cake', 'Een lekker cakeje', 2.2, 'Cake.jpeg'),
     ('Brownie', 'De lekkerste brownie', 5.5, 'Brownie.jpeg');
 
-INSERT INTO "orders" (customer_name, customer_email, total_price, created_at)
+INSERT INTO "orders" (customer_name, customer_email, total_price, date_created, date_edited)
 VALUES
-    ('Jan', 'Janssen', 12.34, now()),
-    ('Piet', 'Pietersen', 12.23, now()),
-    ('Klaas', 'Klaassens', 11.23, now());
+    ('Jan Janssen', 'JJ@home.nl', 12.34, now(), now()),
+    ('Piet Pietersen', 'Pieterman@piet.piet', 12.23, now(), now()),
+    ('Klaas Klaassens', 'Klaasjeeee@gmail.com', 11.23, now(), now());
 
 INSERT INTO "order_items" (product_id, order_id, quantity, price)
 VALUES

@@ -13,10 +13,9 @@ function Navigation() {
     const isAdmin = authenticated && roles.includes("ADMIN");
     const isUser = authenticated && (roles.includes("USER") || isAdmin);
 
-    // Handles logout and redirects to homepage
     const handleLogout = () => {
-        logout(); // ends Keycloak session
-        navigate("/"); // navigate to public homepage
+        logout();
+        navigate("/");
     };
 
     return (
@@ -52,13 +51,12 @@ function Navigation() {
                         </li>
                         <li>
                             {!authenticated ? (
-                                // Login button for unauthenticated users
                                 <button className="login-button" onClick={login}>
                                     <img className="login-icon" src={loginIcon} alt="Login" />
                                 </button>
                             ) : (
                                 <>
-                                    {/* Profile + Basket for users */}
+
                                     {isUser && (
                                         <>
                                             <NavLink to="/profile">
@@ -70,7 +68,6 @@ function Navigation() {
                                         </>
                                     )}
 
-                                    {/* Logout button */}
                                     <button className="logout-button" onClick={handleLogout}>
                                         Uitloggen
                                     </button>

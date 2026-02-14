@@ -33,7 +33,7 @@ public class OrderService {
     public List<OrderResponseDTO> getAllOrders() {
         return orderRepository.findAll()
                 .stream()
-                .map(this::mapToResponse)
+                .map(orderDTOMapper::mapToDTO)
                 .toList();
     }
 
@@ -43,28 +43,10 @@ public class OrderService {
     return orderDTOMapper.mapToDTO(order);
     }
 
-    public OrderResponseDTO mapToResponse(OrderEntity order) {
-        List<OrderResponseDTO.OrderItemResponse> itemResponses =
-                order.getItems().stream()
-                        .map(item -> new OrderResponseDTO.OrderItemResponse(
-                                item.getProduct().getId(),
-                                item.getProduct().getName(),
-                                item.getQuantity(),
-                                item.getPrice()
-                        ))
-                        .toList();
 
-        return new OrderResponseDTO(
-                order.getId(),
-                order.getCreatedAt(),
-                order.getCustomerName(),
-                order.getCustomerEmail(),
-                itemResponses
-        );
-    }
 
     @Transactional
-    public OrderEntity createOrder(OrderRequestDTO dto) {
+    public OrderResponseDTO createOrder(OrderRequestDTO dto) {
 
         OrderEntity order = new OrderEntity();
         order.setCustomerName(dto.getCustomerName());
@@ -86,7 +68,9 @@ public class OrderService {
         }
 
         order.setTotalPrice(total);
-        return orderRepository.save(order);
+
+        OrderEntity saved = orderRepository.save(order);
+        return orderDTOMapper.mapToDTO(saved);
     }
 
     private OrderEntity getOrderEntity(Long id) {
@@ -97,12 +81,9 @@ public class OrderService {
     }
 
     public List<OrderResponseDTO> findOrdersByCustomerEmail(String email) {
-
-        List<OrderEntity> orders = orderRepository.findByCustomerEmail(email);
-
-
-        return orders.stream()
-                .map(this::mapToResponse)
+        return orderRepository.findByCustomerEmail(email)
+                .stream()
+                .map(orderDTOMapper::mapToDTO)
                 .toList();
     }
 }

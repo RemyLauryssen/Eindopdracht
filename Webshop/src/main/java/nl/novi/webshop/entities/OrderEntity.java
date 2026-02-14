@@ -7,18 +7,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-public class OrderEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+public class OrderEntity extends BaseEntity {
 
     @Column(nullable = false)
     private Double totalPrice;
-
 
     private String customerName;
 
@@ -33,8 +25,6 @@ public class OrderEntity {
     }
 
 
-    public Long getId() { return id; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
     public Double getTotalPrice() { return totalPrice; }
     public void setTotalPrice(Double totalPrice) { this.totalPrice = totalPrice; }
 

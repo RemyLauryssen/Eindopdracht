@@ -30,7 +30,7 @@ function AdminReservations() {
                 await adminApi.patch(`/reservation-details/${reservationId}/status`, { status });
             }
 
-            console.log(`Email voorbeeld: ${emailAddress}, Reservering ${reservationId}, Bericht: ${messageMap[reservationId] || ""}`);
+            console.log(`Voorbeeld e-mail: ${emailAddress}, Reservering ${reservationId}, Bericht: ${messageMap[reservationId] || ""}`);
             setMessageMap(prev => ({ ...prev, [reservationId]: "" }));
             await refetch();
         } catch (err) {

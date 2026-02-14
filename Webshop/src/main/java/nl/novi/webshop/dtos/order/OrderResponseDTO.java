@@ -6,23 +6,13 @@ import java.util.List;
 public class OrderResponseDTO {
 
     private Long orderId;
-    private LocalDateTime createdAt;
+    private LocalDateTime dateCreated;
+    private LocalDateTime dateEdited;
+
     private String customerName;
     private String customerEmail;
     private List<OrderItemResponse> items;
     private Double totalPrice;
-
-    public OrderResponseDTO() {}
-
-    public OrderResponseDTO(Long orderId, LocalDateTime createdAt,
-                            String customerName, String customerEmail,
-                            List<OrderItemResponse> items) {
-        this.orderId = orderId;
-        this.createdAt = createdAt;
-        this.customerName = customerName;
-        this.customerEmail = customerEmail;
-        this.items = items;
-    }
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
@@ -59,8 +49,10 @@ public class OrderResponseDTO {
     // getters & setters
     public Long getOrderId() { return orderId; }
     public void setOrderId(Long orderId) { this.orderId = orderId; }
-    public LocalDateTime getOrderDate() { return createdAt; }
-    public void setOrderDate(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getDateCreated() { return dateCreated; }
+    public void setDateCreated(LocalDateTime dateCreated) { this.dateCreated = dateCreated; }
+    public LocalDateTime getDateEdited() { return dateEdited; }
+    public void setDateEdited(LocalDateTime dateEdited) { this.dateEdited = dateEdited; }
     public String getCustomerName() { return customerName; }
     public void setCustomerName(String customerName) { this.customerName = customerName; }
     public String getCustomerEmail() { return customerEmail; }

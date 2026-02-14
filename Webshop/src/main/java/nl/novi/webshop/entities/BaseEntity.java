@@ -37,21 +37,12 @@ public abstract class BaseEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
     public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
     public LocalDateTime getDateEdited() {
         return dateEdited;
-    }
-
-    public void setDateEdited(LocalDateTime dateEdited) {
-        this.dateEdited = dateEdited;
     }
 }
 

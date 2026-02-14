@@ -48,7 +48,7 @@ public class OrderController {
             Authentication authentication) {
 
         String userEmail;
-        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             userEmail = (email != null) ? email : getEmailFromAuth(authentication);
         } else {
             userEmail = getEmailFromAuth(authentication);
@@ -71,9 +71,7 @@ public class OrderController {
     public ResponseEntity<OrderResponseDTO> createOrder(
             @Valid @RequestBody OrderRequestDTO request
     ) {
-        OrderEntity created = orderService.createOrder(request);
-
-        OrderResponseDTO response = orderService.mapToResponse(created);
+        OrderResponseDTO response = orderService.createOrder(request);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

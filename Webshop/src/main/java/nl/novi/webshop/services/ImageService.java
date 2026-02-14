@@ -36,57 +36,57 @@ public class ImageService {
     }
 
 
-    public String storeProductImage(Long productId, MultipartFile file) {
+        public String storeProductImage(Long productId, MultipartFile file) {
 
-        ProductEntity product = productRepository.findById(productId).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Product not found"
-        ));
+            ProductEntity product = productRepository.findById(productId).orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Product not found"
+            ));
 
-        if (file.isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Empty file"
-            );
+            if (file.isEmpty()) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Empty file"
+                );
+            }
+
+            String contentType = file.getContentType();
+            if (contentType == null || !contentType.startsWith("image/")) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Only image files allowed"
+                );
+            }
+
+            String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+            if (extension == null) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "File must have an extension"
+                );
+            }
+
+            String storedFileName = UUID.randomUUID() + "." + extension;
+            Path targetLocation = fileStoragePath.resolve(storedFileName).normalize();
+
+            if (!targetLocation.startsWith(fileStoragePath)) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Invalid file path"
+                );
+            }
+
+            try {
+                Files.copy(
+                        file.getInputStream(),
+                        targetLocation,
+                        StandardCopyOption.REPLACE_EXISTING
+                );
+            } catch (IOException e) {
+                throw new ResponseStatusException(
+                        HttpStatus.INTERNAL_SERVER_ERROR, "Failed to store file"
+                );
+            }
+            product.setImageFileName(storedFileName);
+            productRepository.save(product);
+
+            return storedFileName;
         }
-
-        String contentType = file.getContentType();
-        if (contentType == null || !contentType.startsWith("image/")) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Only image files allowed"
-            );
-        }
-
-        String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
-        if (extension == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "File must have an extension"
-            );
-        }
-
-        String storedFileName = UUID.randomUUID() + "." + extension;
-        Path targetLocation = fileStoragePath.resolve(storedFileName).normalize();
-
-        if (!targetLocation.startsWith(fileStoragePath)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Invalid file path"
-            );
-        }
-
-        try {
-            Files.copy(
-                    file.getInputStream(),
-                    targetLocation,
-                    StandardCopyOption.REPLACE_EXISTING
-            );
-        } catch (IOException e) {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, "Failed to store file"
-            );
-        }
-        product.setImageFileName(storedFileName);
-        productRepository.save(product);
-
-        return storedFileName;
-    }
 
     public Resource loadProductImage(Long productId) {
 

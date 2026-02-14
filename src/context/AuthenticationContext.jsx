@@ -12,22 +12,19 @@ export default function AuthenticationContextProvider({ children }) {
     useEffect(() => {
         keycloak
             .init({
-                onLoad: "check-sso", // check for existing session but do not force login
+                onLoad: "check-sso",
                 pkceMethod: "S256",
                 checkLoginIframe: false,
             })
             .then((auth) => {
                 if (auth) {
-                    console.log("Authenticated:", auth);
-                    console.log("Token:", keycloak.token);
-                    console.log("Parsed:", keycloak.tokenParsed);
                     localStorage.setItem("accessToken", keycloak.token)
                 }
                 setAuthenticated(auth);
                 setInitialized(true);
             })
             .catch(() => {
-                console.error("Keycloak init failed");
+                console.error("Initialisatie Keycloak mislukt");
                 setInitialized(true);
             });
     }, []);

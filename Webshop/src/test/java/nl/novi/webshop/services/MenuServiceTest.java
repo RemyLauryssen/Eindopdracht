@@ -34,10 +34,10 @@ class MenuServiceTest {
 
     private MenuEntity menuEntity() {
         MenuEntity entity = new MenuEntity();
-        entity.setId(1L);
+        entity.setId(Long.valueOf(1));
         entity.setName("Broodje tonijnsalade");
         entity.setDescription("Een lekker broodje tonijnsalade");
-        entity.setPrice(3.5);
+        entity.setPrice(Double.valueOf(3.5));
         entity.setDish("lunch");
         return entity;
     }
@@ -46,17 +46,17 @@ class MenuServiceTest {
         MenuRequestDTO dto = new MenuRequestDTO();
         dto.setName("Broodje tonijnsalde");
         dto.setDescription("Een lekker broodje tonijnsalade");
-        dto.setPrice(3.5);
+        dto.setPrice(Double.valueOf(3.5));
         dto.setDish("lunch");
         return dto;
     }
 
     private MenuResponseDTO menuResponseDTO() {
         MenuResponseDTO dto = new MenuResponseDTO();
-        dto.setId(1L);
+        dto.setId(Long.valueOf(1L));
         dto.setName("Broodje tonijnsalade");
         dto.setDescription("Een lekker broodje tonijnsalade");
-        dto.setPrice(3.5);
+        dto.setPrice(Double.valueOf(3.5));
         dto.setDish("lunch");
         return dto;
     }
@@ -82,22 +82,22 @@ class MenuServiceTest {
         MenuEntity entity = menuEntity();
         MenuResponseDTO responseDTO = menuResponseDTO();
 
-        when(menuRepository.findById(1L)).thenReturn(Optional.of(entity));
+        when(menuRepository.findById(Long.valueOf(1L))).thenReturn(Optional.of(entity));
         when(menuDTOMapper.mapToDTO(entity)).thenReturn(responseDTO);
 
-        MenuResponseDTO result = menuService.findMenuItemById(1L);
+        MenuResponseDTO result = menuService.findMenuItemById(Long.valueOf(1L));
 
         assertEquals("Broodje tonijnsalade", result.getName());
-        verify(menuRepository).findById(1L);
+        verify(menuRepository).findById(Long.valueOf(1L));
     }
 
     @Test
     void findMenuItemById_notFound() {
-        when(menuRepository.findById(1L)).thenReturn(Optional.empty());
+        when(menuRepository.findById(Long.valueOf(1L))).thenReturn(Optional.empty());
 
         assertThrows(
                 RecordNotFoundException.class,
-                () -> menuService.findMenuItemById(1L)
+                () -> menuService.findMenuItemById(Long.valueOf(1L))
         );
     }
 
@@ -123,11 +123,11 @@ class MenuServiceTest {
         MenuEntity entity = menuEntity();
         MenuResponseDTO responseDTO = menuResponseDTO();
 
-        when(menuRepository.findById(1L)).thenReturn(Optional.of(entity));
+        when(menuRepository.findById(Long.valueOf(1L))).thenReturn(Optional.of(entity));
         when(menuRepository.save(entity)).thenReturn(entity);
         when(menuDTOMapper.mapToDTO(entity)).thenReturn(responseDTO);
 
-        MenuResponseDTO result = menuService.updateMenuItem(1L, requestDTO);
+        MenuResponseDTO result = menuService.updateMenuItem(Long.valueOf(1L), requestDTO);
 
         assertEquals("Broodje tonijnsalade", result.getName());
         verify(menuRepository).save(entity);
@@ -135,8 +135,8 @@ class MenuServiceTest {
 
     @Test
     void deleteMenuItem() {
-        menuService.deleteMenuItem(1L);
+        menuService.deleteMenuItem(Long.valueOf(1L));
 
-        verify(menuRepository).deleteById(1L);
+        verify(menuRepository).deleteById(Long.valueOf(1L));
     }
 }

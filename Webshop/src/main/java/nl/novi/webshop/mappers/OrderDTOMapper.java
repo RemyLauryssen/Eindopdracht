@@ -15,8 +15,10 @@ public class OrderDTOMapper {
     public OrderResponseDTO mapToDTO(OrderEntity order) {
 
         OrderResponseDTO dto = new OrderResponseDTO();
+
         dto.setOrderId(order.getId());
-        dto.setOrderDate(order.getCreatedAt());
+        dto.setDateCreated(order.getDateCreated());
+        dto.setDateEdited(order.getDateEdited());
         dto.setCustomerName(order.getCustomerName());
         dto.setCustomerEmail(order.getCustomerEmail());
         dto.setTotalPrice(order.getTotalPrice());
@@ -29,6 +31,7 @@ public class OrderDTOMapper {
 
         return dto;
     }
+
 
     private OrderResponseDTO.OrderItemResponse mapItemToDTO(OrderItem item) {
 
@@ -43,3 +46,4 @@ public class OrderDTOMapper {
         return dto;
     }
 }
+
