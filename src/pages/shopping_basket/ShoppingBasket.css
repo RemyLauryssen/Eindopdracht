@@ -1,0 +1,78 @@
+.basket-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 10px 0 10px 20%;
+    padding: 15px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.basket-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.basket-table th,
+.basket-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.basket-table th {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.basket-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.basket-product-cell img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.basket-quantity-cell {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.basket-quantity-cell button {
+    padding: 4px 8px;
+}
+
+.remove-btn {
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-button {
+    background-color: gold;
+    color: black;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.basket-total-row td {
+    border-top: 2px solid #ddd;
+    padding-top: 12px;
+    font-size: 1.05rem;
+}
+

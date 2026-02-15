@@ -1,53 +1,77 @@
 .webshop-introduction {
     height: 16vh;
     margin-bottom: 2vh;
+    text-align: center;
 }
-
-
 
 .webshop-main-container {
     display: flex;
     flex-direction: row;
-    border: 1px solid white;
     max-height: 70vh;
-    overflow-y: scroll;
+    border-top: 1px solid white;
     padding: 3px;
     flex-wrap: wrap;
 }
 
 .product-catalog {
     display: flex;
-    justify-content: space-evenly;
-    border: 2px dotted blue;
     padding: 0 10px;
-    gap: 10px;
+    gap: 15px;
     flex-wrap: wrap;
 }
 
 .product-card {
     border: 2px solid gold;
+    border-radius: 8px;
     height: 50vh;
-    width: 15vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .product-card > img {
-    max-height: 145px;
-    padding: 5px;
+    max-height: 16vh;
+    border-radius: 8px;
+    padding: 5px 5px 0 5px;
 }
 
-.product-card > h4 {
-    margin-top: 15px;
+.quantity-controls {
+    width: 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
 }
 
-.product-card > p {
+.quantity-button {
+    width: 20px;
+    height: 20px;
+    background-color: gold;
+    color: black;
+    border: 1px solid black;
+}
+
+.quantity-total {
+    background-color: white;
+    border: 1px black;
+    color: black;
+    width: 3vw;
     text-align: center;
+    font-size: small;
+    height: 20px;
     padding: 0;
+    margin: 0;
 }
 
-.product-image {
-    padding: 10px 10px 0 10px;
+.order-button {
+    width: 10vw;
+    background-color: gold;
+    color: black;
+}
+
+.remove-button {
+    width: 10vw;
+    background-color: red;
 }
 

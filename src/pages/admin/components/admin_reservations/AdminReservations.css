@@ -1,0 +1,90 @@
+.reservation-page-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.reservation-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reservation-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2px 5px;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.reservation-text-area {
+    margin-top: 10px;
+    background-color: white;
+    color: black;
+    padding-left: 2px;
+    height: 60px;
+}
+
+.reservation-buttons-area {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 50px 0 50px;
+}
+
+.reservation-buttons-area > button {
+    border: none;
+    border-radius: 50%;
+    height: 42px;
+    width: 42px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.deny-button {
+    background: linear-gradient(145deg, #ff4d4d, #d60000);
+}
+
+.deny-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.3);
+}
+
+.deny-button:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.approve-button {
+    background: linear-gradient(145deg, #4CAF50, #2e7d32);
+}
+
+.approve-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 128, 0, 0.3);
+}
+
+.approve-button:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.reservation-buttons-area > button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.vertical-separator {
+    width: 2px;
+    background-color: white;
+    margin: 0 30px;
+}

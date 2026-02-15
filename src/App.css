@@ -1,10 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 * {
     background: rgb(44,47,57);
     color: white;
     max-height: 100%;
-    max-width: 100%;
 }
 
+h1, h2 {
+    font-family: "Playfair Display", serif, "Times New Roman";
+}
+
+h1 {
+    text-align: center;
+}
+
+li {
+    list-style: none;
+}
+
+:root {
+    --nav-height: 8vh;
+}
+
+.height {
+    padding-top: 120px;
+}
+
+.height.admin {
+    padding-top: 180px;
+}
 
 p {
     font-size: 14px;

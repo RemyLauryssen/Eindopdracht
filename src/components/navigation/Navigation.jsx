@@ -27,54 +27,53 @@ function Navigation() {
                     </button>
                 </span>
 
-                <ul>
-                    <div className="nav-items">
+                <ul className="nav-items">
+                    <li>
+                        <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>Restaurant</NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to="/menu" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>Menu</NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to="/contact" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>Contact</NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to="/webshop" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>Webshop</NavLink>
+                    </li>
+
+                    {!authenticated ? (
                         <li>
-                            <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>
-                                Restaurant
-                            </NavLink>
+                            <button className="login-button" onClick={login}>
+                                <img className="login-icon" src={loginIcon} alt="Login" />
+                            </button>
                         </li>
-                        <li>
-                            <NavLink to="/menu" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>
-                                Menu
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/contact" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>
-                                Contact
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/webshop" className={({ isActive }) => (isActive ? "active-link" : "default-link")}>
-                                Webshop
-                            </NavLink>
-                        </li>
-                        <li>
-                            {!authenticated ? (
-                                <button className="login-button" onClick={login}>
-                                    <img className="login-icon" src={loginIcon} alt="Login" />
-                                </button>
-                            ) : (
+                    ) : (
+                        <>
+                            {isUser && (
                                 <>
-
-                                    {isUser && (
-                                        <>
-                                            <NavLink to="/profile">
-                                                <img className="login-icon" src={loginIcon} alt="Profile" />
-                                            </NavLink>
-                                            <NavLink to="/shopping-basket">
-                                                <img className="login-icon" src={shoppingIcon} alt="Basket" />
-                                            </NavLink>
-                                        </>
-                                    )}
-
-                                    <button className="logout-button" onClick={handleLogout}>
-                                        Uitloggen
-                                    </button>
+                                    <li>
+                                        <NavLink to="/profile">
+                                            <img className="login-icon" src={loginIcon} alt="Profile" />
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/shopping-basket">
+                                            <img className="login-icon" src={shoppingIcon} alt="Basket" />
+                                        </NavLink>
+                                    </li>
                                 </>
                             )}
-                        </li>
-                    </div>
+
+                            <li>
+                                <button className="logout-button" onClick={handleLogout}>
+                                    Uitloggen
+                                </button>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </div>
         </nav>

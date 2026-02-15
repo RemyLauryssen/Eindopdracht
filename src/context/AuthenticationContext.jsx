@@ -24,7 +24,6 @@ export default function AuthenticationContextProvider({ children }) {
                 setInitialized(true);
             })
             .catch(() => {
-                console.error("Initialisatie Keycloak mislukt");
                 setInitialized(true);
             });
     }, []);
@@ -50,10 +49,18 @@ export default function AuthenticationContextProvider({ children }) {
         ...(keycloak.tokenParsed?.realm_access?.roles ?? []),
     ];
 
-    const login = () => keycloak.login();
-    const logout = () => keycloak.logout(
-        {redirectUri: "http://localhost:5173/"}
-    );
+    const login = () => {
+        keycloak.login({
+            redirectUri: window.location.href
+        });
+    };
+    const logout = () => {
+        localStorage.removeItem("accessToken");
+        setAuthenticated(false)
+        keycloak.logout({
+            redirectUri: "http://localhost:5173/"
+        });
+    };
 
     if (!initialized) {
         return <div>Loading authentication…</div>;

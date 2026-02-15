@@ -6,18 +6,33 @@
 .menu-left-side {
     display: flex;
     flex-direction: column;
+    width: 42%;
+}
+.admin-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.delete-button {
+    background-color: red;
+    height: 25px;
+    width: 25px;
 }
 
-.vertical-line {
-    border-left: 1px solid white;
-}
 .menu-right-side {
     display: flex;
+    flex-direction: column;
+}
+
+.radio-button-container  label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
 }
 
 .radio-button-container {
     display: flex;
-    justify-content: space-evenly;
+    gap: 20px;
 }
 
 
@@ -32,67 +47,20 @@
     width: 40vw;
 }
 
-.input-field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-}
-
-.input-field > input {
-    background: white;
-    color: black;
-    padding: 0 0 0 5px;
-}
 
 .submit-button {
     align-self: flex-end;
 }
 
-.menu-item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
+.input-field {
+    background-color: white;
+    color: black;
+    padding-left: 5px;
+    margin: 4px 0;
 }
 
-.menu-logo {
-    max-height: 16vh;
-    margin-top: 6px;
+.add-product-button {
+    margin-top: 10px;
+    background-color: gold;
+    color: black;
 }
-
-.mains-name {
-    display: flex;
-    margin: 0;
-    flex-grow: 1;
-}
-
-.mains-description {
-    flex: 1 1 100%;
-    margin: 0.75rem 0 0;
-    color: gold;
-}
-
-.extras {
-    color: gold;
-}
-
-.extras + .extras {
-    margin-top: 1.5rem;
-}
-
-
-.extras .menu-item {
-    margin-bottom: 0.75rem;
-}
-
-.extras-heading {
-    margin: 0 0 1.5rem;
-    border-bottom: 1px solid gold;
-}
-
-
-.extras-name {
-    flex-grow: 1;
-}
-

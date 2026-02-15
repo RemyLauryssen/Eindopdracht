@@ -1,9 +1,12 @@
 .admin-nav-container {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 8px;
-    padding-bottom: 8px;
+    top: 10%;
+    padding: 8px 0;
     border-bottom: 2px solid white;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
 }
 
 .admin-item {

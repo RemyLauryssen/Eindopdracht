@@ -2,10 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 84vh;
-    overflow-y: scroll;
 }
-
 
 .main-container {
     display: flex;
@@ -16,6 +13,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 25vw;
 }
 
 h2 {

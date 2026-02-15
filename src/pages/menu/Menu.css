@@ -1,5 +1,38 @@
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.dish-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 7vw;
+}
 
+.menu-logo {
+    max-height: 16vh;
+    margin-top: 6px;
+    align-items: center;
+}
 
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 30vw;
+}
 
+.title-price-container {
+    display: flex;
+    border-bottom: 1px dotted white;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Playfair Display", Arial, serif;
+}
+
+.menu-description {
+    margin-left: 5vw;
+    padding: 5px 0;
+    font-size: 12px;
+}
 

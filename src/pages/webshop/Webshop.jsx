@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./Webshop.css";
 import axios from "axios";
 import * as jwt_decode from "jwt-decode";
 import adminApi from "../../constants/admin_api/AdminApi.jsx";
+import LayoutHelper from "../../components/layout-helper/LayoutHelper.jsx";
 
 function Webshop() {
     const [products, setProducts] = useState([]);
@@ -28,10 +29,7 @@ function Webshop() {
 
         try {
             const decoded = jwt_decode.default(token);
-            const roles =
-                decoded.realm_access?.roles ||
-                decoded.resource_access?.["Webshop-frontend"]?.roles ||
-                [];
+            const roles = decoded.realm_access?.roles || decoded.resource_access?.["Webshop-frontend"]?.roles || [];
             if (roles.includes("USER") || roles.includes("ADMIN")) {
                 setIsAuthorized(true);
                 if (roles.includes("ADMIN")) {
@@ -60,15 +58,13 @@ function Webshop() {
 
     function increment(productId) {
         setQuantities((prev) => ({
-            ...prev,
-            [productId]: prev[productId] + 1,
+            ...prev, [productId]: prev[productId] + 1,
         }));
     }
 
     function decrement(productId) {
         setQuantities((prev) => ({
-            ...prev,
-            [productId]: Math.max(1, prev[productId] - 1),
+            ...prev, [productId]: Math.max(1, prev[productId] - 1),
         }));
     }
 
@@ -84,18 +80,16 @@ function Webshop() {
             if (existingIndex > -1) {
                 const updated = [...prev];
                 updated[existingIndex] = {
-                    ...updated[existingIndex],
-                    quantity: updated[existingIndex].quantity + quantity,
+                    ...updated[existingIndex], quantity: updated[existingIndex].quantity + quantity,
                 };
                 return updated;
             }
 
-            return [...prev, { productId: product.id, quantity }];
+            return [...prev, {productId: product.id, quantity}];
         });
 
         setQuantities((prev) => ({
-            ...prev,
-            [productId]: 1,
+            ...prev, [productId]: 1,
         }));
     }
 
@@ -106,75 +100,86 @@ function Webshop() {
             const response = await adminApi.delete(`products/${productId}`);
 
             if (response.status === 204) {
-                alert("Product successfully removed!");
+                alert("Product verwijderd!");
             } else {
-                alert("Something went wrong. The product couldn't be removed.");
+                alert("Er is iets verkeerd gegaan. Product kon niet worden verwijderd.");
             }
         } catch (err) {
-            console.error("Error removing product:", err);
+            console.error("Fout bij verwijderen product:", err);
 
             setProducts((prev) => [...prev]);
-            alert("Error removing product. Please try again later.");
+            alert("Fout bij verwijderen van product. Probeer het later nogmaals.");
         }
     }
 
     return (
-        <main>
-            <div className="webshop-introduction">
-                <h1>Webshop</h1>
-                <p>
-                    Welkom bij de webshop van Celia's Kitchen. Hier kunt u uw favoriete
-                    producten bestellen en ophalen wanneer het u uitkomt!
-                </p>
-            </div>
+        <LayoutHelper>
+            <main>
+                <div className="webshop-introduction">
+                    <h1>Webshop</h1>
+                    <p>
+                        Welkom bij de webshop van Celia's Kitchen. Hier kunt u uw favoriete
+                        producten bestellen en ophalen wanneer het u uitkomt!
+                    </p>
+                </div>
 
-            <div className="webshop-main-container">
-                <ul className="product-catalog">
-                    {products.map((product) => (
-                        <li key={product.id} className="product-card">
+                <div className="webshop-main-container">
+                    <ul className="product-catalog">
+                        {products.map((product) => (<div key={product.id} className="product-card">
                             <img
                                 src={`http://localhost:8080${product.imageUrl}`}
                                 alt={product.name}
-                                className="product-image"
                             />
-                            <h4>{product.name}</h4>
-                            <p>{product.shortDescription}</p>
-                            <p>
-                                €{product.price.toLocaleString("nl-NL", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
+                            <li><h4>{product.name}</h4></li>
+                            <li><h5>{product.shortDescription}</h5></li>
+                            <li><h5>
+                                € {product.price.toLocaleString("nl-NL", {
+                                minimumFractionDigits: 2, maximumFractionDigits: 2,
                             })}
-                            </p>
+                            </h5></li>
 
-                            {isAuthorized && (
-                                <div className="quantity-controls">
-                                    <button onClick={() => decrement(product.id)}>-</button>
-                                    <span>{quantities[product.id] ?? 0}</span>
-                                    <button onClick={() => increment(product.id)}>+</button>
-                                    <button
-                                        className="order-button"
-                                        onClick={() => addToBasket(product.id)}
-                                        disabled={quantities[product.id] <= 0}
-                                    >
-                                        Toevoegen
-                                    </button>
-                                </div>
+                            {isAuthorized && (<>
+                                    <div className="quantity-controls">
+                                        <li>
+                                            <button className="quantity-button"
+                                                    onClick={() => decrement(product.id)}>-
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <p className="quantity-total">{quantities[product.id] ?? 0}</p>
+                                        </li>
+                                        <li>
+                                            <button className="quantity-button"
+                                                    onClick={() => increment(product.id)}>+
+                                            </button>
+                                        </li>
+                                    </div>
+                                    <li>
+                                        <button
+                                            className="order-button"
+                                            onClick={() => addToBasket(product.id)}
+                                            disabled={quantities[product.id] <= 0}
+                                        >
+                                            Toevoegen
+                                        </button>
+                                    </li>
+                                </>
+
                             )}
 
-                            {isAdmin && (
+                            {isAdmin && (<li>
                                 <button
                                     className="remove-button"
                                     onClick={() => removeFromWebshop(product.id)}
                                 >
                                     Verwijderen
                                 </button>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </main>
-    );
+                            </li>)}
+                        </div>))}
+                    </ul>
+                </div>
+            </main>
+        </LayoutHelper>);
 }
 
 export default Webshop;

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./Contact.css";
 import axios from "axios";
+import LayoutHelper from "../../components/layout-helper/LayoutHelper.jsx";
 
 
 function Contact() {
@@ -34,14 +35,14 @@ function Contact() {
             setDinnerGuests("");
             setReservationDateTime("");
 
-            } catch (error) {
+        } catch (error) {
             console.error(error);
         }
     }
 
 
-
     return (
+ <LayoutHelper>
         <main className="outer-container">
             <h1>Contact</h1>
             <div className="main-container">
@@ -125,7 +126,9 @@ function Contact() {
 
             </section>
         </main>
-    );
+ </LayoutHelper>
+    )
+        ;
 }
 
 export default Contact;

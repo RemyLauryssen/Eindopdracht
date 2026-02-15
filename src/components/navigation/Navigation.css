@@ -1,20 +1,22 @@
 .company-logo {
-    margin: 2vw;
     border: none;
-    max-width: 60px;
+    max-width: 80px;
     flex-shrink: 2;
     flex-grow: 0;
 }
 
 .nav-container {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 100vw;
-    padding: 0 0 1vw 1vw;
-    height: 16vh;
+    width: 100%;
+    padding: 1vh 2vw 0 1vw;
+    height: 10%;
     border-bottom: 2px gold solid;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo-button {
@@ -27,12 +29,14 @@
 
 .nav-items li {
     list-style: none;
+    display: flex;
+    align-items: center;
 }
 
 .nav-items {
     display: flex;
+    align-items: center;
     gap: 3vw;
-    margin: 1vw;
 }
 
 .login-icon {
@@ -54,4 +58,16 @@
 
 .default-link:hover{
     color: gold;
+}
+
+.logout-button {
+    background-color: gold;
+    padding: 15px;
+    color: black;
+    cursor: pointer;
+}
+
+.login-button {
+    border: none;
+    cursor: pointer;
 }

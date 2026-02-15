@@ -1,7 +1,8 @@
 import "./Profile.css";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import LayoutHelper from "../../components/layout-helper/LayoutHelper.jsx";
 
 function Profile() {
     const [userData, setUserData] = useState(null);
@@ -9,7 +10,6 @@ function Profile() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // Decode token **once** outside of useEffect
     const token = localStorage.getItem("accessToken");
     let decodedToken = null;
 
@@ -28,7 +28,6 @@ function Profile() {
             return;
         }
 
-        // Set user info from token
         setUserData({
             id: decodedToken.sub,
             name: decodedToken.name ?? "Onbekend",
@@ -36,17 +35,16 @@ function Profile() {
             roles: decodedToken["realm_access"]?.roles ?? [],
         });
 
-        // Fetch orders for this user
         const fetchOrders = async () => {
             try {
                 const response = await axios.get(
                     `http://localhost:8080/orders/user?email=${decodedToken.email}`,
-                    { headers: { Authorization: `Bearer ${token}` } }
+                    {headers: {Authorization: `Bearer ${token}`}}
                 );
 
                 const safeOrders = response.data.map((order) => ({
                     ...order,
-                    totalPrice: order.items.reduce((total, item) => total + (item.price ?? 0), 0), // Add prices of items
+                    totalPrice: order.items.reduce((total, item) => total + (item.price ?? 0), 0),
                     items: order.items?.map((item) => ({
                         ...item,
                         price: item.price ?? 0,
@@ -64,61 +62,60 @@ function Profile() {
         };
 
         fetchOrders();
-        // Only run once on mount
-    }, [token]); // <- Remove decodedToken from dependencies
+    }, [token]);
 
     if (loading) return <p>Bezig met laden...</p>;
     if (error) return <p className="error-message">{error}</p>;
     if (!userData) return null;
 
     return (
-        <main>
-            <h1>Profielpagina</h1>
+        <LayoutHelper>
+            <main>
+                <div className="profile-main-container">
+                    <h1>Profielpagina</h1>
 
-            <h2 className="user-details-title">Gebruikersgegevens</h2>
-            <ul className="user-details">
-                <li>
-                    <h4>Naam:</h4>
-                    <p>{userData.name}</p>
-                </li>
-                <li>
-                    <h4>E-mailadres:</h4>
-                    <p>{userData.email}</p>
-                </li>
-                <li>
-                    <h4>Rollen:</h4>
-                    <p>{userData.roles.join(", ")}</p>
-                </li>
-            </ul>
-
-            <h2 className="user-details-title">Bestellingen</h2>
-            {orders.length === 0 ? (
-                <p>Geen bestellingen gevonden.</p>
-            ) : (
-                <ul className="order-list">
-                    {orders.map((order) => (
-                        <li key={order.id} className="order-card">
-                            <strong>Ordernummer:</strong> {order.orderId}
-                            <strong>Datum:</strong> {new Date(order.orderDate).toLocaleDateString("nl-NL")}
-                            <strong>Totaal:</strong> € {(order.totalPrice ?? 0).toFixed(2)}
-
-                            {order.items.length === 0 ? (
-                                <p>Geen producten in deze bestelling.</p>
-                            ) : (
-                                <ul>
-                                    {order.items.map((item, idx) => (
-                                        <li key={idx}>
-                                            {item.productName} × {item.quantity ?? 0} – €{" "}
-                                            {(item.price ?? 0).toFixed(2)}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                    <h2 className="user-details-title">Gebruikersgegevens</h2>
+                    <ul>
+                        <li>
+                            <h4 className="user-details">Naam:</h4>
+                            <p className="user-details">{userData.name}</p>
                         </li>
-                    ))}
-                </ul>
-            )}
-        </main>
+                        <li>
+                            <h4 className="user-details">E-mailadres:</h4>
+                            <p className="user-details">{userData.email}</p>
+                        </li>
+                    </ul>
+
+                    <h2 className="user-details-title">Bestellingen</h2>
+                    {orders.length === 0 ? (
+                        <p>Geen bestellingen gevonden.</p>
+                    ) : (
+                        <ul className="order-list">
+                            {orders.map((order) => (
+                                <li key={order.id} className="order-card">
+                                    <strong>Ordernummer:</strong> {order.orderId}
+                                    <strong>Datum:</strong> {new Date(order.dateCreated).toLocaleDateString("nl-NL")}
+                                    <strong>Totaal:</strong> € {(order.totalPrice ?? 0).toFixed(2)}
+
+                                    {order.items.length === 0 ? (
+                                        <p>Geen producten in deze bestelling.</p>
+                                    ) : (
+                                        <ul>
+                                            {order.items.map((item, idx) => (
+                                                <li key={idx}>
+                                                    {item.productName} × {item.quantity ?? 0} – €{" "}
+                                                    {(item.price ?? 0).toFixed(2)}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            </main>
+        </LayoutHelper>
     );
 }
 

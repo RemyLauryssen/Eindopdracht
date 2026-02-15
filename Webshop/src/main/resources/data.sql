@@ -9,27 +9,27 @@ VALUES
 
 INSERT INTO "menu_items" (name, description, price, dish)
 VALUES
-('Pinsa Mediterrana', 'Luchtig platbrood met rauwe ham, zwarte olijven, rucola en truffelolie.', 13.95, 'lunch'),
-('Croissant-Shakshuka', 'Gepocheerd ei in kruidige tomatensaus, geserveerd met een warme roombotercroissant.', 12.50, 'lunch'),
-('Kip à la Club Wrap', 'Gegrilde kip, bacon, avocado, tomaat en frisse yoghurt-limoendressing.', 13.50, 'lunch'),
-('Smashed Peas & Munt (V)', 'Grof geprakte doperwten met verse munt, feta en een gepocheerd ei op volkoren zuurdesem.', 11.95, 'lunch'),
-('Kimchi & Double Cheese Toastie', 'Tosti met belegen kaas, cheddar en pittige gefermenteerde kimchi.', 10.95, 'lunch'),
-('Green Sea Salad (Vegan)', 'Salade met wakame (zeewier), edamame, quinoa, komkommer en een dressing van zwarte knoflook en miso.', 14.25, 'lunch'),
-('Roombotercroissant', 'Vers uit de oven, geserveerd met boerenboter en aardbeienjam van De Halm.', 3.25, 'pastries'),
-('Pain au Chocolat', 'Luchtig bladerdeeg met twee banen pure Belgische chocolade.', 3.75, 'pastries'),
-('Red Velvet Taart', 'De iconische dieprode taart met fluweelzachte lagen en een rijke cream cheese frosting.', 5.95, 'pastries'),
-('Cheesecake', 'Fluweelzachte cheesecake op een bodem van bastogne met verse bessen.', 6.50, 'pastries'),
-('Cinnamon Roll', 'Versgebakken kaneelbroodje met een royale laag cream cheese frosting.', 4.75, 'pastries'),
-('Blueberry Muffin', 'Luchtige muffin met blauwe bessen en havermout-crumble.', 4.25, 'pastries'),
-('Banana Bread (Vegan)', 'Huisgebakken en getoast, geserveerd met een beetje pindakaas of ahornsiroop.', 4.25, 'pastries'),
+('Pinsa Mediterrana', 'Luchtig platbrood met rauwe ham, zwarte olijven, rucola en truffelolie', 13.95, 'lunch'),
+('Croissant-Shakshuka', 'Gepocheerd ei in kruidige tomatensaus, geserveerd met een warme roombotercroissant', 12.50, 'lunch'),
+('Kip à la Club Wrap', 'Gegrilde kip, bacon, avocado, tomaat en frisse yoghurt-limoendressing', 13.50, 'lunch'),
+('Smashed Peas & Munt (V)', 'Grof geprakte doperwten met verse munt, feta en een gepocheerd ei op volkoren zuurdesem', 11.95, 'lunch'),
+('Kimchi & Double Cheese Toastie', 'Tosti met belegen kaas, cheddar en pittige gefermenteerde kimchi', 10.95, 'lunch'),
+('Green Sea Salad (Vegan)', 'Salade met wakame (zeewier), edamame, quinoa, komkommer en een dressing van zwarte knoflook en miso', 14.25, 'lunch'),
+('Roombotercroissant', 'Vers uit de oven, geserveerd met boerenboter en aardbeienjam van De Halm', 3.25, 'pastries'),
+('Pain au Chocolat', 'Luchtig bladerdeeg met twee banen pure Belgische chocolade', 3.75, 'pastries'),
+('Red Velvet Taart', 'De iconische dieprode taart met fluweelzachte lagen en een rijke cream cheese frosting', 5.95, 'pastries'),
+('Cheesecake', 'Fluweelzachte cheesecake op een bodem van bastogne met verse bessen', 6.50, 'pastries'),
+('Cinnamon Roll', 'Versgebakken kaneelbroodje met een royale laag cream cheese frosting', 4.75, 'pastries'),
+('Blueberry Muffin', 'Luchtige muffin met blauwe bessen en havermout-crumble', 4.25, 'pastries'),
+('Banana Bread (Vegan)', 'Huisgebakken en getoast, geserveerd met een beetje pindakaas of ahornsiroop', 4.25, 'pastries'),
 ('Espresso', '', 3.20, 'drinks'),
 ('Americano', '', 3.50, 'drinks'),
-('Cappuccino / Flat White', 'Met keuze uit volle melk of havermelk (+€ 0,50).', 4.20, 'drinks'),
-('Chai Latte', 'Romige, lichtzoete thee met specerijen zoals kaneel, kardemom en steranijs. Maak ''m ''Dirty'' (Extra shot espresso) – + € 1,10', 4.95, 'drinks'),
-('Biologische Losse Thee', 'Diverse smaken.', 3.80, 'drinks'),
-('Verse Schulp Sappen', 'Appel, peer of seizoensmix.', 4.50, 'drinks'),
-('Homemade Lemonade', 'Verfrissende limonade met citroen, basilicum en bruiswater.', 4.95, 'drinks'),
-('Frisdrank', 'Coca Cola, Coca Cola Zero, Fanta, Lipton Ice Tea Green, Ginger Ale.', 3.50, 'drinks');
+('Cappuccino / Flat White', '', 4.20, 'drinks'),
+('Chai Latte', '', 4.95, 'drinks'),
+('Biologische Losse Thee', '', 3.80, 'drinks'),
+('Verse Schulp Sappen', '', 4.50, 'drinks'),
+('Homemade Lemonade', '', 4.95, 'drinks'),
+('Frisdrank', '', 3.50, 'drinks');
 
 
 INSERT INTO "products" (name, short_description, price, image_file_name)
