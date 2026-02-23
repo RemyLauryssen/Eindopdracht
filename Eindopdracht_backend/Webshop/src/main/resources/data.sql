@@ -1,11 +1,11 @@
 INSERT INTO "reservation_details"
 (first_name, last_name, email_address, status, reservation_date_time, number_of_guests)
 VALUES
-    ('Jan', 'Janssen', 'jan@email.com', 'PENDING', '2026-02-15 18:30:00', 4),
-    ('Piet', 'Pietersen', 'piet@email.com', 'APPROVED', '2026-02-20 19:00:00', 2),
+    ('Jan', 'Janssen', 'jan@email.com', 'PENDING', '2026-03-15 18:30:00', 4),
+    ('Piet', 'Pietersen', 'piet@email.com', 'APPROVED', '2026-03-20 19:00:00', 2),
     ('Klaas', 'De Vries', 'klaas@email.com', 'DENIED', '2026-03-01 17:45:00', 6),
-    ('Sanne', 'Visser', 'sanne@email.com', 'APPROVED', '2026-02-14 20:15:00', 3),
-    ('Tom', 'Bakker', 'tom@email.com', 'PENDING', '2026-02-28 18:00:00', 5);
+    ('Sanne', 'Visser', 'sanne@email.com', 'APPROVED', '2026-03-14 20:15:00', 3),
+    ('Tom', 'Bakker', 'tom@email.com', 'PENDING', '2026-03-28 18:00:00', 5);
 
 INSERT INTO "menu_items" (name, description, price, dish)
 VALUES
@@ -56,8 +56,8 @@ VALUES
 
 INSERT INTO "payment_details" (payment_method, transaction_id, amount, order_id, date_created, date_edited)
 VALUES
-    ('IDEAL', 'CKW-1001', 26.97, 1, now(), now()),
-    ('CREDIT_CARD', 'CKW-1002', 32.30, 2, now(), now()),
-    ('PAYPAL', 'CKW-1003', 11.14, 3, now(), now());
+    ('ING', 'INGB-ab123cd4', 26.97, 1, now(), now()),
+    ('ABN-Amro', 'ABNA-xyz987qw', 32.30, 2, now(), now()),
+    ('Rabobank', 'RABO-w0x1y2z3', 11.14, 3, now(), now());
 
 

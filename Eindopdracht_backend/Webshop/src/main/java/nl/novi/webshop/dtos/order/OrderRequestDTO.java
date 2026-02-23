@@ -27,7 +27,7 @@ public class OrderRequestDTO {
     }
 
     private String paymentMethod;
-    private String transactionId;
+
 
         public static class OrderItemRequestDTO {
 
@@ -58,13 +58,5 @@ public class OrderRequestDTO {
     }
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-
-    public String getTransactionId() {
-            return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
     }
 }

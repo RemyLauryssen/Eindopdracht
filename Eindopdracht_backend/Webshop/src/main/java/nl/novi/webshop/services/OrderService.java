@@ -14,6 +14,7 @@ import nl.novi.webshop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OrderService {
@@ -51,9 +52,10 @@ public class OrderService {
         order.setCustomerName(dto.getCustomerName());
         order.setCustomerEmail(dto.getCustomerEmail());
 
-        double total = 0;
+        double total = 0.0;
 
         for (OrderRequestDTO.OrderItemRequestDTO itemDto : dto.getItems()) {
+
             ProductEntity product = productRepository.findById(itemDto.getProductId())
                     .orElseThrow(() -> new EntityNotFoundException("Product not found"));
 
@@ -70,13 +72,14 @@ public class OrderService {
 
         PaymentDetailsEntity payment = new PaymentDetailsEntity();
         payment.setPaymentMethod(dto.getPaymentMethod());
-        payment.setTransactionId(dto.getTransactionId());
         payment.setAmount(total);
+
+        String transactionId = generateTransactionId(dto.getPaymentMethod());
+        payment.setTransactionId(transactionId);
 
         order.setPaymentDetails(payment);
 
         OrderEntity saved = orderRepository.save(order);
-
         return orderDTOMapper.mapToDTO(saved);
     }
 
@@ -94,5 +97,21 @@ public class OrderService {
                 .toList();
     }
 
+    private String generateTransactionId(String bank) {
 
+        if (bank == null || bank.isBlank()) {
+            return UUID.randomUUID().toString();
+        }
+
+        String bankCode = bank
+                .replaceAll("[^A-Za-z]", "")
+                .toUpperCase()
+                .substring(0, Math.min(4, bank.length()));
+
+        String randomPart = UUID.randomUUID()
+                .toString()
+                .substring(0, 8);
+
+        return bankCode + "-" + randomPart;
+    }
 }
