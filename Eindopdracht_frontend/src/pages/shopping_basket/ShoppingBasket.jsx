@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import "./ShoppingBasket.css";
 import LayoutHelper from "../../components/layout-helper/LayoutHelper.jsx";
+import { useNavigate } from "react-router-dom";
 
 function ShoppingBasket() {
     const [basketItems, setBasketItems] = useState(() => {
@@ -13,6 +14,7 @@ function ShoppingBasket() {
     const [products, setProducts] = useState([]);
     const [loadingProducts, setLoadingProducts] = useState(true);
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
@@ -31,7 +33,7 @@ function ShoppingBasket() {
         }
     }, []);
 
-       useEffect(() => {
+    useEffect(() => {
         axios
             .get("http://localhost:8080/products")
             .then((res) => setProducts(res.data))
@@ -39,14 +41,14 @@ function ShoppingBasket() {
             .finally(() => setLoadingProducts(false));
     }, []);
 
-   useEffect(() => {
+    useEffect(() => {
         localStorage.setItem("basketItems", JSON.stringify(basketItems));
     }, [basketItems]);
 
     const basketWithProducts = basketItems.map((item) => {
         const productId = item.productId ?? item.product?.id;
         const product = products.find((p) => p.id === productId);
-        return { ...item, product, productId };
+        return {...item, product, productId};
     });
 
     function removeItem(productId) {
@@ -61,38 +63,24 @@ function ShoppingBasket() {
 
         setBasketItems((prev) =>
             prev.map((item) =>
-                item.productId === productId ? { ...item, quantity: newQuantity } : item
+                item.productId === productId ? {...item, quantity: newQuantity} : item
             )
         );
     }
 
-    async function placeOrder() {
+    function placeOrder() {
         if (!user) {
             alert("U moet ingelogd zijn om een bestelling te plaatsen.");
             return;
         }
 
-        const token = localStorage.getItem("accessToken");
-        const orderPayload = {
-            customerName: user.name,
-            customerEmail: user.email,
-            items: basketItems.map((item) => ({
-                productId: item.productId,
-                quantity: item.quantity,
-            })),
-        };
-
-        try {
-            await axios.post("http://localhost:8080/orders", orderPayload, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            setBasketItems([]);
-            localStorage.removeItem("basketItems");
-            alert("Bestelling geplaatst! 🎉");
-        } catch (error) {
-            console.error(error);
-            alert("Er ging iets mis bij het plaatsen van de bestelling.");
-        }
+        navigate("/payment", {
+            state: {
+                basket: basketItems, // raw basket
+                total: totalPrice,
+                customer: user,
+            },
+        });
     }
 
     const totalPrice = basketWithProducts.reduce((total, item) => {
@@ -137,12 +125,14 @@ function ShoppingBasket() {
 
                                 return (
                                     <tr key={item.productId}>
-                                        <td className="basket-product-cell">
-                                            <img
-                                                src={`http://localhost:8080${item.product.imageUrl}`}
-                                                alt={item.product.name}
-                                            />
-                                            {item.product.name}
+                                        <td>
+                                            <div className="basket-product-cell">
+                                                <img
+                                                    src={`http://localhost:8080${item.product.imageUrl}`}
+                                                    alt={item.product.name}
+                                                />
+                                                <span>{item.product.name}</span>
+                                            </div>
                                         </td>
 
                                         <td className="basket-quantity-cell">
@@ -168,20 +158,18 @@ function ShoppingBasket() {
                                                 +
                                             </button>
                                         </td>
+
                                         <td className="text-right">
-                                            {item.quantity}
-                                        </td>
-                                        <td className="text-right">
-                                            € {item.product.price.toLocaleString("nl-NL", { minimumFractionDigits: 2 })}
+                                            € {item.product.price.toLocaleString("nl-NL", {minimumFractionDigits: 2})}
                                         </td>
 
                                         <td className="text-right">
-                                            € {subtotal.toLocaleString("nl-NL", { minimumFractionDigits: 2 })}
+                                            € {subtotal.toLocaleString("nl-NL", {minimumFractionDigits: 2})}
                                         </td>
 
                                         <td>
                                             <button
-                                                className="remove-btn"
+                                                className="remove-button"
                                                 onClick={() =>
                                                     removeItem(item.productId)
                                                 }

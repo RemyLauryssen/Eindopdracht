@@ -13,14 +13,14 @@
 }
 
 .email-input-box, .password-input-box {
-    background: white;
-    color: black;
+    background: var(--secondary-color);
+    color: var(--tertiary-color);
     width: 20vw;
 }
 
 .submit-button {
-    background: white;
-    color: black;
+    background: var(--secondary-color);
+    color: var(--tertiary-color);
     margin-top: 30px;
     width: 20vw;
 }

@@ -13,6 +13,7 @@ import Webshop from "./pages/webshop/Webshop.jsx";
 import Login from "./pages/login/Login.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import ShoppingBasket from "./pages/shopping_basket/ShoppingBasket.jsx";
+import Payment from "./pages/payment/Payment.jsx";
 import Admin from "./pages/admin/Admin.jsx";
 import AdminReservations from "./pages/admin/components/admin_reservations/AdminReservations.jsx";
 import AdminMenu from "./pages/admin/components/admin_menu/AdminMenu.jsx";
@@ -50,6 +51,14 @@ function App() {
                     element={
                         <RoleProtectedRoute allowedRoles={["USER", "ADMIN"]}>
                             <ShoppingBasket />
+                        </RoleProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/payment"
+                    element={
+                        <RoleProtectedRoute allowedRoles={["USER", "ADMIN"]}>
+                            <Payment />
                         </RoleProtectedRoute>
                     }
                 />

@@ -1,0 +1,17 @@
+.payment-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px white solid;
+    gap: 20px 0;
+    margin: 0 40% 0 40%;
+    padding: 8px 10% 8px 10%;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 200px;
+}
+
+.payment-button {
+    padding: 15px 30px;
+    background: var(--button-gradient);
+}

@@ -26,14 +26,14 @@
 
 .product-input-form input {
     padding: 5px;
-    color: black;
-    background-color: white;
+    color: var(--tertiary-color);
+    background-color: var(--secondary-color);
     font-size: 14px;
 }
 
 
 .file-input-button {
-    color: white;
+    color: var(--secondary-color);
 }
 
 
@@ -70,7 +70,7 @@
 }
 
 .products-add-button {
-    background-color: gold;
+    background: var(--button-gradient);
     width: 100%;
-    color: black;
+    color: var(--tertiary-color);
 }

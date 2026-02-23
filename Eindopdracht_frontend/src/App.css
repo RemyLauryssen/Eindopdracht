@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 * {
-    background: rgb(44,47,57);
-    color: white;
+    background-color: rgb(44,47,57);
+    color: var(--secondary-color);
     max-height: 100%;
 }
 
@@ -19,6 +19,11 @@ li {
 
 :root {
     --nav-height: 8vh;
+    --primary-color: gold;
+    --secondary-color: white;
+    --tertiary-color: black;
+    --button-gradient: linear-gradient(145deg,rgba(240, 240, 108, 1) 0%, rgba(255, 215, 0, 1) 100%);
+    --removal-button-gradient: linear-gradient(145deg, #ff4d4d, #d60000);
 }
 
 .height {

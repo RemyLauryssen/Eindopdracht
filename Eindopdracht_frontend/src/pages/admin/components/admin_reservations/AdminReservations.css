@@ -13,15 +13,15 @@
     display: flex;
     flex-direction: column;
     gap: 2px 5px;
-    border: 1px solid white;
+    border: 1px solid var(--secondary-color);
     border-radius: 10px;
     padding: 10px;
 }
 
 .reservation-text-area {
     margin-top: 10px;
-    background-color: white;
-    color: black;
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
     padding-left: 2px;
     height: 60px;
 }
@@ -40,7 +40,7 @@
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    color: white;
+    color: var(--secondary-color);
 
     display: flex;
     align-items: center;
@@ -85,6 +85,6 @@
 
 .vertical-separator {
     width: 2px;
-    background-color: white;
+    background-color: var(--secondary-color);
     margin: 0 30px;
 }

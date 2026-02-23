@@ -1,7 +1,5 @@
 .basket-card {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid white;
+   border: 1px solid var(--secondary-color);
     border-radius: 10px;
     margin: 10px 0 10px 20%;
     padding: 15px;
@@ -12,20 +10,12 @@
 .basket-table {
     width: 100%;
     border-collapse: collapse;
+    text-align: center;
 }
 
 .basket-table th,
 .basket-table td {
     padding: 10px 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-.basket-table th {
-    text-align: left;
-}
-
-.text-right {
-    text-align: right;
 }
 
 .basket-product-cell {
@@ -43,7 +33,7 @@
 
 .basket-quantity-cell {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     gap: 8px;
 }
@@ -52,9 +42,9 @@
     padding: 4px 8px;
 }
 
-.remove-btn {
-    background-color: #c0392b;
-    color: white;
+.remove-button {
+    background: var(--removal-button-gradient);
+    color: var(--secondary-color);
     border: none;
     padding: 6px 10px;
     border-radius: 4px;
@@ -62,8 +52,8 @@
 }
 
 .checkout-button {
-    background-color: gold;
-    color: black;
+    background: var(--button-gradient);
+    color: var(--tertiary-color);
     border: none;
     padding: 8px 14px;
     border-radius: 6px;
@@ -76,3 +66,6 @@
     font-size: 1.05rem;
 }
 
+/*tr, th, td {*/
+/*    border: 2px dotted white;*/
+/*}*/

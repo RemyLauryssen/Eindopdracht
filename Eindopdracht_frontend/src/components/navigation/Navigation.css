@@ -13,14 +13,14 @@
     width: 100%;
     padding: 1vh 2vw 0 1vw;
     height: 10%;
-    border-bottom: 2px gold solid;
+    border-bottom: 2px solid var(--primary-color);
     position: fixed;
     top: 0;
     z-index: 1000;
 }
 
 .logo-button {
-    background: transparent;
+    background-color: transparent;
     border: none;
     cursor: pointer;
     flex-shrink: 2;
@@ -44,26 +44,26 @@
 }
 .active-link {
     text-decoration: underline;
-    color: gold;
+    color: var(--primary-color);
 }
 
 .active-link:hover{
-    color: gold;
+    color: var(--primary-color);
 }
 
 .default-link {
     text-decoration: none;
-    color: white;
+    color: var(--secondary-color);
 }
 
 .default-link:hover{
-    color: gold;
+    color: var(--primary-color);
 }
 
 .logout-button {
-    background-color: gold;
-    padding: 15px;
-    color: black;
+    background: var(--button-gradient);
+    padding: 11px;
+    color: var(--tertiary-color);
     cursor: pointer;
 }
 

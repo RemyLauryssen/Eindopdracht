@@ -3,7 +3,7 @@
     justify-content: space-evenly;
     top: 10%;
     padding: 8px 0;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid var(--secondary-color);
     position: fixed;
     width: 100%;
     z-index: 999;
@@ -32,7 +32,7 @@
 }
 
 .admin-shortcuts-default {
-    border: 1px solid gold;
+    border: 1px solid var(--primary-color);
 }
 
 .active-admin-shortcut {

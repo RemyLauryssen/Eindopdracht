@@ -17,7 +17,7 @@
 }
 
 h2 {
-    color: gold;
+    color: var(--primary-color);
 }
 
 .reservation-form-container {
@@ -34,14 +34,14 @@ h2 {
 }
 
 .reservation-input-field > input {
-    background: white;
-    color: black;
+    background: var(--secondary-color);
+    color: var(--tertiary-color);
     padding: 0 0 0 5px;
 }
 
 .reservation-input-field > button {
     margin-top: 5px;
-    background-color: gold;
-    color: black;
+    background: var(--button-gradient);
+    color: var(--tertiary-color);
     padding: 5px 0;
 }
