@@ -2,7 +2,6 @@ import "./Profile.css";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import LayoutHelper from "../../components/layout-helper/LayoutHelper.jsx";
 
 function Profile() {
     const [userData, setUserData] = useState(null);
@@ -69,53 +68,49 @@ function Profile() {
     if (!userData) return null;
 
     return (
-        <LayoutHelper>
-            <main>
-                <div className="profile-main-container">
-                    <h1>Profielpagina</h1>
+        <div className="profile-main-container">
+            <h1>Profielpagina</h1>
 
-                    <h2 className="user-details-title">Gebruikersgegevens</h2>
-                    <ul>
-                        <li>
-                            <h4 className="user-details">Naam:</h4>
-                            <p className="user-details">{userData.name}</p>
+            <h2 className="user-details-title">Gebruikersgegevens</h2>
+            <ul>
+                <li>
+                    <h4 className="user-details">Naam:</h4>
+                    <p className="user-details">{userData.name}</p>
+                </li>
+                <li>
+                    <h4 className="user-details">E-mailadres:</h4>
+                    <p className="user-details">{userData.email}</p>
+                </li>
+            </ul>
+
+            <h2 className="user-details-title">Bestellingen</h2>
+            {orders.length === 0 ? (
+                <p>Geen bestellingen gevonden.</p>
+            ) : (
+                <ul className="order-list">
+                    {orders.map((order) => (
+                        <li key={order.id} className="order-card">
+                            <strong>Bestelnummer:</strong> {order.orderId}
+                            <strong>Datum:</strong> {new Date(order.dateCreated).toLocaleDateString("nl-NL")}
+                            <strong>Totaal:</strong> € {(order.totalPrice ?? 0).toFixed(2)}
+
+                            {order.items.length === 0 ? (
+                                <p>Geen producten in deze bestelling.</p>
+                            ) : (
+                                <ul>
+                                    {order.items.map((item, idx) => (
+                                        <li key={idx}>
+                                            {item.productName} × {item.quantity ?? 0} – €{" "}
+                                            {(item.price ?? 0).toFixed(2)}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </li>
-                        <li>
-                            <h4 className="user-details">E-mailadres:</h4>
-                            <p className="user-details">{userData.email}</p>
-                        </li>
-                    </ul>
-
-                    <h2 className="user-details-title">Bestellingen</h2>
-                    {orders.length === 0 ? (
-                        <p>Geen bestellingen gevonden.</p>
-                    ) : (
-                        <ul className="order-list">
-                            {orders.map((order) => (
-                                <li key={order.id} className="order-card">
-                                    <strong>Ordernummer:</strong> {order.orderId}
-                                    <strong>Datum:</strong> {new Date(order.dateCreated).toLocaleDateString("nl-NL")}
-                                    <strong>Totaal:</strong> € {(order.totalPrice ?? 0).toFixed(2)}
-
-                                    {order.items.length === 0 ? (
-                                        <p>Geen producten in deze bestelling.</p>
-                                    ) : (
-                                        <ul>
-                                            {order.items.map((item, idx) => (
-                                                <li key={idx}>
-                                                    {item.productName} × {item.quantity ?? 0} – €{" "}
-                                                    {(item.price ?? 0).toFixed(2)}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-            </main>
-        </LayoutHelper>
+                    ))}
+                </ul>
+            )}
+        </div>
     );
 }
 

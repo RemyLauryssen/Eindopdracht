@@ -1,10 +1,7 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import { useContext } from "react";
-import { AuthenticationContext } from "./context/AuthenticationContext.jsx";
 
-import Navigation from "./components/navigation/Navigation.jsx";
-import AdminNavbar from "./components/admin_navbar/AdminNavbar.jsx";
+import AppLayout from "./constants/AppLayout.jsx";
 
 import Homepage from "./pages/homepage/Homepage.jsx";
 import Contact from "./pages/contact/Contact.jsx";
@@ -14,6 +11,7 @@ import Login from "./pages/login/Login.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import ShoppingBasket from "./pages/shopping_basket/ShoppingBasket.jsx";
 import Payment from "./pages/payment/Payment.jsx";
+
 import Admin from "./pages/admin/Admin.jsx";
 import AdminReservations from "./pages/admin/components/admin_reservations/AdminReservations.jsx";
 import AdminMenu from "./pages/admin/components/admin_menu/AdminMenu.jsx";
@@ -23,15 +21,11 @@ import AdminProducts from "./pages/admin/components/admin_products/AdminProducts
 import RoleProtectedRoute from "./components/security/RoleProtectedRoute.jsx";
 
 function App() {
-    const { authenticated, roles } = useContext(AuthenticationContext);
-    const isAdmin = authenticated && roles.includes("ADMIN");
 
     return (
-        <>
-            <Navigation />
-            {isAdmin && <AdminNavbar />}
+        <Routes>
+            <Route element={<AppLayout />}>
 
-            <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/contact" element={<Contact />} />
@@ -46,6 +40,7 @@ function App() {
                         </RoleProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/shopping-basket"
                     element={
@@ -54,6 +49,7 @@ function App() {
                         </RoleProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/payment"
                     element={
@@ -63,6 +59,7 @@ function App() {
                     }
                 />
 
+                {/* admin pages (still protected) */}
                 <Route
                     path="/admin"
                     element={
@@ -71,6 +68,7 @@ function App() {
                         </RoleProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/adminReservations"
                     element={
@@ -79,6 +77,7 @@ function App() {
                         </RoleProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/adminMenu"
                     element={
@@ -87,6 +86,7 @@ function App() {
                         </RoleProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/adminOrders"
                     element={
@@ -95,6 +95,7 @@ function App() {
                         </RoleProtectedRoute>
                     }
                 />
+
                 <Route
                     path="/adminProducts"
                     element={
@@ -103,8 +104,9 @@ function App() {
                         </RoleProtectedRoute>
                     }
                 />
-            </Routes>
-        </>
+
+            </Route>
+        </Routes>
     );
 }
 

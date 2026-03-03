@@ -2,12 +2,49 @@
     display: flex;
     flex-direction: column;
     margin: 0 50px;
+    gap: 20px;
 }
 
 .profile-main-container > h1 {
     text-align: center;
 }
 
+.user-details-title {
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
 .user-details {
     margin-left: 25px;
+}
+
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+}
+
+.order-card {
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+@media (max-width: 768px) {
+    .profile-main-container {
+        margin: 0 10px;
+        gap: 15px;
+    }
+
+  .user-details {
+        margin-left: 15px;
+    }
+
+    .order-card {
+        padding: 8px;
+    }
 }

@@ -2,7 +2,6 @@
 * {
     background-color: rgb(44,47,57);
     color: var(--secondary-color);
-    max-height: 100%;
 }
 
 h1, h2 {
@@ -18,7 +17,8 @@ li {
 }
 
 :root {
-    --nav-height: 8vh;
+    --nav-height: clamp(60px, 8vh, 90px);
+    --admin-nav-height: 48px;
     --primary-color: gold;
     --secondary-color: white;
     --tertiary-color: black;
@@ -26,19 +26,23 @@ li {
     --removal-button-gradient: linear-gradient(145deg, #ff4d4d, #d60000);
 }
 
-.height {
-    padding-top: 120px;
-}
-
-.height.admin {
-    padding-top: 180px;
+main {
+    padding-top: var(--nav-height);
 }
 
 p {
     font-size: 14px;
 }
 
-@media screen and (min-width: 768px) {
+@media (max-width: 768px) {
+    .nav-items li a,
+    .nav-items li button {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-width: 769px) {
     p {
         font-size: 16px;
     }

@@ -2,7 +2,6 @@ import "./AdminReservations.css";
 import UseReservationDetails from "../../../../hooks/UseReservationDetails.jsx";
 import React, {useState} from "react";
 import adminApi from "../../../../constants/admin_api/AdminApi.jsx";
-import LayoutHelper from "../../../../components/layout-helper/LayoutHelper.jsx";
 
 function AdminReservations() {
     const {reservationDetails, refetch, loading, error: fetchError} = UseReservationDetails("/reservation-details");
@@ -42,8 +41,7 @@ function AdminReservations() {
     }
 
     return (
-        <LayoutHelper>
-
+        <>
             <h1>Reserveringen</h1>
             <div className="reservation-page-container">
                 <div className="reservation-left-side">
@@ -99,7 +97,7 @@ function AdminReservations() {
                     ))}
                 </div>
             </div>
-        </LayoutHelper>
+        </>
     );
 }
 

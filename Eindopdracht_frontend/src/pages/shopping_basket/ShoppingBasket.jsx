@@ -2,8 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import "./ShoppingBasket.css";
-import LayoutHelper from "../../components/layout-helper/LayoutHelper.jsx";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function ShoppingBasket() {
     const [basketItems, setBasketItems] = useState(() => {
@@ -91,121 +90,118 @@ function ShoppingBasket() {
     if (loadingProducts) return <p>Loading products…</p>;
 
     return (
-        <LayoutHelper>
+        <main>
+            <h1>Winkelwagen</h1>
 
-            <main>
-                <h1>Winkelwagen</h1>
-
-                {basketWithProducts.length === 0 ? (
-                    <p>Uw winkelwagen is leeg.</p>
-                ) : (
-                    <div className="basket-card">
-                        <table className="basket-table">
-                            <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th className="text-right">Aantal</th>
-                                <th className="text-right">Prijs</th>
-                                <th className="text-right">Subtotaal</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {basketWithProducts.map((item) => {
-                                if (!item.product) {
-                                    return (
-                                        <tr key={item.productId}>
-                                            <td colSpan="5">Product niet gevonden</td>
-                                        </tr>
-                                    );
-                                }
-
-                                const subtotal =
-                                    item.product.price * item.quantity;
-
+            {basketWithProducts.length === 0 ? (
+                <p>Uw winkelwagen is leeg.</p>
+            ) : (
+                <div className="basket-card">
+                    <table className="basket-table">
+                        <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th className="text-right">Aantal</th>
+                            <th className="text-right">Prijs</th>
+                            <th className="text-right">Subtotaal</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {basketWithProducts.map((item) => {
+                            if (!item.product) {
                                 return (
                                     <tr key={item.productId}>
-                                        <td>
-                                            <div className="basket-product-cell">
-                                                <img
-                                                    src={`http://localhost:8080${item.product.imageUrl}`}
-                                                    alt={item.product.name}
-                                                />
-                                                <span>{item.product.name}</span>
-                                            </div>
-                                        </td>
-
-                                        <td className="basket-quantity-cell">
-                                            <button
-                                                onClick={() =>
-                                                    updateQuantity(
-                                                        item.productId,
-                                                        item.quantity - 1
-                                                    )
-                                                }
-                                            >
-                                                -
-                                            </button>
-                                            <span>{item.quantity}</span>
-                                            <button
-                                                onClick={() =>
-                                                    updateQuantity(
-                                                        item.productId,
-                                                        item.quantity + 1
-                                                    )
-                                                }
-                                            >
-                                                +
-                                            </button>
-                                        </td>
-
-                                        <td className="text-right">
-                                            € {item.product.price.toLocaleString("nl-NL", {minimumFractionDigits: 2})}
-                                        </td>
-
-                                        <td className="text-right">
-                                            € {subtotal.toLocaleString("nl-NL", {minimumFractionDigits: 2})}
-                                        </td>
-
-                                        <td>
-                                            <button
-                                                className="remove-button"
-                                                onClick={() =>
-                                                    removeItem(item.productId)
-                                                }
-                                            >
-                                                Verwijderen
-                                            </button>
-                                        </td>
+                                        <td colSpan="5">Product niet gevonden</td>
                                     </tr>
                                 );
-                            })}
+                            }
 
-                            <tr className="basket-total-row">
-                                <td colSpan="3"><strong>Totaal</strong></td>
-                                <td>
-                                    <strong>
-                                        €{" "}
-                                        {totalPrice.toLocaleString("nl-NL", {
-                                            minimumFractionDigits: 2,
-                                        })}
-                                    </strong>
-                                </td>
-                                <td>
-                                    <button
-                                        className="checkout-button"
-                                        onClick={placeOrder}
-                                    >
-                                        Bestelling plaatsen
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-            </main>
-        </LayoutHelper>
+                            const subtotal =
+                                item.product.price * item.quantity;
+
+                            return (
+                                <tr key={item.productId}>
+                                    <td>
+                                        <div className="basket-product-cell">
+                                            <img
+                                                src={`http://localhost:8080${item.product.imageUrl}`}
+                                                alt={item.product.name}
+                                            />
+                                            <span>{item.product.name}</span>
+                                        </div>
+                                    </td>
+
+                                    <td className="basket-quantity-cell">
+                                        <button
+                                            onClick={() =>
+                                                updateQuantity(
+                                                    item.productId,
+                                                    item.quantity - 1
+                                                )
+                                            }
+                                        >
+                                            -
+                                        </button>
+                                        <span>{item.quantity}</span>
+                                        <button
+                                            onClick={() =>
+                                                updateQuantity(
+                                                    item.productId,
+                                                    item.quantity + 1
+                                                )
+                                            }
+                                        >
+                                            +
+                                        </button>
+                                    </td>
+
+                                    <td className="text-right">
+                                        € {item.product.price.toLocaleString("nl-NL", {minimumFractionDigits: 2})}
+                                    </td>
+
+                                    <td className="text-right">
+                                        € {subtotal.toLocaleString("nl-NL", {minimumFractionDigits: 2})}
+                                    </td>
+
+                                    <td>
+                                        <button
+                                            className="remove-button"
+                                            onClick={() =>
+                                                removeItem(item.productId)
+                                            }
+                                        >
+                                            Verwijderen
+                                        </button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+
+                        <tr className="basket-total-row">
+                            <td colSpan="3"><strong>Totaal</strong></td>
+                            <td>
+                                <strong>
+                                    €{" "}
+                                    {totalPrice.toLocaleString("nl-NL", {
+                                        minimumFractionDigits: 2,
+                                    })}
+                                </strong>
+                            </td>
+                            <td>
+                                <button
+                                    className="checkout-button"
+                                    onClick={placeOrder}
+                                >
+                                    Bestelling plaatsen
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            )}
+        </main>
     );
 }
 

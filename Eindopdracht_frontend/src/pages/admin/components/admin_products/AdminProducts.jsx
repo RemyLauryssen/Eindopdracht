@@ -1,7 +1,7 @@
 import "./AdminProducts.css";
 import React, {useEffect, useState} from "react";
 import adminApi from "../../../../constants/admin_api/AdminApi.jsx";
-import LayoutHelper from "../../../../components/layout-helper/LayoutHelper.jsx";
+
 
 function AdminProducts() {
     const [form, setForm] = useState({name: "", shortDescription: "", price: ""});
@@ -70,12 +70,11 @@ function AdminProducts() {
 
 
     return (
-        <LayoutHelper>
-
+        <main>
             <h1>Producten</h1>
             <div className="page-container">
                 <div className="products-left-side">
-                    <h2>Voorbeeldweergave product</h2>
+                    <h2 className="preview-title">Voorbeeldweergave product</h2>
                     {createdProduct && createdProduct.imageUrl && (
                         <>
                             <h4>Het product komt er zo uit te zien:</h4>
@@ -164,7 +163,7 @@ function AdminProducts() {
                 </div>
             </div>
 
-        </LayoutHelper>
+        </main>
     );
 }
 

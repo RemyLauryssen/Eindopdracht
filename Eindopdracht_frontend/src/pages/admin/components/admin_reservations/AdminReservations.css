@@ -1,6 +1,21 @@
 .reservation-page-container {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+}
+
+.reservation-left-side,
+.reservation-right-side {
+    flex: 1 1 400px;
+    max-width: 600px;
+}
+
+.vertical-separator {
+    width: 2px;
+    background-color: var(--secondary-color);
+    margin: 0 20px;
 }
 
 .reservation-card-container {
@@ -12,7 +27,7 @@
 .reservation-card {
     display: flex;
     flex-direction: column;
-    gap: 2px 5px;
+    gap: 5px;
     border: 1px solid var(--secondary-color);
     border-radius: 10px;
     padding: 10px;
@@ -22,21 +37,24 @@
     margin-top: 10px;
     background-color: var(--secondary-color);
     color: var(--tertiary-color);
-    padding-left: 2px;
+    padding: 5px;
     height: 60px;
+    font-size: 14px;
+    resize: vertical;
 }
 
 .reservation-buttons-area {
     display: flex;
     justify-content: space-between;
-    margin: 10px 50px 0 50px;
+    margin: 10px 0 0 0;
+    gap: 10px;
 }
 
 .reservation-buttons-area > button {
     border: none;
     border-radius: 50%;
-    height: 42px;
-    width: 42px;
+    height: 40px;
+    width: 40px;
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
@@ -83,8 +101,42 @@
     opacity: 0.6;
 }
 
-.vertical-separator {
-    width: 2px;
-    background-color: var(--secondary-color);
-    margin: 0 30px;
+@media (max-width: 900px) {
+    .reservation-page-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vertical-separator {
+        display: none;
+    }
+
+    .reservation-left-side,
+    .reservation-right-side {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .reservation-buttons-area {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .reservation-card {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .reservation-text-area {
+        font-size: 13px;
+    }
+
+    .reservation-buttons-area > button {
+        height: 36px;
+        width: 36px;
+        font-size: 16px;
+    }
 }

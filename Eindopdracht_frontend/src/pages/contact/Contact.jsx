@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import "./Contact.css";
 import axios from "axios";
-import LayoutHelper from "../../components/layout-helper/LayoutHelper.jsx";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 function Contact() {
@@ -10,7 +11,7 @@ function Contact() {
     const [lastName, setLastName] = useState("");
     const [emailAddress, setEmailAddress] = useState("");
     const [dinnerGuests, setDinnerGuests] = useState("");
-    const [reservationDateTime, setReservationDateTime] = useState("");
+    const [reservationDateTime, setReservationDateTime] = useState(null);
     const [addSuccess, toggleAddSuccess] = useState(false);
     const [error, setError] = useState(false);
 
@@ -24,7 +25,7 @@ function Contact() {
                 firstName: firstName,
                 lastName: lastName,
                 emailAddress: emailAddress,
-                reservationDateTime: reservationDateTime,
+                reservationDateTime: reservationDateTime?.toISOString(),
                 numberOfGuests: Number(dinnerGuests)
             });
             console.log(response.data);
@@ -42,8 +43,7 @@ function Contact() {
 
 
     return (
- <LayoutHelper>
-        <main className="outer-container">
+        <div className="outer-container">
             <h1>Contact</h1>
             <div className="main-container">
 
@@ -108,13 +108,21 @@ function Contact() {
                         </div>
                         <div className="reservation-input-field">
                             <label htmlFor="reservation-date-time">Datum en tijd:</label>
-                            <input
-                                type="datetime-local"
-                                id="reservation-date-time"
-                                name="reservation-datetime-field"
-                                value={reservationDateTime}
-                                onChange={(e) => setReservationDateTime(e.target.value)}
-                            />
+                            <div className="custom-datepicker">
+                                <DatePicker
+                                    selected={reservationDateTime}
+                                    onChange={(date) => setReservationDateTime(date)}
+                                    showTimeSelect
+                                    timeFormat="HH:mm"
+                                    timeIntervals={30}
+                                    timeCaption="Tijd"
+                                    dateFormat="dd-MM-yyyy HH:mm"
+                                    minDate={new Date()}
+                                    placeholderText="Selecteer datum en tijd"
+                                    className="datepicker-input"
+                                    wrapperClassName="datepicker-wrapper"
+                                />
+                            </div>
                         </div>
                         <div className="reservation-input-field">
                             <button type="submit">Verzenden</button>
@@ -125,10 +133,8 @@ function Contact() {
                 </form>
 
             </section>
-        </main>
- </LayoutHelper>
-    )
-        ;
+        </div>
+    );
 }
 
 export default Contact;

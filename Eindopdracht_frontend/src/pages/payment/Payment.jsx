@@ -1,7 +1,6 @@
 import "./Payment.css";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import LayoutHelper from "../../components/layout-helper/LayoutHelper.jsx";
 
 function Payment() {
     const location = useLocation();
@@ -58,7 +57,7 @@ function Payment() {
     };
 
     return (
-        <LayoutHelper>
+        <main>
             <h1>Betaalpagina</h1>
             <div className="payment-page">
                 <div className="payment-total">
@@ -88,7 +87,7 @@ function Payment() {
                 </div>
                 <button type="submit" className="payment-button" onClick={handlePayment}>Betalen</button>
             </div>
-        </LayoutHelper>
+        </main>
     );
 }
 

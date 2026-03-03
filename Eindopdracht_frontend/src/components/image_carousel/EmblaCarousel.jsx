@@ -13,32 +13,41 @@ import photo3 from "../../assets/Huiskamer3.jpg"
 import photo4 from "../../assets/Huiskamer4.jpg"
 import photo5 from "../../assets/Huiskamer5.jpg"
 
+const photos = [
+    {
+        name: photo1,
+        source: photo1
+    },
+    {
+        name: photo2,
+        source: photo2
+    },
+    {
+        name: photo3,
+        source: photo3
+    },
+    {
+        name: photo4,
+        source: photo4
+    }, {
+        name: photo5,
+        source: photo5
+    }
+
+]
 
 const EmblaCarousel = (props) => {
     const {slides, options} = props
-    const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay()])
-    const photos = [
-        {
-            name: photo1,
-            source: photo1
-        },
-        {
-            name: photo2,
-            source: photo2
-        },
-        {
-            name: photo3,
-            source: photo3
-        },
-        {
-            name: photo4,
-            source: photo4
-        }, {
-            name: photo5,
-            source: photo5
-        }
+    const [emblaRef, emblaApi] = useEmblaCarousel(
+        options,
+        [
+            Autoplay({
+                delay: 3500,
+                stopOnInteraction: false
+            })
+        ]
+    )
 
-    ]
 
     const onNavButtonClick = useCallback((emblaApi) => {
         const autoplay = emblaApi?.plugins()?.autoplay
@@ -71,10 +80,12 @@ const EmblaCarousel = (props) => {
                 <div className="embla__container">
                     {slides.map((index) => (
                         <div className="embla__slide" key={index}>
-                            <div className="embla__slide__number"><img
+                            <img
                                 className="embla__slide__img"
-                                src={photos[index]?.name}
-                                alt={`Afbeelding van huiskamer ${index}`}/></div>
+                                src={photos[index]?.source}
+                                alt={`Afbeelding van huiskamer ${index + 1}`}
+                                loading="lazy"
+                            />
                         </div>
                     ))}
                 </div>

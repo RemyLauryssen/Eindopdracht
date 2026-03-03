@@ -1,12 +1,14 @@
 .embla {
     max-width: 80rem;
-    margin: auto;
+    margin: 0 auto;
+    width: 100%;
    --slide-height: 50vh;
     --slide-spacing: 1rem;
     --slide-size: 100%;
 }
 .embla__viewport {
     overflow: hidden;
+    width: 100%;
 }
 
 .embla__container {
@@ -17,15 +19,18 @@
 .embla__slide {
     transform: translate3d(0, 0, 0);
     flex: 0 0 var(--slide-size);
+    position: relative;
     min-width: 0;
     padding-left: var(--slide-spacing);
+    aspect-ratio: 16 / 9;
 }
 
 .embla__slide__img {
     border-radius: 1.8rem;
     display: block;
-    height: var(--slide-height);
     width: 100%;
+    height: 100%;
+    max-width: 100%;
     object-position: 50% 70%;
     object-fit: cover;
 }
@@ -121,4 +126,36 @@
 }
 .embla__dot--selected:after {
     box-shadow: inset 0 0 0 0.2rem var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+
+    .homepage-carousel {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .embla__slide {
+        position: relative;
+    }
+
+    .embla__slide img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 10px;
+        aspect-ratio: 4 / 3;
+    }
+
+    .embla__buttons {
+        display: none;
+    }
+
+    .embla__controls {
+        margin-top: 0.5rem;
+    }
+
+    .embla__dots {
+        justify-content: center;
+    }
 }

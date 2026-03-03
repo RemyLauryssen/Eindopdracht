@@ -1,8 +1,10 @@
 .orders-list {
-    margin-left: 30px;
+    margin-left: 0;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px;
 }
 
 .order-card {
@@ -12,46 +14,50 @@
     border-radius: 10px;
     margin: 10px 0;
     padding: 10px;
-    max-width: 30%;
-    min-width: 320px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
 }
 
 .order-items {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    overflow-x: auto;
+    display: block;
 }
 
 .order-items th,
 .order-items td {
     padding: 8px 12px;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap;
 }
 
-.order-items th {
-    text-align: left;
-}
+@media (max-width: 768px) {
+    .orders-list {
+        flex-direction: column;
+        margin-left: 0;
+        padding: 5px;
+    }
 
-.order-items th:nth-child(2),
-.order-items th:nth-child(3),
-.order-items th:nth-child(4),
-.order-items td:nth-child(2),
-.order-items td:nth-child(3),
-.order-items td:nth-child(4) {
-    text-align: right;
-}
+    .order-card {
+        max-width: 100%;
+    }
 
-.order-total-row td {
-    border-top: 2px solid #ddd;
-    padding-top: 10px;
-    font-size: 1.05rem;
-}
+    .order-items {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
 
-.order-total-row td:first-child {
-    text-align: right;
-}
+    .order-items th,
+    .order-items td {
+        padding: 6px 8px;
+        font-size: 14px;
+    }
 
-.order-total-row td:last-child {
-    text-align: right;
-    font-size: 1.1rem;
+    .order-total-row td {
+        font-size: 1rem;
+    }
 }

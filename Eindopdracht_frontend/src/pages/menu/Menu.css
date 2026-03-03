@@ -31,6 +31,8 @@
     border-bottom: 1px dotted var(--secondary-color);
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
     font-family: "Playfair Display", Arial, serif;
 }
 
@@ -38,5 +40,15 @@
     margin-left: 5vw;
     padding: 5px 0;
     font-size: 12px;
+}
+
+@media screen and (max-width: 769px) {
+    .menu-logo {
+        max-height: 10rem;
+    }
+
+    .title-price-container strong {
+        white-space: nowrap;
+    }
 }
 

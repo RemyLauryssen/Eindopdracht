@@ -8,14 +8,14 @@
 .nav-container {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
-    padding: 1vh 2vw 0 1vw;
-    height: 10%;
+    height: var(--nav-height);
+    padding: 0 2vw;
     border-bottom: 2px solid var(--primary-color);
     position: fixed;
     top: 0;
+    left: 0;
     z-index: 1000;
 }
 
@@ -23,8 +23,9 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    flex-shrink: 2;
-    flex-grow: 1;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: auto;
 }
 
 .nav-items li {
@@ -37,11 +38,13 @@
     display: flex;
     align-items: center;
     gap: 3vw;
+    margin-left: auto;
 }
 
 .login-icon {
     width: 30px;
 }
+
 .active-link {
     text-decoration: underline;
     color: var(--primary-color);
@@ -70,4 +73,45 @@
 .login-button {
     border: none;
     cursor: pointer;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+
+        .nav-items {
+            position: absolute;
+            top: var(--nav-height);
+            left: 0;
+            width: 100%;
+            flex-direction: column;
+            background-color: rgb(44, 47, 57);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-items.open {
+            max-height: 1000px; /* big enough for all links */
+        }
+
+        .nav-items li {
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+        }
+    }
 }

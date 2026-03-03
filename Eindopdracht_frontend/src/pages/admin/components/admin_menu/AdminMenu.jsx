@@ -2,7 +2,6 @@ import "./AdminMenu.css";
 import React, {useState} from "react";
 import adminApi from "../../../../constants/admin_api/AdminApi.jsx";
 import UseMenuItems from "../../../../hooks/UseMenuItems.jsx";
-import LayoutHelper from "../../../../components/layout-helper/LayoutHelper.jsx";
 
 function AdminMenu() {
     const [productName, setProductName] = useState("");
@@ -44,7 +43,7 @@ function AdminMenu() {
     }
 
     return (
-        <LayoutHelper>
+        <>
             <h1>Menukaart</h1>
             <div className="menu-page-container">
                 <div className="menu-left-side">
@@ -69,9 +68,12 @@ function AdminMenu() {
                                                         maximumFractionDigits: 2,
                                                     })}
                                                     </strong>
-                                                    <button type="button" className="delete-button" onClick={() => deleteMenuItem(menuItem.id)}>
-                                                        X
-                                                    </button>
+                                                    <div className="delete-button-container">
+                                                        <button type="button" className="delete-button"
+                                                                onClick={() => deleteMenuItem(menuItem.id)}>
+                                                            X
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <p className="menu-description">{menuItem.description}</p>
                                             </article>
@@ -92,9 +94,12 @@ function AdminMenu() {
                                                         minimumFractionDigits: 2,
                                                         maximumFractionDigits: 2,
                                                     })}</strong>
-                                                    <button type="button" className="delete-button" onClick={() => deleteMenuItem(menuItem.id)}>
-                                                        X
-                                                    </button>
+                                                    <div className="delete-button-container">
+                                                        <button type="button" className="delete-button"
+                                                                onClick={() => deleteMenuItem(menuItem.id)}>
+                                                            X
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <p className="menu-description">{menuItem.description}</p>
                                             </article>
@@ -115,9 +120,12 @@ function AdminMenu() {
                                                             minimumFractionDigits: 2,
                                                             maximumFractionDigits: 2,
                                                         })}</strong>
-                                                        <button type="button" className="delete-button" onClick={() => deleteMenuItem(menuItem.id)}>
-                                                            X
-                                                        </button>
+                                                        <div className="delete-button-container">
+                                                            <button type="button" className="delete-button"
+                                                                    onClick={() => deleteMenuItem(menuItem.id)}>
+                                                                X
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </article>
                                             )
@@ -150,42 +158,42 @@ function AdminMenu() {
                             ))}
                         </div>
                         <div className="product-input-form">
-                        <label>Naam:</label>
-                        <input
-                            type="text"
-                            className="input-field"
-                            value={productName}
-                            onChange={(e) => setProductName(e.target.value)}
-                            required
-                        />
+                            <label>Naam:</label>
+                            <input
+                                type="text"
+                                className="input-field"
+                                value={productName}
+                                onChange={(e) => setProductName(e.target.value)}
+                                required
+                            />
                         </div>
                         <div className="product-input-form">
-                        <label>Beschrijving:</label>
-                        <input
-                            type="text"
-                            className="input-field"
+                            <label>Beschrijving:</label>
+                            <input
+                                type="text"
+                                className="input-field"
 
-                            value={productDescription}
-                            onChange={(e) => setProductDescription(e.target.value)}
-                            required
-                        />
+                                value={productDescription}
+                                onChange={(e) => setProductDescription(e.target.value)}
+                                required
+                            />
                         </div>
                         <div className="product-input-form">
-                        <label>Prijs</label>
-                        <input
-                            type="number"
-                            className="input-field"
-                            value={productPrice}
-                            onChange={(e) => setProductPrice(e.target.value)}
-                            required
-                        />
+                            <label>Prijs</label>
+                            <input
+                                type="number"
+                                className="input-field"
+                                value={productPrice}
+                                onChange={(e) => setProductPrice(e.target.value)}
+                                required
+                            />
                         </div>
 
                         <button type="submit" className="add-product-button">Product toevoegen</button>
                     </form>
                 </div>
             </div>
-        </LayoutHelper>
+        </>
     );
 }
 

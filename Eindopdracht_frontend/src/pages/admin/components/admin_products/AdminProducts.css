@@ -59,7 +59,7 @@
 
 .success-message {
     margin-top: 15px;
-    color: #4caf50;
+    color: var(--primary-color);
     font-weight: 500;
 }
 
@@ -73,4 +73,51 @@
     background: var(--button-gradient);
     width: 100%;
     color: var(--tertiary-color);
+}
+
+.preview-title {
+    display: block;
+}
+
+@media (max-width: 786px) {
+    .page-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+        align-items: center;
+    }
+
+    .products-left-side,
+    .products-right-side {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .preview-title {
+        display: none;
+    }
+
+    .products-left-side:has(.product-catalog) .preview-title {
+        display: block;
+    }
+
+    .vertical-separator {
+        display: none;
+    }
+
+    .image-preview {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+        margin-top: 10px;
+    }
+
+    .product-input-form input,
+    .file-input-button {
+        width: 100%;
+    }
+
+    .products-add-button {
+        width: 100%;
+    }
 }

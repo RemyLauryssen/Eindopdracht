@@ -8,10 +8,12 @@
     flex-direction: column;
     width: 42%;
 }
+
 .admin-title {
     text-align: center;
     margin-bottom: 10px;
 }
+
 .delete-button {
     background: var(--removal-button-gradient);
     cursor: pointer;
@@ -64,4 +66,106 @@
     margin-top: 10px;
     background: var(--button-gradient);
     color: var(--tertiary-color);
+}
+
+.name-price {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+@media (max-width: 900px) {
+    .menu-page-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .menu-left-side,
+    .menu-right-side {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .vertical-separator {
+        display: none;
+    }
+
+    .dish-container {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .title-price-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .radio-button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-form-container {
+        width: 100%;
+    }
+
+    .input-field {
+        width: 100%;
+    }
+
+    .add-product-button {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .delete-button-container {
+        display: flex;
+        justify-content: flex-end; /* keep it right-aligned */
+    }
+}
+
+@media (max-width: 500px) {
+    .dish-container h2,
+    .admin-title {
+        font-size: 16px;
+    }
+
+    .menu-item h3 {
+        font-size: 14px;
+    }
+
+    .menu-description {
+        font-size: 13px;
+    }
+
+    .delete-button {
+        height: 22px;
+        width: 22px;
+    }
+
+    .radio-button-container label {
+        font-size: 14px;
+    }
+
+    .input-field {
+        font-size: 14px;
+    }
+
+    .add-product-button {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+    .title-price-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .delete-button-container {
+        align-self: flex-start; /* put button under name-price */
+    }
 }
