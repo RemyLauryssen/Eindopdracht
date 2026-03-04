@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import nl.novi.webshop.dtos.menu.MenuResponseDTO;
 import nl.novi.webshop.dtos.menu.MenuRequestDTO;
-import nl.novi.webshop.entities.MenuEntity;
 import nl.novi.webshop.helpers.UrlHelper;
 import nl.novi.webshop.services.MenuService;
 import org.springframework.http.HttpStatus;

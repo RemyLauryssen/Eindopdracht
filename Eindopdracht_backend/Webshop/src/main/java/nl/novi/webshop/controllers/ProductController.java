@@ -2,11 +2,8 @@ package nl.novi.webshop.controllers;
 
 import org.springframework.core.io.Resource;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
 import nl.novi.webshop.dtos.product.ProductResponseDTO;
 import nl.novi.webshop.dtos.product.ProductRequestDTO;
-import nl.novi.webshop.entities.ProductEntity;
-import nl.novi.webshop.helpers.UrlHelper;
 import nl.novi.webshop.services.ImageService;
 import nl.novi.webshop.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -17,12 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.IOException;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/products")

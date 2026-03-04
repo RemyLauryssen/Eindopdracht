@@ -1,7 +1,6 @@
 package nl.novi.webshop.services;
 
 
-import jakarta.persistence.EntityNotFoundException;
 import nl.novi.webshop.dtos.reservationDetails.ReservationDetailsRequestDTO;
 import nl.novi.webshop.dtos.reservationDetails.ReservationDetailsResponseDTO;
 import nl.novi.webshop.dtos.reservationDetails.ReservationStatusUpdateDTO;
@@ -13,7 +12,6 @@ import nl.novi.webshop.repositories.ReservationDetailsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReservationDetailsService {

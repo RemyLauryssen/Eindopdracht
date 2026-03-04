@@ -8,9 +8,10 @@
 
 .reservation-left-side,
 .reservation-right-side {
-    flex: 1 1 400px;
-    max-width: 600px;
+    flex: 1 1;
+    max-width: 400px;
 }
+
 
 .vertical-separator {
     width: 2px;

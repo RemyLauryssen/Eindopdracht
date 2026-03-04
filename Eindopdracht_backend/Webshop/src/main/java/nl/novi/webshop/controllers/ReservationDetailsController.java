@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 import nl.novi.webshop.dtos.reservationDetails.ReservationDetailsResponseDTO;
 import nl.novi.webshop.dtos.reservationDetails.ReservationDetailsRequestDTO;
 import nl.novi.webshop.dtos.reservationDetails.ReservationStatusUpdateDTO;
-import nl.novi.webshop.entities.ReservationDetailsEntity;
 import nl.novi.webshop.helpers.UrlHelper;
 import nl.novi.webshop.services.ReservationDetailsService;
 import org.springframework.http.HttpStatus;

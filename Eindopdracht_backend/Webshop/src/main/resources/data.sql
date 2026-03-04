@@ -41,23 +41,27 @@ VALUES
 
 INSERT INTO "orders" (customer_name, customer_email, total_price, date_created, date_edited)
 VALUES
-    ('Jan Janssen', 'JJ@home.nl', 26.97, now(), now()),
-    ('Piet Pietersen', 'Pieterman@piet.piet', 32.30, now(), now()),
-    ('Klaas Klaassens', 'Klaasjeeee@gmail.com', 11.14, now(), now());
+    ('Jan Janssen', 'JJ@home.nl', 33.00, now(), now()),
+    ('Piet Pietersen', 'Pieterman@piet.piet', 31.90, now(), now()),
+    ('Klaas Klaassens', 'Klaasjeeee@gmail.com', 22.00, now(), now());
 
 INSERT INTO "order_items" (product_id, order_id, quantity, price)
 VALUES
-    (1, 1, 3, 2.11),
-    (2, 1, 6, 3.44),
-    (4, 2, 1, 5.66),
-    (2, 2, 8, 3.33),
-    (3, 3, 2, 1.13),
-    (1, 3, 4, 2.22);
+    (1, 1, 3, 13.20),
+    (2, 1, 6, 19.80),
+
+    -- Order 2
+    (4, 2, 1, 5.50),
+    (2, 2, 8, 26.40),
+
+    -- Order 3
+    (3, 3, 2, 4.40),
+    (1, 3, 4, 17.60);
 
 INSERT INTO "payment_details" (payment_method, transaction_id, amount, order_id, date_created, date_edited)
 VALUES
-    ('ING', 'INGB-ab123cd4', 26.97, 1, now(), now()),
-    ('ABN-Amro', 'ABNA-xyz987qw', 32.30, 2, now(), now()),
-    ('Rabobank', 'RABO-w0x1y2z3', 11.14, 3, now(), now());
+    ('ING', 'INGB-ab123cd4', 33.00, 1, now(), now()),
+    ('ABN-Amro', 'ABNA-xyz987qw', 31.90, 2, now(), now()),
+    ('Rabobank', 'RABO-w0x1y2z3', 22.00, 3, now(), now());
 
 

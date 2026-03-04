@@ -1,13 +1,10 @@
 package nl.novi.webshop.mappers;
 
-import nl.novi.webshop.dtos.order.OrderRequestDTO;
 import nl.novi.webshop.dtos.order.OrderResponseDTO;
 import nl.novi.webshop.entities.OrderEntity;
 import nl.novi.webshop.entities.OrderItem;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class OrderDTOMapper {
@@ -47,6 +44,7 @@ public class OrderDTOMapper {
         dto.setProductId(item.getProduct().getId());
         dto.setProductName(item.getProduct().getName());
         dto.setQuantity(item.getQuantity());
+        dto.setUnitPrice(item.getProduct().getPrice());
         dto.setPrice(item.getPrice());
 
         return dto;

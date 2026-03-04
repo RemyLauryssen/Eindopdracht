@@ -59,15 +59,20 @@ function AdminMenu() {
                                 {menuItems.map((menuItem) => {
                                     if (menuItem.dish === "lunch") {
                                         return (
-                                            <article className="menu-item" key={menuItem.id}>
-                                                <div className="title-price-container">
-                                                    <h3>{menuItem.name}</h3>
-                                                    <strong>
-                                                        € {menuItem.price.toLocaleString("nl-NL", {
-                                                        minimumFractionDigits: 2,
-                                                        maximumFractionDigits: 2,
-                                                    })}
-                                                    </strong>
+                                            <>
+                                                <div className="menu-delete-container">
+                                                    <article className="menu-item" key={menuItem.id}>
+                                                        <div className="title-price-container">
+                                                            <h3>{menuItem.name}</h3>
+                                                            <strong>
+                                                                € {menuItem.price.toLocaleString("nl-NL", {
+                                                                minimumFractionDigits: 2,
+                                                                maximumFractionDigits: 2,
+                                                            })}
+                                                            </strong>
+                                                        </div>
+                                                        <p className="menu-description">{menuItem.description}</p>
+                                                    </article>
                                                     <div className="delete-button-container">
                                                         <button type="button" className="delete-button"
                                                                 onClick={() => deleteMenuItem(menuItem.id)}>
@@ -75,8 +80,7 @@ function AdminMenu() {
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <p className="menu-description">{menuItem.description}</p>
-                                            </article>
+                                            </>
                                         )
                                     }
                                 })}
@@ -86,14 +90,19 @@ function AdminMenu() {
                                 {menuItems.map((menuItem) => {
                                     if (menuItem.dish === "pastries") {
                                         return (
-                                            <article className="menu-item" key={menuItem.id}>
-                                                <div className="title-price-container">{menuItem.name}
+                                            <>
+                                                <div className="menu-delete-container">
+                                                    <article className="menu-item" key={menuItem.id}>
+                                                        <div className="title-price-container">{menuItem.name}
 
-                                                    <strong className="pastries-price">
-                                                        € {menuItem.price.toLocaleString("nl-NL", {
-                                                        minimumFractionDigits: 2,
-                                                        maximumFractionDigits: 2,
-                                                    })}</strong>
+                                                            <strong className="pastries-price">
+                                                                € {menuItem.price.toLocaleString("nl-NL", {
+                                                                minimumFractionDigits: 2,
+                                                                maximumFractionDigits: 2,
+                                                            })}</strong>
+                                                        </div>
+                                                        <p className="menu-description">{menuItem.description}</p>
+                                                    </article>
                                                     <div className="delete-button-container">
                                                         <button type="button" className="delete-button"
                                                                 onClick={() => deleteMenuItem(menuItem.id)}>
@@ -101,8 +110,7 @@ function AdminMenu() {
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <p className="menu-description">{menuItem.description}</p>
-                                            </article>
+                                            </>
                                         )
                                     }
                                 })}
@@ -113,28 +121,34 @@ function AdminMenu() {
                                     menuItems.map((menuItem) => {
                                         if (menuItem.dish === "drinks") {
                                             return (
-                                                <article className="menu-item" key={menuItem.id}>
-                                                    <div className="title-price-container">{menuItem.name}
-                                                        <strong
-                                                            className="extras-price"> € {menuItem.price.toLocaleString("nl-NL", {
-                                                            minimumFractionDigits: 2,
-                                                            maximumFractionDigits: 2,
-                                                        })}</strong>
+                                                <>
+                                                    <div className="menu-delete-container">
+                                                        <article className="menu-item" key={menuItem.id}>
+                                                            <div className="title-price-container">{menuItem.name}
+                                                                <strong
+                                                                    className="extras-price"> € {menuItem.price.toLocaleString("nl-NL", {
+                                                                    minimumFractionDigits: 2,
+                                                                    maximumFractionDigits: 2,
+                                                                })}</strong>
+                                                            </div>
+                                                        </article>
                                                         <div className="delete-button-container">
                                                             <button type="button" className="delete-button"
                                                                     onClick={() => deleteMenuItem(menuItem.id)}>
                                                                 X
                                                             </button>
+
                                                         </div>
                                                     </div>
-                                                </article>
+                                                </>
                                             )
                                         }
                                     })
                                 }
                             </div>
                         </>
-                    )}
+                    )
+                    }
                 </div>
                 <div className="vertical-separator"/>
                 <div className="menu-right-side">
@@ -142,7 +156,8 @@ function AdminMenu() {
                     {addSuccess && <p className="success-message">Product is toegevoegd!</p>}
                     {error && <p className="error-message">Toevoegen is mislukt</p>}
 
-                    <form onSubmit={addMenuItem} className="menu-form-container product-input-form">
+                    <form onSubmit={addMenuItem}
+                          className="menu-form-container product-input-form">
                         <div className="radio-button-container">
                             {["lunch", "pastries", "drinks"].map(type => (
                                 <label key={type}>
@@ -189,12 +204,14 @@ function AdminMenu() {
                             />
                         </div>
 
-                        <button type="submit" className="add-product-button">Product toevoegen</button>
+                        <button type="submit" className="add-product-button">Product toevoegen
+                        </button>
                     </form>
                 </div>
             </div>
         </>
-    );
+    )
+        ;
 }
 
 export default AdminMenu;

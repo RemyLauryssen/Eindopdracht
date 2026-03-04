@@ -30,10 +30,15 @@
     display: flex;
     border-bottom: 1px dotted var(--secondary-color);
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     font-family: "Playfair Display", Arial, serif;
+}
+
+.title-price-container h3 {
+    flex: 1;
+    min-width: 0;
 }
 
 .menu-description {

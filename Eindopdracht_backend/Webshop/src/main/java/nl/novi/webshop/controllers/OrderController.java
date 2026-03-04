@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import nl.novi.webshop.dtos.order.OrderRequestDTO;
 import nl.novi.webshop.dtos.order.OrderResponseDTO;
-import nl.novi.webshop.entities.OrderEntity;
 import nl.novi.webshop.services.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

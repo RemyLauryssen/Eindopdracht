@@ -52,32 +52,29 @@ function AdminOrders() {
                                 <thead>
                                 <tr>
                                     <th>Product</th>
-                                    <th>Aantal</th>
                                     <th>Prijs</th>
+                                    <th>Aantal</th>
                                     <th>Subtotaal</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {order.items?.map((item, i) => {
-                                    const subtotal = item.price * item.quantity;
+                                {order.items?.map((item, i) => (
+                                    <tr key={i}>
+                                        <td>{item.productName}</td>
 
-                                    return (
-                                        <tr key={i}>
-                                            <td>{item.productName}</td>
-                                            <td>{item.quantity}</td>
-                                            <td>
-                                                € {item.price.toLocaleString("nl-NL", {
-                                                minimumFractionDigits: 2
-                                            })}
-                                            </td>
-                                            <td>
-                                                € {subtotal.toLocaleString("nl-NL", {
-                                                minimumFractionDigits: 2
-                                            })}
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
+                                        <td>
+                                            € {(item.unitPrice ?? 0).toLocaleString("nl-NL", {
+                                            minimumFractionDigits: 2
+                                        })}
+                                        </td>
+                                        <td>{item.quantity}</td>
+                                        <td>
+                                            € {(item.price ?? 0).toLocaleString("nl-NL", {
+                                            minimumFractionDigits: 2
+                                        })}
+                                        </td>
+                                    </tr>
+                                ))}
 
                                 <tr className="order-total-row">
                                     <td colSpan="3"><strong>Totaal</strong></td>

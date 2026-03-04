@@ -2,8 +2,6 @@ package nl.novi.webshop.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {

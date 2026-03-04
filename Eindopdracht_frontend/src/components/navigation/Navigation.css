@@ -105,12 +105,12 @@
         }
 
         .nav-items.open {
-            max-height: 1000px; /* big enough for all links */
+            max-height: 1000px;
         }
 
         .nav-items li {
             width: 100%;
-            padding: 10px 0;
+            padding: 0;
             text-align: center;
         }
     }
