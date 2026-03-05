@@ -59,7 +59,6 @@ function App() {
                     }
                 />
 
-                {/* admin pages (still protected) */}
                 <Route
                     path="/admin"
                     element={

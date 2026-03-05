@@ -17,7 +17,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.notFound().build();
     }
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         List<String> violations = ex

@@ -61,14 +61,11 @@ public class OauthSecurityConfiguration {
                         .permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
-
-                        // USER endpoints
                         .requestMatchers(HttpMethod.GET, "/orders/*")
                         .hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/orders/**")
                         .hasRole("USER")
 
-                        // ADMIN endpoints
                         .requestMatchers("/admin/**")
                         .hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/products/**")

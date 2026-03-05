@@ -12,7 +12,6 @@
     max-width: 400px;
 }
 
-
 .vertical-separator {
     width: 2px;
     background-color: var(--secondary-color);
@@ -60,11 +59,9 @@
     font-size: 18px;
     font-weight: bold;
     color: var(--secondary-color);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     transition: all 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -122,22 +119,5 @@
         flex-direction: row;
         justify-content: flex-end;
         gap: 15px;
-    }
-}
-
-@media (max-width: 500px) {
-    .reservation-card {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    .reservation-text-area {
-        font-size: 13px;
-    }
-
-    .reservation-buttons-area > button {
-        height: 36px;
-        width: 36px;
-        font-size: 16px;
     }
 }

@@ -29,7 +29,6 @@ public class ProductController {
         this.imageService = imageService;
     }
 
-
     @GetMapping
     @PreAuthorize("permitAll()")
     public ResponseEntity<List<ProductResponseDTO>> getAllProducts() {
@@ -41,7 +40,6 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findProductById(id));
     }
-
 
     @PostMapping(
             value = "/create",
@@ -60,9 +58,7 @@ public class ProductController {
         requestDTO.setShortDescription(shortDescription);
         requestDTO.setPrice(price);
 
-
         ProductResponseDTO created = productService.createProduct(requestDTO);
-
 
         if (file != null && !file.isEmpty()) {
             String storedFileName = imageService.storeProductImage(created.getId(), file);

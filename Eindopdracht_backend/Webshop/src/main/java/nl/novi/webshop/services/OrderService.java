@@ -37,13 +37,10 @@ public class OrderService {
                 .toList();
     }
 
-
     public OrderResponseDTO findOrderById(Long id) {
     OrderEntity order = getOrderEntity(id);
     return orderDTOMapper.mapToDTO(order);
     }
-
-
 
     @Transactional
     public OrderResponseDTO createOrder(OrderRequestDTO dto) {

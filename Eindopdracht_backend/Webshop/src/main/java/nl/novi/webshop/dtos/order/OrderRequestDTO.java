@@ -28,7 +28,6 @@ public class OrderRequestDTO {
 
     private String paymentMethod;
 
-
         public static class OrderItemRequestDTO {
 
         @NotNull
@@ -56,6 +55,7 @@ public class OrderRequestDTO {
     public String getPaymentMethod() {
             return  paymentMethod;
     }
+
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }

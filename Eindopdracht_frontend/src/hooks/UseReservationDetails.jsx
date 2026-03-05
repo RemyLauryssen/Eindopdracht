@@ -13,7 +13,7 @@ function UseReservationDetails(endpoint) {
             const response = await adminApi.get(endpoint);
             setReservationDetails(response.data);
         } catch (err) {
-            setError(err.response?.data?.message || "Fout bij laden reserveringen");
+            setError("Fout bij laden van reserveringen");
         } finally {
             setLoading(false);
         }

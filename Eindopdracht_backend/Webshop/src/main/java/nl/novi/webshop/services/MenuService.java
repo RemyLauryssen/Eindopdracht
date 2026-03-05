@@ -55,8 +55,6 @@ public class MenuService {
                 .orElseThrow(() -> new RecordNotFoundException("Menu-item " + id +" not found"));
     }
 
-
-
     public void deleteMenuItem(Long id) {
         menuRepository.deleteById(id);
     }

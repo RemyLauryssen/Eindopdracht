@@ -75,7 +75,7 @@ function ShoppingBasket() {
 
         navigate("/payment", {
             state: {
-                basket: basketItems, // raw basket
+                basket: basketItems,
                 total: totalPrice,
                 customer: user,
             },

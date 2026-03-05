@@ -48,9 +48,7 @@ public class ReservationDetailsEntity extends BaseEntity {
         return reservationDateTime;
     }
 
-    public void setReservationDateTime(LocalDateTime reservationDateTime) {
-        this.reservationDateTime = reservationDateTime;
-    }
+    public void setReservationDateTime(LocalDateTime reservationDateTime) { this.reservationDateTime = reservationDateTime; }
 
     public int getNumberOfGuests() {
         return numberOfGuests;
@@ -69,7 +67,6 @@ public class ReservationDetailsEntity extends BaseEntity {
             this.status = status;
         }
     }
-
 
     @Override
     public boolean equals(Object o) {

@@ -61,13 +61,11 @@ public class ReservationDetailsService {
     public ReservationDetailsResponseDTO updateReservationDetails(Long id, ReservationDetailsRequestDTO requestDTO)  {
         ReservationDetailsEntity existingReservationDetailsEntity = getReservationDetailsEntity(id);
 
-
         existingReservationDetailsEntity.setFirstName(requestDTO.getFirstName());
         existingReservationDetailsEntity.setLastName(requestDTO.getLastName());
         existingReservationDetailsEntity.setEmailAddress(requestDTO.getEmailAddress());
         existingReservationDetailsEntity.setReservationDateTime(requestDTO.getReservationDateTime());
         existingReservationDetailsEntity.setNumberOfGuests(requestDTO.getNumberOfGuests());
-
 
         existingReservationDetailsEntity = reservationDetailsRepository.save(existingReservationDetailsEntity);
         return reservationDetailsDTOMapper.mapToDTO(existingReservationDetailsEntity);
@@ -77,8 +75,6 @@ public class ReservationDetailsService {
         return reservationDetailsRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException("Reservation detail " + id +" not found"));
     }
-
-
 
     public void deleteReservationDetails(Long id) {
         reservationDetailsRepository.deleteById(id);

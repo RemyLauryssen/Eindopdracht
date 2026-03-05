@@ -50,9 +50,7 @@ public class ReservationDetailsResponseDTO {
         return reservationDateTime;
     }
 
-    public void setReservationDateTime(LocalDateTime reservationDateTime) {
-        this.reservationDateTime = reservationDateTime;
-    }
+    public void setReservationDateTime(LocalDateTime reservationDateTime) { this.reservationDateTime = reservationDateTime; }
 
     public int getNumberOfGuests() {
         return numberOfGuests;
