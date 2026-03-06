@@ -21,7 +21,15 @@ function AdminProducts() {
     }, [previewUrlImage]);
 
     function handleChange(e) {
-        const {name, value} = e.target;
+        const {name} = e.target;
+        let {value} = e.target;
+
+        if (name === "price") {
+            value = value
+                .replace(/[^0-9.,]/g, "")
+                .replace(/([.,].*)[.,]/g, "$1");
+        }
+
         setForm(prev => ({...prev, [name]: value}));
     }
 
@@ -43,11 +51,16 @@ function AdminProducts() {
         setError("");
         setAddSuccess(false);
 
+
         try {
             const formData = new FormData();
+
+            const normalizedPrice = parseFloat(form.price.replace(",", "."));
+
             formData.append("name", form.name);
             formData.append("shortDescription", form.shortDescription);
-            formData.append("price", parseFloat(form.price));
+            formData.append("price", normalizedPrice);
+
             if (productImage) formData.append("file", productImage);
 
             const res = await adminApi.post("/products/create", formData, {
@@ -59,13 +72,13 @@ function AdminProducts() {
             setForm({name: "", shortDescription: "", price: ""});
             setProductImage(null);
             setPreviewUrlImage("");
+
         } catch (err) {
             console.error(err);
             setError(err.response?.data?.message || "Product aanmaken mislukt");
         } finally {
             setLoading(false);
         }
-
     }
 
 
@@ -130,7 +143,7 @@ function AdminProducts() {
                                 Prijs:
                             </label>
                             <input
-                                type="number"
+                                type="text"
                                 name="price"
                                 value={form.price}
                                 onChange={handleChange}

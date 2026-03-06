@@ -94,7 +94,7 @@ function ShoppingBasket() {
             <h1>Winkelwagen</h1>
 
             {basketWithProducts.length === 0 ? (
-                <p>Uw winkelwagen is leeg.</p>
+                <h4 className="empty-basket">Uw winkelwagen is leeg...</h4>
             ) : (
                 <div className="basket-card">
                     <table className="basket-table">
@@ -156,11 +156,11 @@ function ShoppingBasket() {
                                         </button>
                                     </td>
 
-                                    <td className="text-right">
+                                    <td>
                                         € {item.product.price.toLocaleString("nl-NL", {minimumFractionDigits: 2})}
                                     </td>
 
-                                    <td className="text-right">
+                                    <td>
                                         € {subtotal.toLocaleString("nl-NL", {minimumFractionDigits: 2})}
                                     </td>
 

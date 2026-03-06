@@ -7,11 +7,11 @@ import {
 } from './EmblaCarouselArrowButtons.jsx'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
-import photo1 from "../../assets/Huiskamer1.jpg"
-import photo2 from "../../assets/Huiskamer2.jpg"
-import photo3 from "../../assets/Huiskamer3.jpg"
-import photo4 from "../../assets/Huiskamer4.jpg"
-import photo5 from "../../assets/Huiskamer5.jpg"
+import photo1 from "../../assets/livingrooms/Huiskamer1.jpg"
+import photo2 from "../../assets/livingrooms/Huiskamer2.jpg"
+import photo3 from "../../assets/livingrooms/Huiskamer3.jpg"
+import photo4 from "../../assets/livingrooms/Huiskamer4.jpg"
+import photo5 from "../../assets/livingrooms/Huiskamer5.jpg"
 
 const photos = [
     {

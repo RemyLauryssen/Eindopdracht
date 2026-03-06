@@ -3,8 +3,8 @@ import { useContext, useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthenticationContext } from "../../context/AuthenticationContext.jsx";
 import companyLogo from "../../assets/logo/Celia's.svg";
-import loginIcon from "../../assets/user-svgrepo-com.svg";
-import shoppingIcon from "../../assets/Shopping-cart.svg";
+import loginIcon from "../../assets/icons/user-svgrepo-com.svg";
+import shoppingIcon from "../../assets/icons/Shopping-cart.svg";
 
 function useIsMobile(breakpoint = 768) {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);

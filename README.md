@@ -18,85 +18,88 @@ De frontend maakt gebruik van een combinatie van React en Vite om de applicatie 
 ## Backend
 De backend is gebouwd op een combinate van Spring Boot (3.2.5) met Maven (4.0.0) en heeft de volgende projectstructuur:
 <pre> 
-src/
-├── main/
-│   ├── java/
-│   │   ├── nl/
-│   │       ├── novi/
-│   │           ├── webshop/
-│   │               ├── config/
-│   │               │   ├── GlobalCorsConfiguration.java
-│   │               │   └── OauthSecurityConfiguration.java
-│   │               ├── controllers/
-│   │               │   ├── MenuController.java
-│   │               │   ├── OrderController.java
-│   │               │   ├── ProductController.java
-│   │               │   └── ReservationDetailsController.java
-│   │               ├── dtos/
-│   │               │   ├── menu/
-│   │               │   │   ├── MenuRequestDTO.java
-│   │               │   │   └── MenuResponseDTO.java
-│   │               │   ├── order/
-│   │               │   │   ├── OrderRequestDTO.java
-│   │               │   │   └── OrderResponseDTO.java
-│   │               │   ├── product/
-│   │               │   │   ├── ProductRequestDTO.java
-│   │               │   │   └── ProductResponseDTO.java
-│   │               │   ├── reservationDetails/
-│   │               │       ├── ReservationDetailsRequestDTO.java
-│   │               │       ├── ReservationDetailsResponseDTO.java
-│   │               │       └── ReservationStatusUpdateDTO.java
-│   │               ├── entities/
-│   │               │   ├── BaseEntity.java
-│   │               │   ├── MenuEntity.java
-│   │               │   ├── OrderEntity.java
-│   │               │   ├── OrderItem.java
-│   │               │   ├── ProductEntity.java
-│   │               │   ├── ReservationDetailsEntity.java
-│   │               │   └── ReservationStatus.java
-│   │               ├── exceptions/
-│   │               │   ├── BadRequestException.java
-│   │               │   └── RecordNotFoundException.java
-│   │               ├── helpers/
-│   │               │   ├── GlobalExceptionHandler.java
-│   │               │   └── UrlHelper.java
-│   │               ├── mappers/
-│   │               │   ├── DTOMapper.java
-│   │               │   ├── MenuDTOMapper.java
-│   │               │   ├── OrderDTOMapper.java
-│   │               │   ├── ProductDTOMapper.java
-│   │               │   └── ReservationDetailsDTOMapper.java
-│   │               ├── repositories/
-│   │               │   ├── MenuRepository.java
-│   │               │   ├── OrderRepository.java
-│   │               │   ├── ProductRepository.java
-│   │               │   └── ReservationDetailsRepository.java
-│   │               ├── services/
-│   │               │   ├── ImageService.java
-│   │               │   ├── MenuService.java
-│   │               │   ├── OrderService.java
-│   │               │   ├── ProductService.java
-│   │               │   └── ReservationDetailsService.java
-│   │               └── WebshopApplication.java
-│   ├── resources/
-│       ├── static/
-│       ├── templates/
-│       ├── application.properties
-│       └── data.sql
-├── test/
-├── java/
-│   ├── nl/
-│       ├── novi/
-│           ├── webshop/
-│               ├── controllers/
-│               │   ├── MenuControllerIntegrationTest.java
-│               │   └── ReservationControllerIntegrationTest.java
-│               ├── services/
-│               │   ├── MenuServiceTest.java
-│               │   └── ReservationDetailsServiceTest.java
-│               └── WebshopApplicationTests.java
-├── resources/
-└── application-test.properties
+Webshop/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── nl/
+│   │   │       ├── novi/
+│   │   │           ├── webshop/
+│   │   │               ├── config/
+│   │   │               │   ├── GlobalCorsConfiguration.java
+│   │   │               │   └── OauthSecurityConfiguration.java
+│   │   │               ├── controllers/
+│   │   │               │   ├── MenuController.java
+│   │   │               │   ├── OrderController.java
+│   │   │               │   ├── ProductController.java
+│   │   │               │   └── ReservationDetailsController.java
+│   │   │               ├── dtos/
+│   │   │               │   ├── menu/
+│   │   │               │   │   ├── MenuRequestDTO.java
+│   │   │               │   │   └── MenuResponseDTO.java
+│   │   │               │   ├── order/
+│   │   │               │   │   ├── OrderRequestDTO.java
+│   │   │               │   │   └── OrderResponseDTO.java
+│   │   │               │   ├── product/
+│   │   │               │   │   ├── ProductRequestDTO.java
+│   │   │               │   │   └── ProductResponseDTO.java
+│   │   │               │   ├── reservationDetails/
+│   │   │               │       ├── ReservationDetailsRequestDTO.java
+│   │   │               │       ├── ReservationDetailsResponseDTO.java
+│   │   │               │       └── ReservationStatusUpdateDTO.java
+│   │   │               ├── entities/
+│   │   │               │   ├── BaseEntity.java
+│   │   │               │   ├── MenuEntity.java
+│   │   │               │   ├── OrderEntity.java
+│   │   │               │   ├── OrderItem.java
+│   │   │               │   ├── PaymentDetailsEntity.java
+│   │   │               │   ├── ProductEntity.java
+│   │   │               │   ├── ReservationDetailsEntity.java
+│   │   │               │   └── ReservationStatus.java
+│   │   │               ├── exceptions/
+│   │   │               │   └── RecordNotFoundException.java
+│   │   │               ├── helpers/
+│   │   │               │   ├── GlobalExceptionHandler.java
+│   │   │               │   └── UrlHelper.java
+│   │   │               ├── mappers/
+│   │   │               │   ├── DTOMapper.java
+│   │   │               │   ├── MenuDTOMapper.java
+│   │   │               │   ├── OrderDTOMapper.java
+│   │   │               │   ├── ProductDTOMapper.java
+│   │   │               │   └── ReservationDetailsDTOMapper.java
+│   │   │               ├── repositories/
+│   │   │               │   ├── MenuRepository.java
+│   │   │               │   ├── OrderItemRepository.java
+│   │   │               │   ├── OrderRepository.java
+│   │   │               │   ├── ProductRepository.java
+│   │   │               │   └── ReservationDetailsRepository.java
+│   │   │               ├── services/
+│   │   │               │   ├── ImageService.java
+│   │   │               │   ├── MenuService.java
+│   │   │               │   ├── OrderService.java
+│   │   │               │   ├── ProductService.java
+│   │   │               │   └── ReservationDetailsService.java
+│   │   │               └── WebshopApplication.java
+│   │   ├── resources/
+│   │       ├── application.properties
+│   │       └── data.sql
+│   ├── test/
+│       ├── java/
+│       │   ├── nl/
+│       │       ├── novi/
+│       │           ├── webshop/
+│       │               ├── controllers/
+│       │               │   ├── MenuControllerIntegrationTest.java
+│       │               │   └── ReservationControllerIntegrationTest.java
+│       │               ├── services/
+│       │               │   ├── MenuServiceTest.java
+│       │               │   └── ReservationDetailsServiceTest.java
+│       │               └── WebshopApplicationTests.java
+│       ├── resources/
+│           └── application-test.properties
+├── mvnw
+├── mvnw.cmd
+└── pom.xml
 </pre>
 De Maven-dependencies die worden gebruikt om de backend te runnen zijn als volgt:
  - spring-boot-starter-web

@@ -92,7 +92,7 @@ function Profile() {
                         <li key={order.id} className="order-card">
                             <strong>Bestelnummer:</strong> {order.orderId}
                             <strong>Datum:</strong> {new Date(order.dateCreated).toLocaleDateString("nl-NL")}
-                            <strong>Totaal:</strong> € {(order.totalPrice ?? 0).toFixed(2)}
+                            <strong>Totaal:</strong> € {(order.totalPrice ?? 0).toLocaleString("nl-NL", {minimumFractionDigits: 2})}
 
                             {order.items.length === 0 ? (
                                 <p>Geen producten in deze bestelling.</p>
@@ -101,7 +101,7 @@ function Profile() {
                                     {order.items.map((item, idx) => (
                                         <li key={idx}>
                                             {item.productName} × {item.quantity ?? 0} – €{" "}
-                                            {(item.price ?? 0).toFixed(2)}
+                                            {(item.price ?? 0).toLocaleString("nl-NL", {minimumFractionDigits: 2})}
                                         </li>
                                     ))}
                                 </ul>

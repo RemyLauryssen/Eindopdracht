@@ -1,11 +1,12 @@
 import "./Payment.css";
 import {useLocation, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 function Payment() {
     const location = useLocation();
     const navigate = useNavigate();
     const [selectedBank, setSelectedBank] = useState("");
+    const [addSuccess, toggleAddSuccess] = useState(false);
 
     const {basket, total, customer} = location.state || {};
 
@@ -48,6 +49,7 @@ function Payment() {
 
             const data = await response.json();
             console.log(data);
+            toggleAddSuccess(true);
             localStorage.removeItem("basketItems");
 
         } catch (error) {
@@ -86,6 +88,7 @@ function Payment() {
                     </select>
                 </div>
                 <button type="submit" className="payment-button" onClick={handlePayment}>Betalen</button>
+                {addSuccess === true && <p className="success-message">Bestelling geplaatst...</p>}
             </div>
         </main>
     );

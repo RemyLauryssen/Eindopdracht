@@ -18,10 +18,12 @@ function AdminMenu() {
         toggleError(false);
 
         try {
+            const normalizedPrice = parseFloat(productPrice.replace(",", "."));
+
             await adminApi.post("/menu", {
                 name: productName,
                 description: productDescription,
-                price: parseFloat(productPrice),
+                price: normalizedPrice,
                 dish: dishType,
             });
 
@@ -153,7 +155,6 @@ function AdminMenu() {
                 <div className="vertical-separator"/>
                 <div className="menu-right-side">
                     <h2 className="admin-title">Een product toevoegen</h2>
-                    {addSuccess && <p className="success-message">Product is toegevoegd!</p>}
                     {error && <p className="error-message">Toevoegen is mislukt</p>}
 
                     <form onSubmit={addMenuItem}
@@ -196,16 +197,22 @@ function AdminMenu() {
                         <div className="product-input-form">
                             <label>Prijs</label>
                             <input
-                                type="number"
+                                type="text"
                                 className="input-field"
                                 value={productPrice}
-                                onChange={(e) => setProductPrice(e.target.value)}
+                                onChange={(e) => {
+                                    const value = e.target.value
+                                        .replace(/[^0-9.,]/g, "")
+                                        .replace(/([.,].*)[.,]/g, "$1");
+                                    setProductPrice(value);
+                                }}
                                 required
                             />
                         </div>
 
                         <button type="submit" className="add-product-button">Product toevoegen
                         </button>
+                        {addSuccess && <p className="success-message">Product is toegevoegd!</p>}
                     </form>
                 </div>
             </div>
